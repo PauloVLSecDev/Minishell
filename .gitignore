@@ -1,3 +1,5 @@
 *.o
 *.a
 a.out
+.swp
+.vscode

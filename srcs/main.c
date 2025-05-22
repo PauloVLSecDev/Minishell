@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/22 18:32:37 by brunogue         ###   ########.fr       */
+/*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
+/*   Updated: 2025/05/22 19:06:24 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishel.h"
 
-//.h
-# include "parser.h"
-# include "token.h"
+int	main(int ac, char **av)
+{
+	int	i;
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <signal.h>
-
-
-
-#endif
+	i = 0;
+	if (ac == 2)
+	{
+		av[1][i] = av[1][i] - 32;
+	}
+	return (0);
+}
