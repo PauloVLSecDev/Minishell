@@ -6,10 +6,15 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/22 14:55:58 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:56:01 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINISHELL_H
+#define MINISHELL_H
+
+#include <stdio.h>
+#include <unistd.h>
 
 
-#ifndef 
+#endif
