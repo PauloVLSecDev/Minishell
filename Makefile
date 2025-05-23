@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/05/22 21:19:18 by pvitor-l         ###   ########.fr        #
+#    Updated: 2025/05/23 14:25:20 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 NAME = minishell
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g3

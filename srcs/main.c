@@ -6,20 +6,17 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/22 19:06:24 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:25:54 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "minishell.h"
 
-int	main(int ac, char **av)
+int	main(void)
 {
-	int	i;
+	const char	*name;
 
-	i = 0;
-	if (ac == 2)
-	{
-		av[1][i] = av[1][i] - 32;
-	}
+	name = "minishell> ";
+	name = readline(name);
 	return (0);
 }
