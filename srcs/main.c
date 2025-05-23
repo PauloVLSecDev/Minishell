@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/23 16:28:06 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:09:25 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int check_quotes(char *imput)
     count_double_quote = 0;
 	while (imput[i] != '\0')
 	{
-			if (imput[i] == 39)
+			if (imput[i] == QUOTE)
                 count_quote++; 
-            if (imput[i] == 34)
+            if (imput[i] == DOUBLE_QUOTE)
                 count_double_quote++; 
             i++;
 	}
