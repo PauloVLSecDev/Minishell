@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/05/23 14:25:20 by brunogue         ###   ########.fr        #
+#    Updated: 2025/05/23 15:29:15 by pvitor-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,16 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I$(INCLUDES_DIR)
 FILES = $(SRC_DIR)/main.c
+
 OBJ = $(FILES:.c=.o)
+
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME) $(INCLUDES)
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME) $(INCLUDES)
 
 %.o: %.c
 	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
