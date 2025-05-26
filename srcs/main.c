@@ -30,25 +30,24 @@ int	main(void)
 	return (0);
 }
 
-int check_quotes(char *imput)
+int	check_quotes(char *imput)
 {
 	int	count_quote;
-	int count_double_quote;
+	int	count_double_quote;
 	int	i;
 
 	i = 0;
 	count_quote = 0;
-    count_double_quote = 0;
+	count_double_quote = 0;
 	while (imput[i] != '\0')
 	{
-			if (imput[i] == QUOTE)
-                count_quote++; 
-            if (imput[i] == DOUBLE_QUOTE)
-                count_double_quote++; 
-            i++;
+		if (imput[i] == QUOTE)
+			count_quote++;
+		if (imput[i] == DOUBLE_QUOTE)
+			count_double_quote++;
+		i++;
 	}
-	if (!(count_quote % 2 == 0 ) || !(count_double_quote % 2 == 0))
-        return (0); 
-    return (1);
-}  
-
+	if (!(count_quote % 2 == 0) || !(count_double_quote % 2 == 0))
+		return (0);
+	return (1);
+}

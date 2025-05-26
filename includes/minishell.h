@@ -13,26 +13,25 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-//INCLUDES
+// INCLUDES
 # include "../libft/libft.h"
 # include "parser.h"
 # include "token.h"
-
+# include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <fcntl.h>
 # include <signal.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+# include <unistd.h>
 
-enum e_quotes
+enum	e_quotes
 {
-    DOUBLE_QUOTE = '"',
-    QUOTE = '\'',
+	DOUBLE_QUOTE = '"',
+	QUOTE = '\'',
 };
 
-int check_quotes(char *imput);
+int		check_quotes(char *imput);
 
 #endif
