@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/23 17:09:25 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:43:43 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 int	main(void)
 {
 	const char	*name;
-	char		*imput;
+	char		*input;
 
 	name = "Minishell> ";
 	while (1)
 	{
-		imput = readline(name);
-		if (!check_quotes(imput))
-			ft_printf("nao contem um numero par de aspas %s\n", imput);
-		if (!strcmp(imput, "exit"))
+		input = readline(name);
+		if (!check_quotes(input))
+			ft_printf("nao contem um numero par de aspas %s\n", input);
+		if (!strcmp(input, "exit"))
 			return (1);
-		ft_printf("%s\n", imput);
+        add_history(input);
+		ft_printf("%s\n", input);
+        free(input);
 	}
 	return (0);
 }
