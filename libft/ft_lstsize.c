@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 18:41:25 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/01/04 13:50:17 by pvitor-l         ###   ########.fr       */
+/*   Created: 2024/11/01 11:45:59 by brunogue          #+#    #+#             */
+/*   Updated: 2024/11/01 13:07:06 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,15 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	len;
+	t_list	*temp;
+	int		i;
 
-	len = 0;
-	while (lst != NULL)
+	temp = lst;
+	i = 0;
+	while (temp)
 	{
-		len++;
-		lst = lst->next;
+		temp = temp->next;
+		i++;
 	}
-	return (len);
+	return (i);
 }
-/*
-int	main(void)
-{
-	t_list	*lista;
-	t_list	*zero;
-	t_list	*um;
-	int		size;
-
-	zero = (t_list *)malloc(sizeof(t_list));
-	um = (t_list *)malloc(sizeof(t_list));
-	lista = (t_list *)malloc(sizeof(t_list));
-	lista->next = zero;
-	zero->next = um;
-	size = ft_lstsize(lista);
-	printf("\nquantidade de nos, %d\n", size);
-}
-*/

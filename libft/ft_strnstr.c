@@ -3,38 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 17:43:31 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/10/28 17:02:09 by pvitor-l         ###   ########.fr       */
+/*   Created: 2024/10/11 13:13:15 by brunogue          #+#    #+#             */
+/*   Updated: 2024/11/01 14:45:06 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t	i;
-	size_t	j;
-	size_t	len_little;
+	size_t	big_i;
+	size_t	little_i;
 
-	len_little = ft_strlen(little);
+	big_i = 0;
 	if (*little == '\0')
-		return ((char *)big);
-	j = 0;
-	while (big[j] != '\0' && j < len)
 	{
-		i = 0;
-		if (j + len_little > len)
-			return (NULL);
-		while (little[i] != '\0' && little[i] == big[i + j])
+		return ((char *)big);
+	}
+	while (big_i < len && big[big_i] != '\0')
+	{
+		little_i = 0;
+		while (big[big_i + little_i] == little[little_i]
+			&& (big_i + little_i) < len)
 		{
-			i++;
+			if (little[little_i + 1] == '\0')
+				return ((char *)(big + big_i));
+			little_i++;
 		}
-		if (little[i] == '\0')
-			return ((char *)&big[j]);
-		j++;
+		big_i++;
 	}
 	return (NULL);
 }

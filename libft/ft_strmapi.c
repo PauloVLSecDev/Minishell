@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 18:37:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/11/02 19:44:03 by pvitor-l         ###   ########.fr       */
+/*   Created: 2024/10/26 16:51:41 by brunogue          #+#    #+#             */
+/*   Updated: 2024/11/01 14:44:54 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*new_string;
-	unsigned int	len_s;
-	unsigned int	index;
+	unsigned int	length;
+	unsigned int	i;
+	char			*new_str;
 
-	index = 0;
-	if (!s)
+	length = 0;
+	i = 0;
+	if (s == NULL || f == NULL)
 		return (NULL);
-	len_s = ft_strlen(s);
-	new_string = (char *)ft_calloc((len_s + 1), sizeof(char));
-	if (!new_string)
+	while (s[length])
+		length++;
+	new_str = (char *)malloc(sizeof(char) * (length + 1));
+	if (new_str == NULL)
 		return (NULL);
-	while (index < len_s)
+	while (i < length)
 	{
-		new_string[index] = f(index, s[index]);
-		index++;
+		new_str[i] = f(i, s[i]);
+		i++;
 	}
-	new_string[index] = '\0';
-	return (new_string);
+	new_str[length] = '\0';
+	return (new_str);
 }

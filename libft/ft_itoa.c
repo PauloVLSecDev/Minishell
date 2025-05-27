@@ -3,54 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 14:01:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/11/02 18:21:31 by pvitor-l         ###   ########.fr       */
+/*   Created: 2024/10/25 18:39:53 by brunogue          #+#    #+#             */
+/*   Updated: 2024/11/01 14:42:17 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_numlen(int n)
+static int	get_digit_count(int n)
 {
-	int	len;
+	int	count;
 
-	len = 0;
+	count = 0;
 	if (n <= 0)
-	{
-		len = 1;
-	}
+		count = 1;
 	while (n != 0)
 	{
 		n = n / 10;
-		len++;
+		count++;
 	}
-	return (len);
+	return (count);
 }
 
 char	*ft_itoa(int n)
 {
-	char			*con;
-	unsigned int	num;
-	size_t			size_int;
+	int		length;
+	long	num;
+	char	*new_str;
+	int		is_negative;
 
-	if (n < 0)
-		num = -n;
-	else
-		num = n;
-	size_int = ft_numlen(n);
-	con = (char *)malloc(size_int + 1);
-	if (!con)
+	num = n;
+	length = get_digit_count(n);
+	is_negative = (n < 0);
+	new_str = malloc((length + 1) * sizeof (char));
+	if (new_str == NULL)
 		return (NULL);
-	con[size_int] = '\0';
-	while (size_int > 0)
+	new_str[length] = '\0';
+	if (is_negative)
+		num = -num;
+	while (length > 0)
 	{
-		con[size_int - 1] = (num % 10) + '0';
-		size_int--;
+		new_str[--length] = (num % 10) + '0';
 		num = num / 10;
 	}
-	if (n < 0)
-		con[0] = '-';
-	return (con);
+	if (is_negative)
+		new_str[0] = '-';
+	return (new_str);
 }
