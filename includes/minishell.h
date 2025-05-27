@@ -6,11 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/05/26 20:20:24 by pvitor-l         ###   ########.fr       */
-=======
-/*   Updated: 2025/05/27 15:42:11 by brunogue         ###   ########.fr       */
->>>>>>> dev
+/*   Updated: 2025/05/27 17:11:44 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +26,6 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-<<<<<<< HEAD
-typedef enum  e_token_type;
-{
-    TOKEN_WORD; // anyware word also can be key word for exmple -l, -w, are util for amost comands  
-    TOKEN_PIPE; // |
-    TOKEN_REDIR_IN; // <
-    TOKEN_REDIR_OUT; // >
-    TOKEN_APPEND; // >> I don't know how this function
-    TOKEN_APPEND; // << I don't know how this function
-	DOUBLE_QUOTE = '"', // we have changed
-	QUOTE = '\'', // should also be changed
-
-=======
 typedef enum e_token_type
 {
     TOKEN_WORD, // anyware word also can be key word for exmple -l, -w, are util for amost comands  
@@ -53,18 +36,13 @@ typedef enum e_token_type
 	DOUBLE_QUOTE = '"', // we have changed
 	QUOTE = '\'', // should also be changed
 }	t_token_type;
->>>>>>> dev
 
 typedef	struct s_cmd 
 {
     char    **args;
     int input_file;
     int output_file;
-<<<<<<< HEAD
-    int append_mode  // yet don't know how this will be aplicated 
-=======
     int append_mode;  // yet don't know how this will be aplicated 
->>>>>>> dev
     struct  s_cmd *next;
 }   t_cmd;
 

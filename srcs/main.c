@@ -6,11 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/05/26 16:43:43 by pvitor-l         ###   ########.fr       */
-=======
-/*   Updated: 2025/05/27 15:43:30 by brunogue         ###   ########.fr       */
->>>>>>> dev
+/*   Updated: 2025/05/27 17:12:15 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +22,7 @@ int	main(void)
 	{
 		input = readline(name);
 		if (!check_quotes(input))
-<<<<<<< HEAD
-			ft_printf("nao contem um numero par de aspas %s\n", input);
-=======
 			ft_printf("nao contem um numero par de aspas: %s\n", input);
->>>>>>> dev
 		if (!strcmp(input, "exit"))
 			return (1);
         add_history(input);
