@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/27 14:18:16 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:09:00 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,9 @@ int	check_quotes(char *imput)
 	if (!(count_quote % 2 == 0) || !(count_double_quote % 2 == 0))
 		return (0);
 	return (1);
+}
+
+void	token_type()
+{
+	
 }
