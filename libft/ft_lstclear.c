@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_istnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:36:23 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/01/04 13:37:38 by pvitor-l         ###   ########.fr       */
+/*   Created: 2024/11/01 12:06:56 by brunogue          #+#    #+#             */
+/*   Updated: 2025/02/01 13:38:05 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_istnew(void *content)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*search;
+	t_list	*temp;
 
-	search = (t_list *)malloc(sizeof(t_list));
-	if (!search)
-		return (NULL);
-	search->content = content;
-	search->next = NULL;
-	return (search);
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = temp;
+	}
+	free(*lst);
+	*lst = NULL;
 }

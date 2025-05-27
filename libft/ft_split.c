@@ -3,192 +3,116 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 17:41:33 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/02/04 18:25:48 by pvitor-l         ###   ########.fr       */
+/*   Created: 2024/10/25 14:01:01 by brunogue          #+#    #+#             */
+/*   Updated: 2025/02/20 18:46:33 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_string(char const *s, char c)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int	count_strings;
-	int	boolean;
+	size_t	i;
+	char	*sub_str;
+	size_t	s_len;
 
-	boolean = 1;
-	count_strings = 0;
+	i = 0;
+	if (s == NULL)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+	{
+		sub_str = (char *)malloc(1);
+		if (sub_str == NULL)
+			return (NULL);
+		sub_str[0] = '\0';
+		return (sub_str);
+	}
+	if (len > s_len - start)
+		len = s_len - start;
+	sub_str = (char *)malloc(len + 1);
+	if (sub_str == NULL)
+		return (NULL);
+	ft_strlcpy(sub_str, s + start, len + 1);
+	return (sub_str);
+}
+
+static int	count_words(char const *s, char c)
+{
+	int	count;
+	int	in_word;
+
+	count = 0;
+	in_word = 0;
 	while (*s)
 	{
-		if (*s != c && boolean)
+		if (*s != c && !in_word)
 		{
-			boolean = 0;
-			count_strings++;
+			in_word = 1;
+			count++;
 		}
 		else if (*s == c)
-			boolean = 1;
+			in_word = 0;
 		s++;
 	}
-	return (count_strings);
+	return (count);
 }
 
-static void	ft_free(char **split, size_t len)
+static void	free_result(char **result)
 {
-	while (len > 0)
+	int	i;
+
+	i = 0;
+	if (result == NULL)
+		return ;
+	while (result[i])
 	{
-		free(split[len - 1]);
-		len--;
+		free(result[i]);
+		i++;
 	}
-	free(split);
-	return ;
+	free(result);
 }
 
-static char	*ft_copy(const char *start, size_t len)
+static char	*get_next_word(char const *s, int *i, char c)
 {
-	char	*string;
+	int	start;
 
-	string = (char *)malloc(len + 1);
-	if (!string)
-		return (NULL);
-	ft_strlcpy(string, start, len + 1);
-	return (string);
-}
-
-static void	ft_len_substring(char **result, const char *s, char c)
-{
-	int				count_len;
-	unsigned int	start;
-	char			*search_string;
-	size_t			size;
-
-	count_len = 0;
-	search_string = (char *)s;
-	while (*search_string != '\0')
-	{
-		while (*search_string == c)
-			search_string++;
-		start = search_string - s;
-		while (*search_string && *search_string != c)
-			search_string++;
-		if (search_string - s > start)
-		{
-			size = (size_t)(search_string - s - start);
-			result[count_len] = ft_copy(s + start, size);
-			if (!result[count_len])
-				return (ft_free(result, count_len));
-			count_len++;
-		}
-	}
+	while (s[*i] == c)
+		(*i)++;
+	start = *i;
+	while (s[*i] && s[*i] != c)
+		(*i)++;
+	if (start < *i)
+		return (ft_substr(s, start, *i - start));
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**split;
-	size_t	len;
+	int		i;
+	int		j;
+	char	**result;
 
-	if (!s)
+	i = 0;
+	j = 0;
+	if (s == NULL)
 		return (NULL);
-	len = ft_count_string(s, c);
-	split = (char **)malloc((len + 1) * sizeof(char *));
-	if (!split)
+	result = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (result == NULL)
 		return (NULL);
-	ft_len_substring(split, s, c);
-	split[len] = NULL;
-	return (split);
-}
-/*
-
-include "libft.h"
-
-static    int	ft_count_string(char const s, char c)
-{
-	int	count_strings;
-	int	boolean;
-
-	boolean = 1;
-	count_strings = 0;
-	while (s)
+	while (s[i])
 	{
-		if (s != c && boolean)
+		if (s[i] != c)
 		{
-			boolean = 0;
-			count_strings++;
+			result[j] = get_next_word(s, &i, c);
+			if (result[j] == NULL)
+				return (free_result(result), NULL);
+			j++;
 		}
-		else if (s == c)
-			boolean = 1;
-		s++;
+		i++;
 	}
-	return (count_strings);
+	result[j] = NULL;
+	return (result);
 }
-
-static    void	ft_free(char split, size_t len )
-{
-	while (len > 0)
-	{
-		free(split[len - 1]);
-		len--;
-	}
-	free(split);
-	return ;
-}
-
-static char	ft_copy(const charstart, size_t len)
-{
-	char	string;
-
-	string = (char)malloc(len + 1);
-	if (!string)
-		return (NULL);
-	ft_strlcpy(string, start, len + 1);
-	return (string);
-}
-
-static    int	ft_len_substring(char result, const char *s, char c)
-{
-	int				count_len;
-	unsigned int	start;
-	char			search_string;
-	size_t			size;
-
-	count_len = 0;
-	search_string = (char)s;
-	while (search_string != '\0')
-	{
-		while (search_string == c)
-			search_string++;
-		start = search_string - s;
-		while (search_string &&search_string != c)
-			search_string++;
-		if (search_string - s > start)
-		{
-			size = (size_t)(search_string - s - start);
-			result[count_len] = ft_copy(s + start, size);
-			if (!result[count_len])
-			{
-				ft_free(result, count_len);
-				return (0);
-			}
-			count_len++;
-		}
-	}
-	return (1);
-}
-
-char	ft_split(char const *s, char c)
-{
-	char	split;
-	size_t	len;
-
-	if (!s)
-		return (NULL);
-	len = ft_count_string(s, c);
-	split = (char *)malloc((len + 1) sizeof(char *));
-	if (!split)
-		return (NULL);
-	if (!ft_len_substring(split, s, c))
-		return (NULL);
-	split[len] = NULL;
-	return (split);
-}
-*/

@@ -6,11 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/05/27 15:43:30 by brunogue         ###   ########.fr       */
-=======
-/*   Updated: 2025/05/27 16:09:00 by brunogue         ###   ########.fr       */
->>>>>>> 5c99cd2df882a5a41f7e586fc01784b46c2f9680
+/*   Updated: 2025/05/27 20:22:12 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +54,34 @@ int	check_quotes(char *imput)
 	return (1);
 }
 
-void	token_type()
+int	validate_types(char *str)
 {
-	
+	if (!ft_strcmp(str, "|"))
+		return (TOKEN_PIPE);
+	if (!ft_strcmp(str, "<"))
+		return (TOKEN_REDIR_IN);
+	if (!ft_strcmp(str, ">"))
+		return (TOKEN_REDIR_OUT);
+	if (!ft_strcmp(str, "<<"))
+		return (TOKEN_APPEND);
+	else
+		return (TOKEN_WORD);
+}
+
+void	type_correct(char *input)
+{
+	t_token	*new;
+	char	*token;
+
+	token = ft_strtok(input, " ");
+	if (!token)
+		return ;
+	while (token)
+	{
+		new = ft_calloc(1, sizeof(t_token));
+		new->value = ft_strdup(token);
+		new->type = validate_types(token);
+		token = ft_strtok(NULL, " ");
+	}
+	return ;
 }

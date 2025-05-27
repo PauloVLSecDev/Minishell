@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_array.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/05 16:19:49 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/03/05 16:25:17 by pvitor-l         ###   ########.fr       */
+/*   Created: 2024/10/29 18:13:52 by brunogue          #+#    #+#             */
+/*   Updated: 2025/02/01 13:40:23 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_array(char **matrix)
+t_list	*ft_lstnew(void *content)
 {
-	int	i;
+	t_list	*elem;
 
-	if (!matrix)
-		return ;
-	i = 0;
-	while (matrix[i] != NULL)
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
+	elem = malloc(sizeof(t_list));
+	if (!elem)
+		return (NULL);
+	elem->content = content;
+	elem->next = NULL;
+	return (elem);
 }

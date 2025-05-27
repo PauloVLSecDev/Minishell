@@ -24,3 +24,4 @@
 
 27/5
 brunogue - list.txt
+brunogue - libft atualizada, criando a type_correct e inicializando os types.
