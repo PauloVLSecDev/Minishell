@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/27 14:08:20 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/05/27 15:17:04 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-typedef enum  e_token_type
+typedef enum e_token_type
 {
     TOKEN_WORD, // anyware word also can be key word for exmple -l, -w, are util for amost comands  
     TOKEN_PIPE, // |
