@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/23 17:10:27 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/05/27 15:42:11 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,25 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-enum	e_quotes
+typedef enum e_token_type
 {
-	DOUBLE_QUOTE = '"',
-	QUOTE = '\'',
-};
+    TOKEN_WORD, // anyware word also can be key word for exmple -l, -w, are util for amost comands  
+    TOKEN_PIPE, // |
+    TOKEN_REDIR_IN, // <
+    TOKEN_REDIR_OUT, // >
+    TOKEN_APPEND, // << I don't know how this function
+	DOUBLE_QUOTE = '"', // we have changed
+	QUOTE = '\'', // should also be changed
+}	t_token_type;
+
+typedef	struct s_cmd 
+{
+    char    **args;
+    int input_file;
+    int output_file;
+    int append_mode;  // yet don't know how this will be aplicated 
+    struct  s_cmd *next;
+}   t_cmd;
 
 int		check_quotes(char *imput);
 
