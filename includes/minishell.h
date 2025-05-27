@@ -6,11 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/05/27 15:42:11 by brunogue         ###   ########.fr       */
-=======
-/*   Updated: 2025/05/27 16:06:04 by brunogue         ###   ########.fr       */
->>>>>>> 5c99cd2df882a5a41f7e586fc01784b46c2f9680
+/*   Updated: 2025/05/27 17:35:52 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +26,16 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-typedef enum e_token_type
+typedef struct s_token
 {
+	int				type;
+	struct s_token	*next;
+	struct s_token	*prev;
+}	t_token;
+
+enum e_token_type
+{
+	UNKNOWN = -1,
     TOKEN_WORD, // anyware word also can be key word for exmple -l, -w, are util for amost comands  
     TOKEN_PIPE, // |
     TOKEN_REDIR_IN, // <
@@ -39,20 +43,7 @@ typedef enum e_token_type
     TOKEN_APPEND, // << I don't know how this function
 	DOUBLE_QUOTE = '"', // we have changed
 	QUOTE = '\'', // should also be changed
-<<<<<<< HEAD
-}	t_token_type;
-
-typedef	struct s_cmd 
-{
-    char    **args;
-    int input_file;
-    int output_file;
-    int append_mode;  // yet don't know how this will be aplicated 
-    struct  s_cmd *next;
-}   t_cmd;
-=======
 };
->>>>>>> 5c99cd2df882a5a41f7e586fc01784b46c2f9680
 
 typedef	struct s_cmd 
 {
