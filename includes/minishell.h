@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/26 20:20:24 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:08:20 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,23 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-typedef enum  e_token_type;
+typedef enum  e_token_type
 {
-    TOKEN_WORD; // anyware word also can be key word for exmple -l, -w, are util for amost comands  
-    TOKEN_PIPE; // |
-    TOKEN_REDIR_IN; // <
-    TOKEN_REDIR_OUT; // >
-    TOKEN_APPEND; // >> I don't know how this function
-    TOKEN_APPEND; // << I don't know how this function
+    TOKEN_WORD, // anyware word also can be key word for exmple -l, -w, are util for amost comands  
+    TOKEN_PIPE, // |
+    TOKEN_REDIR_IN, // <
+    TOKEN_REDIR_OUT, // >
+    TOKEN_APPEND, // << I don't know how this function
 	DOUBLE_QUOTE = '"', // we have changed
 	QUOTE = '\'', // should also be changed
-
+}	t_token_type;
 
 typedef	struct s_cmd 
 {
     char    **args;
     int input_file;
     int output_file;
-    int append_mode  // yet don't know how this will be aplicated 
+    int append_mode;  // yet don't know how this will be aplicated 
     struct  s_cmd *next;
 }   t_cmd;
 
