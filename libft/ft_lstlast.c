@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 13:38:42 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/01/04 13:46:26 by pvitor-l         ###   ########.fr       */
+/*   Created: 2024/11/01 11:51:01 by brunogue          #+#    #+#             */
+/*   Updated: 2024/11/01 13:06:38 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,12 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next != NULL)
-		lst = lst->next;
-	return (lst);
-}
-/*
-int	main(void)
-{
-	t_list	*lst;
-	t_list	*node;
+	t_list	*temp;
 
-	lst = (t_list *)malloc(sizeof(t_list));
-	node = (t_list *)malloc(sizeof(t_list));
-	lst->content = "lista primeiro no";
-	node->content = "node segundo no";
-	node->next = lst;
-	lst = node;
-	printf("\nretorno %p\n", ft_lstlast(lst));
-	printf("retorno %p\n", node);
-	return (0);
+	if (!lst)
+		return (NULL);
+	temp = lst;
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
 }
-*/

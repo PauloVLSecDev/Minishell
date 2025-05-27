@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/27 17:35:52 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:23:06 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,39 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+// ENUM DE TIPOS DE TOKENS
+typedef enum e_token_type
+{
+	UNKNOWN = -1,
+	TOKEN_WORD,       // Qualquer palavra (pode ser argumento como -l, -w etc.)
+	TOKEN_PIPE,       // |
+	TOKEN_REDIR_IN,   // <
+	TOKEN_REDIR_OUT,  // >
+	TOKEN_APPEND,     // >> (não <<) — redirecionamento em modo append
+	TOKEN_HEREDOC,    // << — heredoc
+	DOUBLE_QUOTE = '"',
+	QUOTE = '\''
+}	t_token_type;
+
+// STRUCT DO TOKEN
 typedef struct s_token
 {
 	int				type;
+	char			*value;
 	struct s_token	*next;
-	struct s_token	*prev;
 }	t_token;
 
-enum e_token_type
+// STRUCT DE COMANDO
+typedef struct s_cmd
 {
-	UNKNOWN = -1,
-    TOKEN_WORD, // anyware word also can be key word for exmple -l, -w, are util for amost comands  
-    TOKEN_PIPE, // |
-    TOKEN_REDIR_IN, // <
-    TOKEN_REDIR_OUT, // >
-    TOKEN_APPEND, // << I don't know how this function
-	DOUBLE_QUOTE = '"', // we have changed
-	QUOTE = '\'', // should also be changed
-};
+	char			**args;
+	int				input_file;
+	int				output_file;
+	int				append_mode; // 1 se for modo append (>>), 0 se for >
+	struct s_cmd	*next;
+}	t_cmd;
 
-typedef	struct s_cmd 
-{
-    char    **args;
-    int input_file;
-    int output_file;
-    int append_mode;  // yet don't know how this will be aplicated 
-    struct  s_cmd *next;
-}   t_cmd;
-
-int		check_quotes(char *imput);
+// FUNÇÕES
+int	check_quotes(char *input);
 
 #endif
