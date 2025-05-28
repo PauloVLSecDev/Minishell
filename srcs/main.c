@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/28 20:25:20 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:27:52 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(void)
         token_list = tokenization(input);
 		if (!ft_strcmp(input, "clear"))
 		{
-			printf("\033[H\033[J"); // ou 100 '\n' se preferir
+			ft_printf("\033[H\033[J");
 			free(input);
-			continue;
+			continue ;
 		}
         valid_pipe(token_list);
 		ft_printf("%s\n", input);

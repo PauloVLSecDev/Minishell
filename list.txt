@@ -33,3 +33,5 @@ devemos pensar no parsem de forma forma possivel e comecarmos a entender o EOF v
 28/5
 brunogue - suprimido os leaks da readline e addhistory;
 leaks do token corrigidos pela função free_token_list;
+
+feito o clear, mas ta errado
