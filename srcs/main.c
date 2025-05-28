@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/28 17:05:52 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:57:17 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void    ft_print_token(t_token *list)
 {
     while (list != NULL) 
     {
-        ft_printf("token: %s   type de token %d\n", list->value, list->type);
+        ft_printf("token: %s         | type de token %d\n", list->value, list->type);
         list = list->next; 
     }
     return ;
