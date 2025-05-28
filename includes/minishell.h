@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/28 19:01:37 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:19:45 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef enum e_token_type
 	TOKEN_REDIR_OUT,  // >
 	TOKEN_APPEND,     // >> (não <<) — redirecionamento em modo append
 	TOKEN_HEREDOC,    // << — heredoc
+	TOKEN_EOF,
 	DOUBLE_QUOTE = '"',
 	QUOTE = '\''
 }	t_token_type;
@@ -64,5 +65,6 @@ t_token_type	find_token_type(char *str);
 t_token			*tokenization(char *input);
 void			ft_print_token(t_token *list);
 void			free_token_list(t_token *head);
+int				valid_pipe(t_token *list);
 
 #endif

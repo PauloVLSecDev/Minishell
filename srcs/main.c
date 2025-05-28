@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/28 19:00:49 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:25:20 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(void)
 {
 	const char	*name;
 	char		*input;
-    t_token *token_list;
+    t_token		*token_list;
 
 	name = "Minishell> ";
 	while (1)
@@ -24,17 +24,22 @@ int	main(void)
 		input = readline(name);
 		if (!check_quotes(input))
 			ft_printf("nao contem um numero par de aspas: %s\n", input);
-		if (!strcmp(input, "exit"))
+		if (!ft_strcmp(input, "exit"))
 		{
 			free (input);
 			return (1);
 		}
         add_history(input);
         token_list = tokenization(input);
+		if (!ft_strcmp(input, "clear"))
+		{
+			printf("\033[H\033[J"); // ou 100 '\n' se preferir
+			free(input);
+			continue;
+		}
         valid_pipe(token_list);
 		ft_printf("%s\n", input);
         ft_print_token(token_list);
-		free_token_list(token_list);
         free(input);
 	}
 	return (0);
@@ -102,8 +107,8 @@ t_token *tokenization(char *input)
         } 
         else
         {
-                current->next = new;
-                current = new;
+			current->next = new;
+			current = new;
         }
 		token = ft_strtok(NULL, " ");
 	}
@@ -112,7 +117,7 @@ t_token *tokenization(char *input)
 
 void    ft_print_token(t_token *list)
 {
-    while (list != NULL) 
+    while (list != NULL)
     {
         ft_printf("token: %s         | type de token %d\n", list->value, list->type);
         list = list->next; 

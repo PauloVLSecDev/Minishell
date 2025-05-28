@@ -6,11 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2025/05/28 16:47:31 by pvitor-l         ###   ########.fr        #
-=======
-#    Updated: 2025/05/28 18:17:59 by brunogue         ###   ########.fr        #
->>>>>>> dev
+#    Updated: 2025/05/28 20:00:04 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,16 +21,13 @@ LIBFT_DIR = libft
 
 LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I$(INCLUDES_DIR)
-<<<<<<< HEAD
 FILES = $(SRC_DIR)/main.c \
+		$(SRC_DIR)/free.c \
 		$(SRC_DIR)/parse.c
-=======
-FILES = $(SRC_DIR)/main.c $(SRC_DIR)/free.c
 
 VALGRIND = valgrind --leak-check=full \
 	--show-leak-kinds=all \
 	--suppressions=supress.supp
->>>>>>> dev
 
 OBJ = $(FILES:.c=.o)
 
