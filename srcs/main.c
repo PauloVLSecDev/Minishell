@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/27 21:35:40 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/27 22:01:15 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(void)
         add_history(input);
 		ft_printf("%s\n", input);
         token_list = tokenization(input);
-       ft_print_token(token_list);
+        ft_print_token(token_list);
         free(input);
 	}
 	return (0);
@@ -95,7 +95,7 @@ t_token *tokenization(char *input)
         else
         {
                 current->next = new;
-                head = new;
+                current = new;
         }
 		token = ft_strtok(NULL, " ");
 	}
