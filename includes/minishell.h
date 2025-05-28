@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/27 21:33:13 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:50:57 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ int	check_quotes(char *input);
 t_token_type    find_token_type(char *str);
 t_token *tokenization(char *input);
 void   ft_print_token(t_token *list);
+int valid_pipe(t_token *list);
 
 #endif
