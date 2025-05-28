@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 18:26:31 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/28 17:09:20 by brunogue         ###   ########.fr       */
+/*   Created: 2025/05/28 17:35:17 by brunogue          #+#    #+#             */
+/*   Updated: 2025/05/28 17:36:49 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s)
+void	free_token_list(t_token *head)
 {
-	int		i;
-	int		c;
-	char	*new_str;
+	t_token	*temp;
 
-	c = 0;
-	i = 0;
-	while (s[i] != '\0')
+	while (head)
 	{
-		c++;
-		i++;
+		temp = head;
+		head = head->next;
+		free(temp->value);
+		free(temp);
 	}
-	new_str = (char *)malloc(c + 1);
-	if (new_str == NULL)
-	{
-		free(new_str);
-		return (NULL);
-	}
-	i = 0;
-	while (i < c)
-	{
-		new_str[i] = s[i];
-		i++;
-	}
-	new_str[i] = '\0';
-	return (new_str);
 }
