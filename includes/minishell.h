@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/27 20:50:38 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:33:13 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef enum e_token_type
 // STRUCT DO TOKEN
 typedef struct s_token
 {
-	int				type;
+    t_token_type	type;
 	char			*value;
 	struct s_token	*next;
 }	t_token;
@@ -60,5 +60,8 @@ typedef struct s_cmd
 
 // FUNÇÕES
 int	check_quotes(char *input);
+t_token_type    find_token_type(char *str);
+t_token *tokenization(char *input);
+void   ft_print_token(t_token *list);
 
 #endif

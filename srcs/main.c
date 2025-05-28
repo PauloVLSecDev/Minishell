@@ -6,11 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/05/27 17:12:15 by pvitor-l         ###   ########.fr       */
-=======
-/*   Updated: 2025/05/27 20:22:12 by brunogue         ###   ########.fr       */
->>>>>>> 5480673dd4586a90351f1d538443a5e304ea1a41
+/*   Updated: 2025/05/27 21:35:40 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +16,7 @@ int	main(void)
 {
 	const char	*name;
 	char		*input;
+    t_token *token_list;
 
 	name = "Minishell> ";
 	while (1)
@@ -31,12 +28,14 @@ int	main(void)
 			return (1);
         add_history(input);
 		ft_printf("%s\n", input);
+        token_list = tokenization(input);
+       ft_print_token(token_list);
         free(input);
 	}
 	return (0);
 }
 
-int	check_quotes(char *imput)
+int	check_quotes(char *input)
 {
 	int	count_quote;
 	int	count_double_quote;
@@ -45,11 +44,11 @@ int	check_quotes(char *imput)
 	i = 0;
 	count_quote = 0;
 	count_double_quote = 0;
-	while (imput[i] != '\0')
+	while (input[i] != '\0')
 	{
-		if (imput[i] == QUOTE)
+		if (input[i] == QUOTE)
 			count_quote++;
-		if (imput[i] == DOUBLE_QUOTE)
+		if (input[i] == DOUBLE_QUOTE)
 			count_double_quote++;
 		i++;
 	}
@@ -58,7 +57,7 @@ int	check_quotes(char *imput)
 	return (1);
 }
 
-int	validate_types(char *str)
+t_token_type    find_token_type(char *str)
 {
 	if (!ft_strcmp(str, "|"))
 		return (TOKEN_PIPE);
@@ -72,20 +71,43 @@ int	validate_types(char *str)
 		return (TOKEN_WORD);
 }
 
-void	type_correct(char *input)
+t_token *tokenization(char *input)
 {
 	t_token	*new;
-	char	*token;
+	t_token	*head;
+    t_token *current;  
+	char    *token;
 
+	head = NULL;
+    current = NULL;  
 	token = ft_strtok(input, " ");
-	if (!token)
-		return ;
 	while (token)
 	{
 		new = ft_calloc(1, sizeof(t_token));
 		new->value = ft_strdup(token);
-		new->type = validate_types(token);
+		new->type = find_token_type(token);
+        new->next = NULL;
+        if(!head)
+        {
+            head = new;
+            current = new;
+        } 
+        else
+        {
+                current->next = new;
+                head = new;
+        }
 		token = ft_strtok(NULL, " ");
 	}
-	return ;
+	return (head);
+}
+
+void    ft_print_token(t_token *list)
+{
+    while (list != NULL) 
+    {
+        ft_printf("token %s | type de token %d\n", list->value, list->type);
+        list = list->next; 
+    }
+    return ;
 }
