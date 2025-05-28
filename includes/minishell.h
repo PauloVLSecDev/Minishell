@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/27 21:33:13 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:37:19 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ typedef struct s_cmd
 }	t_cmd;
 
 // FUNÇÕES
-int	check_quotes(char *input);
-t_token_type    find_token_type(char *str);
-t_token *tokenization(char *input);
-void   ft_print_token(t_token *list);
+int				check_quotes(char *input);
+t_token_type	find_token_type(char *str);
+t_token			*tokenization(char *input);
+void			ft_print_token(t_token *list);
+void			free_token_list(t_token *head);
 
 #endif

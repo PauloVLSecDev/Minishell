@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/28 15:04:46 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:53:28 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@ int	main(void)
 		if (!check_quotes(input))
 			ft_printf("nao contem um numero par de aspas: %s\n", input);
 		if (!strcmp(input, "exit"))
+		{
+			free (input);
 			return (1);
+		}
         add_history(input);
 		ft_printf("%s\n", input);
         token_list = tokenization(input);
         ft_print_token(token_list);
+		free_token_list(token_list);
         free(input);
 	}
 	return (0);
@@ -66,6 +70,8 @@ t_token_type    find_token_type(char *str)
 	if (!ft_strcmp(str, ">"))
 		return (TOKEN_REDIR_OUT);
 	if (!ft_strcmp(str, "<<"))
+		return (TOKEN_HEREDOC);
+	if (!ft_strcmp(str, ">>"))
 		return (TOKEN_APPEND);
 	else
 		return (TOKEN_WORD);
@@ -78,6 +84,7 @@ t_token *tokenization(char *input)
     t_token *current;  
 	char    *token;
 
+	new = NULL;
 	head = NULL;
     current = NULL;  
 	token = ft_strtok(input, " ");

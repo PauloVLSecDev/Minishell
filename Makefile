@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/05/23 15:29:15 by pvitor-l         ###   ########.fr        #
+#    Updated: 2025/05/28 18:17:59 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,11 @@ LIBFT_DIR = libft
 
 LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I$(INCLUDES_DIR)
-FILES = $(SRC_DIR)/main.c
+FILES = $(SRC_DIR)/main.c $(SRC_DIR)/free.c
+
+VALGRIND = valgrind --leak-check=full \
+	--show-leak-kinds=all \
+	--suppressions=supress.supp
 
 OBJ = $(FILES:.c=.o)
 
@@ -44,4 +48,9 @@ fclean: clean
 	rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean
 
-re: fclean all
+valgrind:
+	$(VALGRIND) ./$(NAME)
+
+re: fclean all 
+
+.PHONY: all clean fclean re
