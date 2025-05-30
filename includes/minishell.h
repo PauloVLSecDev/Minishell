@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/28 19:01:37 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:29:09 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "../libft/libft.h"
 # include "parser.h"
 # include "token.h"
+
+//LIBS
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -25,6 +27,8 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+#define AVOID_TOKENS " \t\r\v\f"
 
 // ENUM DE TIPOS DE TOKENS
 typedef enum e_token_type
@@ -58,11 +62,12 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-// FUNÇÕES
+// FUNCTIONS
 int				check_quotes(char *input);
 t_token_type	find_token_type(char *str);
 t_token			*tokenization(char *input);
 void			ft_print_token(t_token *list);
 void			free_token_list(t_token *head);
+int				valid_pipe(t_token *list);
 
 #endif

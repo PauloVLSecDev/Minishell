@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/28 19:00:49 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/05/30 19:09:51 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,33 +81,61 @@ t_token_type    find_token_type(char *str)
 t_token *tokenization(char *input)
 {
 	t_token	*new;
-	t_token	*head;
-    t_token *current;  
-	char    *token;
+	t_token	*token;
+    t_token *current;
+	char	*value;
+	int		i;
+	int		start;
+	int		verify_quotes;
 
+	i = 0;
 	new = NULL;
-	head = NULL;
+	token = NULL;
     current = NULL;  
-	token = ft_strtok(input, " ");
-	while (token)
+	while (input[i] != '\0')
 	{
-		new = ft_calloc(1, sizeof(t_token));
-		new->value = ft_strdup(token);
-		new->type = find_token_type(token);
-        new->next = NULL;
-        if(!head)
-        {
-            head = new;
-            current = new;
-        } 
-        else
-        {
-                current->next = new;
-                current = new;
-        }
-		token = ft_strtok(NULL, " ");
+		while (input[i] && ft_strchr(AVOID_TOKENS, input[i]))
+			i++;
+		if (input[i] == '\0')
+			break ;
+		if (input[i] == QUOTE || input[i] == 	DOUBLE_QUOTE)
+		{
+			verify_quotes = input[i];
+			start = ++i;
+			while (input[i] != verify_quotes && input[i] != '\0')
+				i++;
+			value = ft_substr(input, start, i - start);
+			new = ft_calloc(1, sizeof(t_token));
+			new->value = value;
+			new->type = TOKEN_WORD;
+			new->next = NULL;
+			if (token == NULL)
+				token = new;
+			else
+				current->next = new;
+			current = new;
+			if (input[i] == verify_quotes)
+				i++;
+		}
+		else
+		{
+			start = i;
+			while (input[i] && !ft_strchr(AVOID_TOKENS, input[i]))
+				i++;
+			value = ft_substr(input, start, i - start);
+			new = ft_calloc(1, sizeof(t_token));
+			new->value = value;
+			new->type = TOKEN_WORD;
+			new->next = NULL;
+			if (token == NULL)
+				token = new;
+			else
+				current->next = new;
+			current = new;
+		}
+		i++;
 	}
-	return (head);
+	return (token);
 }
 
 void    ft_print_token(t_token *list)
