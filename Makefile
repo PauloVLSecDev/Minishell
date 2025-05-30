@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/05/28 20:00:04 by brunogue         ###   ########.fr        #
+#    Updated: 2025/05/30 19:29:22 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,7 @@ LIBFT_DIR = libft
 
 LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I$(INCLUDES_DIR)
-FILES = $(SRC_DIR)/main.c \
-		$(SRC_DIR)/free.c \
-		$(SRC_DIR)/parse.c
+FILES = $(SRC_DIR)/main.c $(SRC_DIR)/free.c $(SRC_DIR)/parser.c
 
 VALGRIND = valgrind --leak-check=full \
 	--show-leak-kinds=all \
