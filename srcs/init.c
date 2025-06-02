@@ -10,6 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-// this file will used for initlized all struct this is project or amost all 
+// this file will used for initlized all struct this is project or amost all

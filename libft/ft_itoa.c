@@ -37,7 +37,7 @@ char	*ft_itoa(int n)
 	num = n;
 	length = get_digit_count(n);
 	is_negative = (n < 0);
-	new_str = malloc((length + 1) * sizeof (char));
+	new_str = malloc((length + 1) * sizeof(char));
 	if (new_str == NULL)
 		return (NULL);
 	new_str[length] = '\0';

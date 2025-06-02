@@ -16,7 +16,7 @@ int	main(void)
 {
 	const char	*name;
 	char		*input;
-    t_token *token_list;
+	t_token		*token_list;
 
 	name = "Minishell> ";
 	while (1)
@@ -26,16 +26,16 @@ int	main(void)
 			ft_printf("nao contem um numero par de aspas: %s\n", input);
 		if (!strcmp(input, "exit"))
 		{
-			free (input);
+			free(input);
 			return (1);
 		}
-        add_history(input);
-        token_list = tokenization(input);
-        valid_pipe(token_list);
+		add_history(input);
+		token_list = tokenization(input);
+		valid_pipe(token_list);
 		ft_printf("%s\n", input);
-        ft_print_token(token_list);
+		ft_print_token(token_list);
 		free_token_list(token_list);
-        free(input);
+		free(input);
 	}
 	return (0);
 }
@@ -62,7 +62,7 @@ int	check_quotes(char *input)
 	return (1);
 }
 
-t_token_type    find_token_type(char *str)
+t_token_type	find_token_type(char *str)
 {
 	if (!ft_strcmp(str, "|"))
 		return (TOKEN_PIPE);
@@ -78,44 +78,45 @@ t_token_type    find_token_type(char *str)
 		return (TOKEN_WORD);
 }
 
-t_token *tokenization(char *input)
+t_token	*tokenization(char *input)
 {
 	t_token	*new;
 	t_token	*head;
-    t_token *current;  
-	char    *token;
+	t_token	*current;
+	char	*token;
 
 	new = NULL;
 	head = NULL;
-    current = NULL;  
+	current = NULL;
 	token = ft_strtok(input, " ");
 	while (token)
 	{
 		new = ft_calloc(1, sizeof(t_token));
 		new->value = ft_strdup(token);
 		new->type = find_token_type(token);
-        new->next = NULL;
-        if(!head)
-        {
-            head = new;
-            current = new;
-        } 
-        else
-        {
-                current->next = new;
-                current = new;
-        }
+		new->next = NULL;
+		if (!head)
+		{
+			head = new;
+			current = new;
+		}
+		else
+		{
+			current->next = new;
+			current = new;
+		}
 		token = ft_strtok(NULL, " ");
 	}
 	return (head);
 }
 
-void    ft_print_token(t_token *list)
+void	ft_print_token(t_token *list)
 {
-    while (list != NULL) 
-    {
-        ft_printf("token: %s         | type de token %d\n", list->value, list->type);
-        list = list->next; 
-    }
-    return ;
+	while (list != NULL)
+	{
+		ft_printf("token: %s         | type de token %d\n", list->value,
+			list->type);
+		list = list->next;
+	}
+	return ;
 }
