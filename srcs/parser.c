@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:32:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/04 16:27:22 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:40:30 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,86 @@ int	check_quotes(char *input)
 	return (1);
 }
 
-int valid_pipe(t_token *list)
+int	valid_pipe(t_token *list)
 {
-    while (list != NULL)
-    {
-        if (list->type == TOKEN_PIPE && list->next == NULL)
-        {
-            ft_printf("\npipe syntax error\n"); 
-            return (1);
-        }
-        else if (list->type == TOKEN_PIPE) 
-        {
-            ft_printf("\nsyntax error near unexpected token `|'\n"); 
-            return (1);
-        }
-            list = list->next;
-    }
-     return (0);
+	while (list != NULL)
+	{
+		if (list->type == TOKEN_PIPE && list->next == NULL)
+		{
+			ft_printf("\npipe syntax error\n");
+			return (1);
+		}
+		else if (list->type == TOKEN_PIPE)
+		{
+			ft_printf("\nsyntax error near unexpected token `|'\n");
+			return (1);
+		}
+		list = list->next;
+	}
+	return (0);
+}
+
+int	valid_redir_in(t_token *list)
+{
+	if (list == NULL)
+		return (1);
+	while (list != NULL)
+	{
+		if ((list->type == TOKEN_REDIR_IN)
+			&& (list->next == NULL))
+		{
+			ft_printf("syntax error near unexpected token `<'\n");
+			return (1);
+		}
+		else if (list->type == TOKEN_REDIR_IN && list->next->type != TOKEN_WORD)
+		{
+			ft_printf("pipe syntax error\n");
+			return (1);
+		}
+		list = list->next;
+	}
+	return (0);
+}
+
+int	valid_redir_out(t_token *list)
+{
+	if (list == NULL)
+		return (1);
+	while (list != NULL)
+	{
+		if (list->type == TOKEN_REDIR_OUT && list->next == NULL)
+		{
+			ft_printf("syntax error near unexpected token `>'\n");
+			return (1);
+		}
+
+		else if (list->type == TOKEN_REDIR_OUT && list->next->type != TOKEN_WORD)
+		{
+			ft_printf("pipe syntax error\n");
+			return (1);
+		}
+		list = list->next;
+	}
+	return (0);
+}
+
+int	valid_heredoc(t_token *list)
+{
+	if (list == NULL)
+		return (1);
+	while (list != NULL)
+	{
+		if (list->type == TOKEN_HEREDOC && list->next == NULL)
+		{
+			ft_printf("syntax error near unexpected token `>'\n");
+			return (1);
+		}
+		else if (list->type == TOKEN_HEREDOC && list->next->type != TOKEN_WORD)
+		{
+			ft_printf("pipe syntax error\n");
+			return (1);
+		}
+		list = list->next;
+	}
+	return (0);
 }
