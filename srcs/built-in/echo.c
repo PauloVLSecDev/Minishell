@@ -6,9 +6,13 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:48:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 17:50:03 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:19:14 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	ft_echo(char **input)
+{
+	
+}

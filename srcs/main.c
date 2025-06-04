@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 16:27:27 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:41:22 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(void)
 {
-	t_token		*token;
-    t_token 	*token_list;
-	char		*input;
+	t_token	*token;
+	t_token	*token_list;
+	char	*input;
 
 	token = NULL;
 	while (1)
@@ -26,14 +26,14 @@ int	main(void)
 			ft_printf("nao contem um numero par de aspas: %s\n", input);
 		if (!ft_strcmp(input, "exit"))
 		{
-			free (input);
+			free(input);
 			return (1);
 		}
-        add_history(input);
-        token_list = tokenization(token, input);
-        valid_pipe(token_list);
-        ft_print_token(token_list);
-        free(input);
+		add_history(input);
+		token_list = tokenization(token, input);
+		valid_pipe(token_list);
+		ft_print_token(token_list);
+		free(input);
 	}
 	return (0);
 }
