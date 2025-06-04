@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/04 17:07:09 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:59:33 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_env	*create_node_env(char *name, char *content)
 	node = (t_env *)malloc(sizeof(t_env);
     if (!node)
         return (NULL);
-    node->name = name; 
-    node->content = content; 
+    node->name = name;
+    node->content = content;
     node->next = NULL;
     return (node);
 }
