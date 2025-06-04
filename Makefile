@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/05/30 16:59:26 by brunogue         ###   ########.fr        #
+#    Updated: 2025/06/04 16:16:33 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT_DIR = libft
 
 LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I$(INCLUDES_DIR)
-FILES = $(SRC_DIR)/main.c $(SRC_DIR)/free.c $(SRC_DIR)/parser.c
+FILES = $(SRC_DIR)/main.c $(SRC_DIR)/free.c $(SRC_DIR)/parser.c $(SRC_DIR)/token.c
 
 VALGRIND = valgrind --leak-check=full \
 	--show-leak-kinds=all \
@@ -49,7 +49,7 @@ fclean: clean
 	@make -C $(LIBFT_DIR) fclean
 
 valgrind:
-	$(VALGRIND) ./$(NAME)
+	-$(VALGRIND) ./$(NAME)
 
 re: fclean all 
 

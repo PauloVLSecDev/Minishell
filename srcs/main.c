@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/30 19:09:51 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:15:35 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,136 +14,27 @@
 
 int	main(void)
 {
-	const char	*name;
+	t_token		*token;
+    t_token 	*token_list;
 	char		*input;
-    t_token *token_list;
 
-	name = "Minishell> ";
+	token = NULL;
 	while (1)
 	{
-		input = readline(name);
+		input = readline("minishell> ");
 		if (!check_quotes(input))
 			ft_printf("nao contem um numero par de aspas: %s\n", input);
-		if (!strcmp(input, "exit"))
+		if (!ft_strcmp(input, "exit"))
 		{
 			free (input);
 			return (1);
 		}
         add_history(input);
-        token_list = tokenization(input);
+        token_list = tokenization(token, input);
         valid_pipe(token_list);
-		ft_printf("%s\n", input);
         ft_print_token(token_list);
 		free_token_list(token_list);
         free(input);
 	}
 	return (0);
-}
-
-int	check_quotes(char *input)
-{
-	int	count_quote;
-	int	count_double_quote;
-	int	i;
-
-	i = 0;
-	count_quote = 0;
-	count_double_quote = 0;
-	while (input[i] != '\0')
-	{
-		if (input[i] == QUOTE)
-			count_quote++;
-		if (input[i] == DOUBLE_QUOTE)
-			count_double_quote++;
-		i++;
-	}
-	if (!(count_quote % 2 == 0) || !(count_double_quote % 2 == 0))
-		return (0);
-	return (1);
-}
-
-t_token_type    find_token_type(char *str)
-{
-	if (!ft_strcmp(str, "|"))
-		return (TOKEN_PIPE);
-	if (!ft_strcmp(str, "<"))
-		return (TOKEN_REDIR_IN);
-	if (!ft_strcmp(str, ">"))
-		return (TOKEN_REDIR_OUT);
-	if (!ft_strcmp(str, "<<"))
-		return (TOKEN_HEREDOC);
-	if (!ft_strcmp(str, ">>"))
-		return (TOKEN_APPEND);
-	else
-		return (TOKEN_WORD);
-}
-
-t_token *tokenization(char *input)
-{
-	t_token	*new;
-	t_token	*token;
-    t_token *current;
-	char	*value;
-	int		i;
-	int		start;
-	int		verify_quotes;
-
-	i = 0;
-	new = NULL;
-	token = NULL;
-    current = NULL;  
-	while (input[i] != '\0')
-	{
-		while (input[i] && ft_strchr(AVOID_TOKENS, input[i]))
-			i++;
-		if (input[i] == '\0')
-			break ;
-		if (input[i] == QUOTE || input[i] == 	DOUBLE_QUOTE)
-		{
-			verify_quotes = input[i];
-			start = ++i;
-			while (input[i] != verify_quotes && input[i] != '\0')
-				i++;
-			value = ft_substr(input, start, i - start);
-			new = ft_calloc(1, sizeof(t_token));
-			new->value = value;
-			new->type = TOKEN_WORD;
-			new->next = NULL;
-			if (token == NULL)
-				token = new;
-			else
-				current->next = new;
-			current = new;
-			if (input[i] == verify_quotes)
-				i++;
-		}
-		else
-		{
-			start = i;
-			while (input[i] && !ft_strchr(AVOID_TOKENS, input[i]))
-				i++;
-			value = ft_substr(input, start, i - start);
-			new = ft_calloc(1, sizeof(t_token));
-			new->value = value;
-			new->type = TOKEN_WORD;
-			new->next = NULL;
-			if (token == NULL)
-				token = new;
-			else
-				current->next = new;
-			current = new;
-		}
-		i++;
-	}
-	return (token);
-}
-
-void    ft_print_token(t_token *list)
-{
-    while (list != NULL) 
-    {
-        ft_printf("token: %s         | type de token %d\n", list->value, list->type);
-        list = list->next; 
-    }
-    return ;
 }
