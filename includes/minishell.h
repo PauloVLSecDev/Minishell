@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 16:25:18 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:25:42 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # include <unistd.h>
 
 #define AVOID_TOKENS " \t\r\v\f"
+#define DOUBLE_QUOTE '"'
+#define QUOTE '\''
 
 // ENUM DE TIPOS DE TOKENS
 typedef enum e_token_type
@@ -41,8 +43,6 @@ typedef enum e_token_type
 	TOKEN_APPEND,     // >> (não <<) — redirecionamento em modo append
 	TOKEN_HEREDOC,    // << — heredoc
 	TOKEN_EOF,
-	DOUBLE_QUOTE = '"',
-	QUOTE = '\''
 }	t_token_type;
 
 // STRUCT DO TOKEN

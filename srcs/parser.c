@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:32:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/04 16:27:22 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:08:09 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int valid_pipe(t_token *list)
     {
         if (list->type == TOKEN_PIPE && list->next == NULL)
         {
-            ft_printf("\npipe syntax error\n"); 
+            ft_printf("\npipe syntax error"); 
             return (1);
         }
         else if (list->type == TOKEN_PIPE) 
