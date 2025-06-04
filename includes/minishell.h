@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/28 19:01:37 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:35:17 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ typedef struct s_cmd
 	int append_mode; // 1 se for modo append (>>), 0 se for >
 	struct s_cmd	*next;
 }					t_cmd;
+
+typedef struct s_env
+{
+    char *name;
+    char *content;
+    struct s_env *next;
+}              t_env;
 
 // FUNÇÕES
 int					check_quotes(char *input);
