@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 17:41:22 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:10:47 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int	main(void)
 		add_history(input);
 		token_list = tokenization(token, input);
 		valid_pipe(token_list);
+		valid_redir_in(token_list);
+		valid_redir_out(token_list);
+		valid_heredoc(token_list);
 		ft_print_token(token_list);
 		free(input);
 	}
