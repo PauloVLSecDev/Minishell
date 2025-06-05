@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 19:18:36 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/05 20:02:17 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main(int argc, char *argv[], char *envp[])
 		if (!ft_strcmp(input, "exit"))
 		{
 			free(input);
+            free_env(env_copy);
 			return (1);
 		}
 		add_history(input);

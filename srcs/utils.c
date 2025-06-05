@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/05 19:53:51 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/05 20:05:30 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_env	*insertion_node_end_in_env(char **env)
 	if (!content_split)
         return (NULL);
     head = create_node_env(content_split[0], content_split[1]);
-    if(!head)
+    if (!head)
     {
         free_all(content_split);
         return (NULL);
@@ -74,7 +74,6 @@ t_env	*insertion_node_end_in_env(char **env)
         curr = curr->next;
         i++;
     }
-    free_env(curr);
     return (head);
 }
 
@@ -87,9 +86,9 @@ void    free_env(t_env *env)
         while (temp != NULL)
         {
             next = temp->next;
-            free(temp); 
-            free(temp->content); 
             free(temp->name); 
+            free(temp->content); 
+            free(temp); 
             temp = next;
         }
 }
