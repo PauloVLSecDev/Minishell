@@ -1,15 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 16:29:34 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/05/26 18:22:58 by pvitor-l         ###   ########.fr       */
+/*   Created: 2025/06/04 17:48:17 by brunogue          #+#    #+#             */
+/*   Updated: 2025/06/04 18:19:14 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// this file will used for initlized all struct this is project or amost all
+int	ft_echo(char **input)
+{
+	
+}

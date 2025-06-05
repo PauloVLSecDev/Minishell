@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:32:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/04 18:22:58 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/05 20:43:44 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ int	valid_redir_in(t_token *list)
 	{
 		if ((list->type == TOKEN_REDIR_IN) && (list->next == NULL))
 		{
-			ft_printf("syntax error near unexpected token `<'\n");
+			ft_printf("*************syntax error near unexpected token '<' ***********************\n");
 			return (1);
 		}
 		else if (list->type == TOKEN_REDIR_IN && list->next->type != TOKEN_WORD)
 		{
-			ft_printf("pipe syntax error\n");
+			ft_printf("****************pipe syntax error*************\n");
 			return (1);
 		}
 		list = list->next;
