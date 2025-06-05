@@ -6,18 +6,24 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 18:10:47 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/04 19:18:36 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+
+int main(int argc, char *argv[], char *envp[]) 
 {
+    (void) argc;
+    (void)argv;
+
 	t_token	*token;
 	t_token	*token_list;
 	char	*input;
+    t_env *env_copy;
 
+    env_copy = insertion_node_end_in_env(envp);
 	token = NULL;
 	while (1)
 	{

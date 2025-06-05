@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 18:03:29 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:36:49 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,14 @@ int					valid_pipe(t_token *list);
 int					valid_heredoc(t_token *list);
 int					valid_redir_out(t_token *list);
 int					valid_redir_in(t_token *list);
+
 // free.c
 void				free_token_list(t_token *head);
 
+//utils.c
+t_env           	*insertion_node_end_in_env(char **env);
+t_env           	*create_node_env(char *name, char *content);
+void                  free_env(t_env *env);
 #endif
+
+
