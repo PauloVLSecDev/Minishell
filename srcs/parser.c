@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:32:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/04 18:06:48 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:35:15 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,24 @@ int	check_quotes(char *input)
 
 int	valid_pipe(t_token *list)
 {
-    while (list != NULL)
-    {
-        if (list->type == TOKEN_PIPE && list->next == NULL)
-        {
-            ft_printf("\n**************pipe syntax error**************"); 
-            return (1);
-        }
-        else if (list->type == TOKEN_PIPE) 
-        {
-            ft_printf("\n***********syntax error near unexpected token*************`|'\n"); 
-            return (1);
-        }
-        list = list->next;
-    }
-    return (0);
+	t_token	*head;
+
+	head = list;
+	while (list != NULL)
+	{
+		if (list->type == TOKEN_PIPE && list->next == NULL)
+		{
+			ft_printf("pipe syntax error\n");
+			return (1);
+		}
+		else if (head->type == TOKEN_PIPE)
+		{
+			ft_printf("syntax error near unexpected token `|'\n");
+			return (1);
+		}
+		list = list->next;
+	}
+	return (0);
 }
 
 int	valid_redir_in(t_token *list)
@@ -59,8 +62,7 @@ int	valid_redir_in(t_token *list)
 		return (1);
 	while (list != NULL)
 	{
-		if ((list->type == TOKEN_REDIR_IN)
-			&& (list->next == NULL))
+		if ((list->type == TOKEN_REDIR_IN) && (list->next == NULL))
 		{
 			ft_printf("*************syntax error near unexpected token '<' ***********************\n");
 			return (1);
@@ -86,8 +88,8 @@ int	valid_redir_out(t_token *list)
 			ft_printf("syntax error near unexpected token `>'\n");
 			return (1);
 		}
-
-		else if (list->type == TOKEN_REDIR_OUT && list->next->type != TOKEN_WORD)
+		else if (list->type == TOKEN_REDIR_OUT
+			&& list->next->type != TOKEN_WORD)
 		{
 			ft_printf("pipe syntax error\n");
 			return (1);

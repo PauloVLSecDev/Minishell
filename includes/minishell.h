@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 18:55:56 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:03:51 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "struct.h"
 # include "parser.h"
 # include "token.h"
+# include "builtin.h"
 // LIBS
 # include <fcntl.h>
 # include <readline/history.h>
@@ -45,7 +46,9 @@ void				ft_print_token(t_token *list);
 // parser.c
 int					check_quotes(char *input);
 int					valid_pipe(t_token *list);
-
+int					valid_heredoc(t_token *list);
+int					valid_redir_out(t_token *list);
+int					valid_redir_in(t_token *list);
 // free.c
 void				free_token_list(t_token *head);
 

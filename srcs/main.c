@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 17:41:22 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:42:28 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(void)
 	t_token	*token;
 	t_token	*token_list;
 	char	*input;
-
+	
 	token = NULL;
 	while (1)
 	{
@@ -32,6 +32,9 @@ int	main(void)
 		add_history(input);
 		token_list = tokenization(token, input);
 		valid_pipe(token_list);
+		valid_redir_in(token_list);
+		valid_redir_out(token_list);
+		valid_heredoc(token_list);
 		ft_print_token(token_list);
 		free(input);
 	}
