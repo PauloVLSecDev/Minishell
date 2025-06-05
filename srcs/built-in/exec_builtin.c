@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/05 19:09:19 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:50:54 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,44 @@ int	exec_builtin(t_cmd *cmd)
 	return (1);
 }
 
-t_cmd	*token_to_cmd(t_token *tokens)
+int	count_word(t_token *token)
+{
+	t_token	*temp;
+	int	count;
+
+	temp = token;
+	count = 0;
+	while (temp)
+	{
+		if (temp->type == TOKEN_WORD)
+			count++;
+		temp = temp->next;
+	}
+	return (count);
+}
+
+t_cmd	*token_to_cmd(t_token *token)
 {
 	t_cmd	*cmd;
-	int i;
-	
-	
+	int 	i;
+	int		count;
+
+	i = 0;
+	count = count_word(token);
+	cmd = malloc(sizeof(t_cmd));
+	cmd->args = malloc(sizeof(char *) * (count + 1));
+	while (token)
+	{
+		if (token->type == TOKEN_WORD)
+		{
+			cmd->args[i] = ft_strdup(token->value);
+			i++;
+		}
+		else
+			break;
+		token = token->next;
+	}
+	cmd->args[i] = NULL;
+	cmd->next = NULL;
+	return (cmd);
 }
