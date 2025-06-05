@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/05 15:42:28 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:27:13 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(void)
 {
 	t_token	*token;
 	t_token	*token_list;
+	t_cmd	*cmd;
 	char	*input;
 	
 	token = NULL;
@@ -35,6 +36,7 @@ int	main(void)
 		valid_redir_in(token_list);
 		valid_redir_out(token_list);
 		valid_heredoc(token_list);
+		cmd = token_to_cmd(token_list);
 		ft_print_token(token_list);
 		free(input);
 	}

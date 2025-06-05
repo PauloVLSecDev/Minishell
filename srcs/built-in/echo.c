@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:48:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/05 17:08:22 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:56:22 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_echo(char **input)
 
 	i = 1;
 	n_flag = 0;
-	if (input[i], !ft_strcmp(input[i], "-n"))
+	if (input[i] && !ft_strcmp(input[i], "-n"))
 	{
 		n_flag = 1;
 		i++;
