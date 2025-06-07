@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
 
 static int	ft_count_string(char const *s, char c)
@@ -98,4 +97,3 @@ char	**ft_split(char const *s, char c)
 	split[len] = NULL;
 	return (split);
 }
-

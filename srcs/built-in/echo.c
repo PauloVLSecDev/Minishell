@@ -14,5 +14,4 @@
 
 int	ft_echo(char **input)
 {
-	
 }

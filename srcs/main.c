@@ -6,24 +6,29 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/05 20:02:17 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:32:17 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-int main(int argc, char *argv[], char *envp[]) 
+int	main(int argc, char *argv[], char *envp[])
 {
-    (void) argc;
-    (void)argv;
-
 	t_token	*token;
 	t_token	*token_list;
 	char	*input;
-    t_env *env_copy;
+	t_env	*env_copy;
 
-    env_copy = insertion_node_end_in_env(envp);
+	(void)argc;
+	(void)argv;
+
+	env_copy = linked_node_env(envp);
+
+	while (env_copy != NULL)
+	{
+		printf("%s%s\n", env_copy->name, env_copy->content);
+		env_copy = env_copy->next;
+	}
 	token = NULL;
 	while (1)
 	{
@@ -33,7 +38,7 @@ int main(int argc, char *argv[], char *envp[])
 		if (!ft_strcmp(input, "exit"))
 		{
 			free(input);
-            free_env(env_copy);
+			free_env(env_copy);
 			return (1);
 		}
 		add_history(input);

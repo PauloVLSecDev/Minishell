@@ -104,5 +104,5 @@ t_gnl_list				*ft_last_node(t_gnl_list **lst);
 char					*ft_extract_line(t_gnl_list **lst);
 void					ft_gnl_new_node(t_gnl_list **lst, int fd);
 void					ft_gnlclear(t_gnl_list **lst);
-void                	free_all(char **matrix);
+void					free_all(char **matrix);
 #endif

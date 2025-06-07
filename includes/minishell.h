@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/05 20:42:05 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:32:03 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 // INCLUDES
 # include "../libft/libft.h"
-# include "struct.h"
 # include "parser.h"
+# include "struct.h"
 # include "token.h"
 // LIBS
 # include <fcntl.h>
@@ -32,30 +32,28 @@
 # define QUOTE '\''
 # define DOUBLE_QUOTE '"'
 
-
 // token.c
-t_token_type		find_token_type(char *str);
-t_token				*tokenization(t_token *token, char *input);
-int					handle_quotes(char *input, int *i, t_token **token,
-						t_token **current);
-void				append_token(t_token **token, t_token **current,
-						char *value);
-void				ft_print_token(t_token *list);
+t_token_type	find_token_type(char *str);
+t_token			*tokenization(t_token *token, char *input);
+int				handle_quotes(char *input, int *i, t_token **token, t_token **current);
+void			append_token(t_token **token, t_token **current, char *value);
+void			ft_print_token(t_token *list);
 
 // parser.c
-int					check_quotes(char *input);
-int					valid_pipe(t_token *list);
-int					valid_heredoc(t_token *list);
-int					valid_redir_out(t_token *list);
-int					valid_redir_in(t_token *list);
+int				check_quotes(char *input);
+int				valid_pipe(t_token *list);
+int				valid_heredoc(t_token *list);
+int				valid_redir_out(t_token *list);
+int				valid_redir_in(t_token *list);
 
 // free.c
-void				free_token_list(t_token *head);
+void			free_token_list(t_token *head);
 
-//utils.c
-t_env           	*insertion_node_end_in_env(char **env);
-t_env           	*create_node_env(char *name, char *content);
-void                  free_env(t_env *env);
+// utils.c
+t_env       	*linked_node_env(char **env);
+t_env			*create_node_env(char *name, char *content);
+void			free_env(t_env *env);
+char			*get_env_name(char *env);
+void   insert_node(char *env, char *env_name, t_env *current_node);
+
 #endif
-
-
