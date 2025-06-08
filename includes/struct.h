@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 18:56:09 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:53:48 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_token
 typedef struct s_cmd
 {
 	char			**args;
+	int				is_builtin;
 	int				input_file;
 	int				output_file;
 	int append_mode; // 1 se for modo append (>>), 0 se for >

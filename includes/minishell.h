@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/06 21:32:03 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:22:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "parser.h"
 # include "struct.h"
 # include "token.h"
+# include "builtin.h"
 // LIBS
 # include <fcntl.h>
 # include <readline/history.h>
@@ -54,6 +55,9 @@ t_env       	*linked_node_env(char **env);
 t_env			*create_node_env(char *name, char *content);
 void			free_env(t_env *env);
 char			*get_env_name(char *env);
-void   insert_node(char *env, char *env_name, t_env *current_node);
+void   			insert_node(char *env, char *env_name, t_env *current_node);
+void			free_token_list(t_token *head);
+void			free_token_list(t_token *token);
+void			free_cmd(t_cmd *cmd);
 
 #endif

@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:35:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/06 20:52:53 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:20:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_token_list(t_token *head)
+void	free_token_list(t_token *token)
 {
-	t_token	*temp;
+	t_token	*tmp;
 
-	while (head)
+	while (token)
 	{
-		temp = head;
-		head = head->next;
-		free(temp->value);
-		free(temp);
+		tmp = token->next;
+		free(token->value); // valor duplicado com ft_substr
+		free(token);        // struct t_token
+		token = tmp;
 	}
 }
 
@@ -39,4 +39,23 @@ void	free_env(t_env *env)
 		free(temp);
 		temp = next;
 	}
+}
+
+void	free_cmd(t_cmd *cmd)
+{
+	int	i;
+
+	if (!cmd)
+		return ;
+	if (cmd->args)
+	{
+		i = 0;
+		while (cmd->args[i])
+		{
+			free(cmd->args[i]);
+			i++;
+		}
+		free(cmd->args);
+	}
+	free(cmd);
 }
