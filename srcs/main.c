@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/05 19:45:23 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:48:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	main(void)
 		cmd = token_to_cmd(token_list);
 		exec_builtin(cmd);
 		ft_print_token(token_list);
+		free_token_list(token_list);
+		free_cmd(cmd);
 		free(input);
 	}
 	return (0);

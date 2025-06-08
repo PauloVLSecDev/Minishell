@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/05 15:03:51 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:53:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ int					valid_redir_out(t_token *list);
 int					valid_redir_in(t_token *list);
 // free.c
 void				free_token_list(t_token *head);
+void				free_token_list(t_token *token);
+void				free_cmd(t_cmd *cmd);
 
 #endif
