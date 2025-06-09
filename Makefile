@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/06/08 16:32:53 by marvin           ###   ########.fr        #
+#    Updated: 2025/06/09 13:18:53 by pvitor-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/token.c \
 		$(SRC_DIR)/built-in/echo.c \
 		$(SRC_DIR)/built-in/exec_builtin.c \
-		$(SRC_DIR)/utils.c
+		$(SRC_DIR)/environment.c
 
 VALGRIND = valgrind --leak-check=full \
 	--show-leak-kinds=all \
