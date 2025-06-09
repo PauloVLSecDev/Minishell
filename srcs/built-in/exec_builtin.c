@@ -38,7 +38,7 @@ int	exec_builtin(t_cmd *cmd)
 int	count_word(t_token *token)
 {
 	t_token	*temp;
-	int	count;
+	int		count;
 
 	temp = token;
 	count = 0;
@@ -54,7 +54,7 @@ int	count_word(t_token *token)
 t_cmd	*token_to_cmd(t_token *token)
 {
 	t_cmd	*cmd;
-	int 	i;
+	int		i;
 	int		count;
 
 	i = 0;
@@ -69,7 +69,7 @@ t_cmd	*token_to_cmd(t_token *token)
 			i++;
 		}
 		else
-			break;
+			break ;
 		token = token->next;
 	}
 	cmd->args[i] = NULL;

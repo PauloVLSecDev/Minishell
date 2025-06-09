@@ -28,7 +28,7 @@ t_token_type	find_token_type(char *str)
 		return (TOKEN_WORD);
 }
 
-t_token *tokenization(t_token *token, char *input)
+t_token	*tokenization(t_token *token, char *input)
 {
 	t_token	*current;
 	char	*value;
