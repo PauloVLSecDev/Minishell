@@ -13,7 +13,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#include "minishell.h"
+# include "minishell.h"
 
 // ENUM DE TIPOS DE TOKENS
 typedef enum e_token_type
@@ -43,7 +43,7 @@ typedef struct s_cmd
 	int				is_builtin;
 	int				input_file;
 	int				output_file;
-	int 			append_mode; // 1 se for modo append (>>), 0 se for >
+	int append_mode; // 1 se for modo append (>>), 0 se for >
 	struct s_cmd	*next;
 }					t_cmd;
 

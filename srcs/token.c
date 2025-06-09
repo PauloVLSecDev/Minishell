@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/05 18:25:27 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:21:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_token_type	find_token_type(char *str)
 		return (TOKEN_WORD);
 }
 
-t_token	*tokenization(t_token *token, char *input)
+t_token *tokenization(t_token *token, char *input)
 {
 	t_token	*current;
 	char	*value;
