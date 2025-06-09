@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/09 13:31:20 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/09 18:23:36 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_env       	*linked_node_env(char **env);
 t_env			*create_node_env(char *name, char *content);
 void			free_env(t_env *env);
 char			*get_env_name(char *env);
+char	        *get_env_value(t_env *env, char *name);
 void   			insert_node(char *env, char *env_name, t_env *current_node);
 void			free_token_list(t_token *head);
 void			free_token_list(t_token *token);
