@@ -1,12 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_free_all.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<<< HEAD:utils/utils.c
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/09 13:28:32 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:59:33 by brunogue         ###   ########.fr       */
+========
+/*   Created: 2025/06/04 18:52:26 by pvitor-l          #+#    #+#             */
+/*   Updated: 2025/06/04 18:52:42 by pvitor-l         ###   ########.fr       */
+>>>>>>>> 02957d94d4015e5ecf28e4dd5a66dd7042ce8a64:libft/ft_free_all.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +21,7 @@ void	free_all(char **matrix)
 {
 	int	i;
 
+<<<<<<<< HEAD:utils/utils.c
 	node = (t_env *)malloc(sizeof(t_env);
     if (!node)
         return (NULL);
@@ -33,6 +39,7 @@ t_env	*insertion_node_env(char **env)
 	content_split = ft_split(env, "=");
 	if (!content_split)
 		return (NULL);
+========
 	if (!matrix)
 		return ;
 	i = 0;
@@ -42,4 +49,5 @@ t_env	*insertion_node_env(char **env)
 		i++;
 	}
 	free(matrix);
+>>>>>>>> 02957d94d4015e5ecf28e4dd5a66dd7042ce8a64:libft/ft_free_all.c
 }

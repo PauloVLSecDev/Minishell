@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 12:42:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/27 20:16:49 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:53:46 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ t_gnl_list				*ft_last_node(t_gnl_list **lst);
 char					*ft_extract_line(t_gnl_list **lst);
 void					ft_gnl_new_node(t_gnl_list **lst, int fd);
 void					ft_gnlclear(t_gnl_list **lst);
-
+void                	free_all(char **matrix);
 #endif
