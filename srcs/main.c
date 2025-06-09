@@ -6,13 +6,13 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/09 13:32:28 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:40:43 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char *argv[], char *envp[])
+int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[], char *envp[])
 {
 	t_token	*token;
 	t_token	*token_list;
