@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/10 13:53:23 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:47:40 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 
 	(void)argc;
 	(void)argv;
-	env_copy = linked_node_env(envp);
 	token = NULL;
 	(void)path;
+	env_copy = linked_node_env(envp);
 	while (1)
 	{
 		input = readline("minishell> ");
@@ -46,6 +46,7 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		cmd = token_to_cmd(token_list);
 		//execution_cmd(env_copy, cmd);
 		exec_builtin(cmd, env_copy);
+		ft_printf("asffsd %s\n", get_env_value(env_copy, "OLDPWD"));
 		ft_print_token(token_list);
 		free_token_list(token_list);
 		free_cmd(cmd);

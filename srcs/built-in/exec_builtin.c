@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/10 14:03:22 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:30:05 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,3 +80,5 @@ t_cmd	*token_to_cmd(t_token *token)
 	cmd->next = NULL;
 	return (cmd);
 }
+
+
