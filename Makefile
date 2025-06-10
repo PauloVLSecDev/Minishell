@@ -6,7 +6,11 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2025/06/09 18:25:00 by brunogue         ###   ########.fr        #
+=======
+#    Updated: 2025/06/10 15:38:35 by pvitor-l         ###   ########.fr        #
+>>>>>>> init_paulo
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +31,16 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/token.c \
 		$(SRC_DIR)/built-in/echo.c \
 		$(SRC_DIR)/built-in/exec_builtin.c \
+<<<<<<< HEAD
 		$(SRC_DIR)/built-in/pwd.c \
 		$(SRC_DIR)/built-in/cd.c \
 		$(SRC_DIR)/environment.c
+=======
+		$(SRC_DIR)/environment.c \
+		$(SRC_DIR)/execution.c \
+		$(SRC_DIR)/utils.c 
+
+>>>>>>> init_paulo
 
 VALGRIND = valgrind --leak-check=full \
 	--show-leak-kinds=all \
