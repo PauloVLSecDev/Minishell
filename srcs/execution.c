@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/10 14:46:47 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:58:24 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ char	**find_path(t_env *env)
 		return (NULL);
 	while (current_node->name && ft_strcmp(current_node->name, "PATH"))
 		current_node = current_node->next;
-	path = ft_split(current_node->content, ':');
+    if (current_node != NULL)
+        path = ft_split(current_node->content, ':');
 	if (!path)
 		return (NULL);
 	return (path);
