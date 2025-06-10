@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/10 14:03:06 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:35:10 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	count_word(t_token *token)
 	}
 	return (count);
 }
-
+/*
 t_cmd	*token_to_cmd(t_token *token)
 {
 	t_cmd	*cmd;
@@ -76,3 +76,47 @@ t_cmd	*token_to_cmd(t_token *token)
 	cmd->next = NULL;
 	return (cmd);
 }
+*/
+t_cmd	*token_to_cmd(t_token *token)
+{
+	t_cmd	*cmd;
+	int		i;
+	int		count;
+
+	if (!token)
+		return (NULL);
+	count = count_word(token);
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
+	cmd->args = malloc(sizeof(char *) * (count + 1));
+	if (!cmd->args)
+	{
+		free(cmd);
+		return (NULL);
+	}
+	i = 0;
+	while (token)
+	{
+		if (token->type == TOKEN_WORD)
+		{
+			cmd->args[i] = ft_strdup(token->value);
+			if (!cmd->args[i])
+			{
+				while (i > 0)
+					free(cmd->args[--i]);
+				free(cmd->args);
+				free(cmd);
+				return (NULL);
+			}
+			i++;
+		}
+		else
+			break ;
+		token = token->next;
+	}
+	cmd->args[i] = NULL;
+	cmd->next = NULL;
+	return (cmd);
+}
+

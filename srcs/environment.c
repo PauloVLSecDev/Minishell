@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/09 17:06:40 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:51:07 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ char	*get_env_name(char *env)
 	len = 0;
 	if (env == NULL)
 		return (NULL);
-	while (env[len] != '=')
+	while (env[len] && env[len] != '=')
 		len++;
+	if (env[len] != '=')
+		return (NULL);
 	environment_variable_name = (char *)malloc((len + 1) * sizeof(char));
 	if (!environment_variable_name)
 		return (NULL);
@@ -61,7 +63,6 @@ t_env	*linked_node_env(char **env)
 	int		i;
 	char	*content;
 
-	;
 	i = 1;
 	env_name = get_env_name(env[0]);
 	content = ft_strchr(env[0], '=');

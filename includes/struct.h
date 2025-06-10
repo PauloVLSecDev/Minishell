@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/05 14:53:48 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:09:09 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,18 @@
 
 # include "minishell.h"
 
-// ENUM DE TIPOS DE TOKENS
 typedef enum e_token_type
 {
 	UNKNOWN = -1,
-	TOKEN_WORD,      // Qualquer palavra (pode ser argumento como -l, -w etc.)
-	TOKEN_PIPE,      // |
-	TOKEN_REDIR_IN,  // <
-	TOKEN_REDIR_OUT, // >
-	TOKEN_APPEND,    // >> (não <<) — redirecionamento em modo append
-	TOKEN_HEREDOC,   // << — hered
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIR_IN,
+	TOKEN_REDIR_OUT,
+	TOKEN_APPEND,
+	TOKEN_HEREDOC,
 	TOKEN_EOF,
 }					t_token_type;
 
-// STRUCT DO TOKEN
 typedef struct s_token
 {
 	t_token_type	type;
@@ -36,14 +34,13 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
-// STRUCT DE COMANDO
 typedef struct s_cmd
 {
 	char			**args;
 	int				is_builtin;
 	int				input_file;
 	int				output_file;
-	int append_mode; // 1 se for modo append (>>), 0 se for >
+	int				append_mode;
 	struct s_cmd	*next;
 }					t_cmd;
 

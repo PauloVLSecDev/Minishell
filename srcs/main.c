@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/10 13:57:45 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:59:59 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	(void)argv;
+    
 	env_copy = linked_node_env(envp);
 	token = NULL;
 	(void)path;
 	while (1)
 	{
 		input = readline("minishell> ");
+       // if (!*input)
+       //     return (0);
 		if (!check_quotes(input))
 			ft_printf("nao contem um numero par de aspas: %s\n", input);
 		if (!ft_strcmp(input, "exit"))
