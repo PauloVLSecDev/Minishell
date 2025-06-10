@@ -6,13 +6,23 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 12:29:00 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/09 13:19:49 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:22:36 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_pwd(char **args, t_env *env)
+void	ft_pwd(void)
 {
+	char	cwd[PATH_MAX];
 	
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	{
+		write(1, cwd, ft_strlen(cwd));
+		write(1, "\n", 1);
+	}
+	else
+	{
+		perror("pwd");
+	}
 }

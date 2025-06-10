@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/06/09 13:18:53 by pvitor-l         ###   ########.fr        #
+#    Updated: 2025/06/09 18:25:00 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/token.c \
 		$(SRC_DIR)/built-in/echo.c \
 		$(SRC_DIR)/built-in/exec_builtin.c \
+		$(SRC_DIR)/built-in/pwd.c \
+		$(SRC_DIR)/built-in/cd.c \
 		$(SRC_DIR)/environment.c
 
 VALGRIND = valgrind --leak-check=full \
