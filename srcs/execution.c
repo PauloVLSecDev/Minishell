@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/09 20:27:23 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:46:47 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,23 @@ char	**recreate_env(t_env *env)
 		absolute_env_line = ft_strjoin(join_equal, current_env->content);
 		env_array[i] = ft_strdup(absolute_env_line);
 		free(join_equal);
+		free(join_name);
 		free(absolute_env_line);
 		current_env = current_env->next;
 		i++;
 	}
-	i = 0;
-	if (!env_array)
-		free_all(env_array);
 	return (env_array);
 }
 void	execution_cmd(t_env *env, t_cmd *cmd)
 {
-	char	**path;
 	char	*abs_path;
 	char	**new_envp;
 
+	if (exec_builtin(cmd) != -1)
+		return ;
 	new_envp = recreate_env(env);
-	path = find_path(env);
-	abs_path = join_path_with_cmd(path, cmd);
-	execve(abs_path, &cmd->args[1], new_envp);
+	abs_path = join_path_with_cmd(find_path(env), cmd);
+	execve(abs_path, cmd->args, new_envp);
 }
 
 char	*join_path_with_cmd(char **path, t_cmd *cmd)
@@ -81,12 +79,18 @@ char	*join_path_with_cmd(char **path, t_cmd *cmd)
 	i = 0;
 	join_slash = NULL;
 	path_with_cmd = NULL;
+	if (!path)
+		return (NULL);
 	while (path[i] != NULL)
 	{
 		join_slash = ft_strjoin(path[i], "/");
 		path_with_cmd = ft_strjoin(join_slash, cmd->args[0]);
 		if (access(path_with_cmd, X_OK) == 0)
+		{
+			free(join_slash);
+			free(path_with_cmd);
 			return (path_with_cmd);
+		}
 		free(join_slash);
 		free(path_with_cmd);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/05 19:50:54 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:03:06 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	exec_builtin(t_cmd *cmd)
 		ft_echo(cmd->args);
 	if (code == PWD)
 		ft_printf("PWD");
-	return (1);
+	return (code);
 }
 
 int	count_word(t_token *token)

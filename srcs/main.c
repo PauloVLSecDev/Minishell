@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/09 19:43:25 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:57:45 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	main(int argc, char *argv[], char *envp[])
 		valid_heredoc(token_list);
 		cmd = token_to_cmd(token_list);
 		execution_cmd(env_copy, cmd);
-		exec_builtin(cmd);
 		ft_print_token(token_list);
 		free_token_list(token_list);
 		free_cmd(cmd);
