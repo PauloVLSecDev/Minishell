@@ -6,11 +6,16 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 12:45:10 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/09 18:58:22 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:19:49 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	cd_arg(char **args)
+{
+	
+}
 
 int	ft_cd(char **args, t_env *env)
 {
@@ -29,5 +34,6 @@ int	ft_cd(char **args, t_env *env)
 		getcwd(cwd, PATH_MAX);
 		return (1);
 	}
+	cd_arg(args);
 	return (-1);
 }

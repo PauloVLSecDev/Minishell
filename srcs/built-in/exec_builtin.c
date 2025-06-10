@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/09 18:56:03 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:03:22 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int	exec_builtin(t_cmd *cmd, t_env *env)
 		ft_pwd();
 	if (code == CD)
 		ft_cd(cmd->args, env);
-	return (1);
+	return (code);
 }
 
 int	count_word(t_token *token)
 {
 	t_token	*temp;
-	int	count;
+	int		count;
 
 	temp = token;
 	count = 0;
@@ -58,7 +58,7 @@ int	count_word(t_token *token)
 t_cmd	*token_to_cmd(t_token *token)
 {
 	t_cmd	*cmd;
-	int 	i;
+	int		i;
 	int		count;
 
 	i = 0;
@@ -73,7 +73,7 @@ t_cmd	*token_to_cmd(t_token *token)
 			i++;
 		}
 		else
-			break;
+			break ;
 		token = token->next;
 	}
 	cmd->args[i] = NULL;

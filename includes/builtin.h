@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/09 18:56:31 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:32:28 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #  define PATH_MAX 4096
 #endif
 
-#include "minishell.h"
+# include "minishell.h"
 
-enum e_builtin
+enum	e_builtin
 {
 	NOT_BUILTIN,
 	ECHO,
@@ -39,6 +39,5 @@ int		ft_echo(char **input);
 void	ft_pwd(void);
 //FT_CD
 int		ft_cd(char **args, t_env *env);
-
 
 #endif

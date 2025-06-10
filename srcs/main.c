@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/09 18:55:30 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:53:23 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	t_token	*token_list;
 	t_cmd	*cmd;
 	char	*input;
-    t_env *env_copy;
+	t_env	*env_copy;
+	char	**path;
 
 	(void)argc;
 	(void)argv;
 	env_copy = linked_node_env(envp);
-	
 	token = NULL;
+	(void)path;
 	while (1)
 	{
 		input = readline("minishell> ");
@@ -43,6 +44,7 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		valid_redir_out(token_list);
 		valid_heredoc(token_list);
 		cmd = token_to_cmd(token_list);
+		//execution_cmd(env_copy, cmd);
 		exec_builtin(cmd, env_copy);
 		ft_print_token(token_list);
 		free_token_list(token_list);
