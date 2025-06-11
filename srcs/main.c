@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/11 13:01:13 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:41:44 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 
 	(void)argc;
 	(void)argv;
+	env_copy = linked_node_env(envp);
+	token = NULL;
 	(void)path;
 
 	token = NULL;

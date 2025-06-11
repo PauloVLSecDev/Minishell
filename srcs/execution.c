@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/11 13:00:05 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:41:50 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	execution_cmd(t_env *env, t_cmd *cmd)
     pid = fork();
     if (pid == 0) 
     {
-	    if (exec_builtin(cmd) != -1)
+	    if (exec_builtin(cmd, env) != -1)
         		return ;
 	    else
     	{
