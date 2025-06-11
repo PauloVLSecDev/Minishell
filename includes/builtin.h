@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/11 13:42:32 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:30:30 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ enum	e_builtin
 	ECHO,
 	CD,
 	PWD,
+	ENV,
+	EXIT,
 };
 
 //EXEC_BUILTIN
@@ -41,5 +43,11 @@ void	ft_pwd(void);
 
 //FT_CD
 int		ft_cd(char **args, t_env *env);
+
+//FT_ENV
+int		ft_env(char **args, t_env *env);
+
+//FT_EXIT
+int		ft_exit(char **args);
 
 #endif

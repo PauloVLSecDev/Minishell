@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/06/11 13:43:17 by brunogue         ###   ########.fr        #
+#    Updated: 2025/06/11 18:30:12 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,18 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/built-in/pwd.c \
 		$(SRC_DIR)/built-in/cd.c \
 		$(SRC_DIR)/built-in/echo.c \
+		$(SRC_DIR)/built-in/env.c \
+		$(SRC_DIR)/built-in/exit.c \
 		$(SRC_DIR)/environment.c \
 		$(SRC_DIR)/execution.c \
 		$(SRC_DIR)/utils.c 
 
 VALGRIND = valgrind --leak-check=full \
 	--show-leak-kinds=all \
+	--track-origins=yes \
+	--track-fds=yes \
+	--trace-children=yes \
+	--trace-children-skip='*/bin/*,*/sbin/*,/usr/bin/*' \
 	--suppressions=supress.supp
 
 OBJ = $(FILES:.c=.o)

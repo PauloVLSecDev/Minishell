@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/11 13:41:44 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:42:18 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,17 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	t_cmd	*cmd;
 	char	*input;
 	t_env	*env_copy;
-	char	**path;
 
-	(void)argc;
-	(void)argv;
 	env_copy = linked_node_env(envp);
 	token = NULL;
-	(void)path;
-
 	token = NULL;
-	env_copy = linked_node_env(envp);
 	while (1)
 	{
 		input = readline("minishell> ");
-       // if (!*input)
-       //     return (0);
+       if (!*input)
+           continue ;
 		if (!check_quotes(input))
 			ft_printf("nao contem um numero par de aspas: %s\n", input);
-		if (!ft_strcmp(input, "exit"))
-		{
-			free(input);
-			free_env(env_copy);
-			return (1);
-		}
 		add_history(input);
 		token_list = tokenization(token, input);
 		valid_pipe(token_list);

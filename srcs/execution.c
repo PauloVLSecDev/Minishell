@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/11 13:41:50 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:32:45 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,24 @@ void	execution_cmd(t_env *env, t_cmd *cmd)
 	char	*abs_path;
 	char	**new_envp;
 	int     status;
-    int pid;
+    int		pid;
 
     status = 0;
     if (cmd == NULL)
         return ;
-    pid = fork();
-    if (pid == 0) 
+	else if (exec_builtin(cmd, env) != -1)
+		return ;
+	pid = fork();
+    if (pid == 0)
     {
-	    if (exec_builtin(cmd, env) != -1)
-        		return ;
-	    else
-    	{
-    		new_envp = recreate_env(env);
-    		abs_path = join_path_with_cmd(find_path(env), cmd);
-	    	if (execve(abs_path, cmd->args, new_envp) == -1)
-	    	{
-                free_all(new_envp);
-	    		perror("error in execute comand");
-	    		exit(127);
-	    	}
-	    }
+		new_envp = recreate_env(env);
+		abs_path = join_path_with_cmd(find_path(env), cmd);
+		if (execve(abs_path, cmd->args, new_envp) == -1)
+		{
+			free_all(new_envp);
+			perror("Error in execute command");
+			exit(127);
+		}
     }
     if (pid > 0)
     {
