@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/10 16:23:54 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:59:55 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ t_env	*linked_node_env(char **env)
 	int		i;
 	char	*content;
 
-	;
 	i = 1;
 	env_name = get_env_name(env[0]);
 	content = ft_strchr(env[0], '=');
