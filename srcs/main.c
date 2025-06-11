@@ -6,11 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/06/09 18:55:30 by brunogue         ###   ########.fr       */
-=======
-/*   Updated: 2025/06/10 18:59:59 by pvitor-l         ###   ########.fr       */
->>>>>>> init_paulo
+/*   Updated: 2025/06/11 12:47:49 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +18,13 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	t_token	*token_list;
 	t_cmd	*cmd;
 	char	*input;
-<<<<<<< HEAD
-    t_env *env_copy;
-=======
 	t_env	*env_copy;
 	char	**path;
->>>>>>> init_paulo
 
 	(void)argc;
 	(void)argv;
     
 	env_copy = linked_node_env(envp);
-<<<<<<< HEAD
-	
-=======
->>>>>>> init_paulo
 	token = NULL;
 	(void)path;
 	while (1)
@@ -59,11 +47,7 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		valid_redir_out(token_list);
 		valid_heredoc(token_list);
 		cmd = token_to_cmd(token_list);
-<<<<<<< HEAD
-		exec_builtin(cmd, env_copy);
-=======
 		execution_cmd(env_copy, cmd);
->>>>>>> init_paulo
 		ft_print_token(token_list);
 		free_token_list(token_list);
 		free_cmd(cmd);

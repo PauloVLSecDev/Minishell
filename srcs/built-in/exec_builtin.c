@@ -6,11 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/06/09 18:56:03 by brunogue         ###   ########.fr       */
-=======
-/*   Updated: 2025/06/10 16:35:10 by pvitor-l         ###   ########.fr       */
->>>>>>> init_paulo
+/*   Updated: 2025/06/11 12:45:57 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +33,10 @@ int	exec_builtin(t_cmd *cmd, t_env *env)
 	if (code == ECHO)
 		ft_echo(cmd->args);
 	if (code == PWD)
-<<<<<<< HEAD
 		ft_pwd();
 	if (code == CD)
 		ft_cd(cmd->args, env);
-	return (1);
-=======
-		ft_printf("PWD");
 	return (code);
->>>>>>> init_paulo
 }
 
 int	count_word(t_token *token)
