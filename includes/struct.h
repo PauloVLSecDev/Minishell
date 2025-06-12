@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/10 16:09:09 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:47:03 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 # define STRUCT_H
 
 # include "minishell.h"
+
+typedef struct s_token	t_token;
+
+typedef struct s_cmd	t_cmd;
+
+typedef struct s_env	t_env;
+
+typedef struct s_shell
+{
+	t_token	*token;
+	t_cmd	*cmd;
+	t_env	*env;
+	char	*input;
+}	t_shell;
+
 
 typedef enum e_token_type
 {
