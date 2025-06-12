@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:42:15 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 18:57:15 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/12 19:54:49 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	clean_exit(t_shell *sh, int code)
 	if (sh->input)
 		free(sh->input);
 	free_env(sh->env);
-	free_cmd(sh->cmd);
 	free_token_list(sh->token);
+	free_cmd(sh->cmd);
+	free(sh);
 	exit(code);
 }
 
