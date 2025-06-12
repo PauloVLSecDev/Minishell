@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/11 13:41:50 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:04:45 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,33 +58,33 @@ void	execution_cmd(t_env *env, t_cmd *cmd)
 {
 	char	*abs_path;
 	char	**new_envp;
-	int     status;
-    int pid;
+	int		status;
+    char **path;
+	int		pid;
 
-    status = 0;
-    if (cmd == NULL)
-        return ;
-    pid = fork();
-    if (pid == 0) 
-    {
+	status = 0;
+	if (cmd == NULL)
+		return ;
+	pid = fork();
+	if (pid == 0)
+	{
 	    if (exec_builtin(cmd, env) != -1)
-        		return ;
-	    else
-    	{
-    		new_envp = recreate_env(env);
-    		abs_path = join_path_with_cmd(find_path(env), cmd);
-	    	if (execve(abs_path, cmd->args, new_envp) == -1)
-	    	{
-                free_all(new_envp);
-	    		perror("error in execute comand");
-	    		exit(127);
-	    	}
-	    }
-    }
-    if (pid > 0)
-    {
-        waitpid(pid, &status, 0);
-    }
+            return ;
+        path = find_path(env); 
+		new_envp = recreate_env(env);
+		abs_path = join_path_with_cmd(path, cmd);
+		if (execve(abs_path, cmd->args, new_envp) == -1)
+		{
+			free_all(new_envp);
+			perror("error in execute comand");
+		    exit(1);
+		}
+		free_all(new_envp);
+	}
+	if (pid > 0)
+	{
+		waitpid(pid, &status, 0);
+	}
 }
 
 char	*join_path_with_cmd(char **path, t_cmd *cmd)
@@ -117,8 +117,9 @@ char	**find_path(t_env *env)
 	current_node = env;
 	if (!current_node)
 		return (NULL);
-	while (current_node && current_node->name && ft_strcmp(current_node->name, "PATH"))
-		current_node = current_node->next;
+	while (current_node && current_node->name && ft_strcmp(current_node->name,
+			"PATH"))
+	current_node = current_node->next;
 	if (current_node == NULL)
 		return (NULL);
 	path = ft_split(current_node->content, ':');

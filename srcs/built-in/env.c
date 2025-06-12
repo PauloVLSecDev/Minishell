@@ -15,8 +15,6 @@
 int	ft_env(char **args, t_env *env)
 {
 	char	*temp;
-	
-	
+
 	args = recreate_env(env);
-	
 }

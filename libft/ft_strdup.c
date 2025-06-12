@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 18:26:31 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/28 17:09:20 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:40:20 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ char	*ft_strdup(const char *s)
 	}
 	new_str = (char *)malloc(c + 1);
 	if (new_str == NULL)
-	{
-		free(new_str);
 		return (NULL);
-	}
 	i = 0;
 	while (i < c)
 	{

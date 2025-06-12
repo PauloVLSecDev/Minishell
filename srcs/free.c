@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:35:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/08 16:20:44 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/11 16:08:40 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	free_token_list(t_token *token)
 	while (token)
 	{
 		tmp = token->next;
-		free(token->value); // valor duplicado com ft_substr
-		free(token);        // struct t_token
+		free(token->value);
+		free(token);
 		token = tmp;
 	}
 }
@@ -28,16 +28,14 @@ void	free_token_list(t_token *token)
 void	free_env(t_env *env)
 {
 	t_env	*temp;
-	t_env	*next;
 
-	temp = env;
-	while (temp != NULL)
+	while (env)
 	{
-		next = temp->next;
-		free(temp->name);
-		free(temp->content);
-		free(temp);
-		temp = next;
+		temp = env->next;
+		free(env->name);
+		free(env->content);
+		free(env);
+		env = temp;
 	}
 }
 

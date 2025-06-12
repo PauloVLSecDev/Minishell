@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/11 13:41:55 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:56:39 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_env_name(char *env)
 	char	*environment_variable_name;
 	int		i;
 	int		len;
-	
+
 	i = 0;
 	len = 0;
 	if (env == NULL)
@@ -26,7 +26,7 @@ char	*get_env_name(char *env)
 		len++;
 	if (env[len] != '=')
 		return (NULL);
-	environment_variable_name = (char *)malloc((len + 1) * sizeof(char *));
+	environment_variable_name = malloc((len + 1) * sizeof(char));
 	if (!environment_variable_name)
 		return (NULL);
 	while (env[i] && env[i] != '=')
@@ -61,7 +61,7 @@ char	*get_env_value(t_env *env, char *name)
 t_env	*create_node_env(char *name, char *content)
 {
 	t_env	*node;
-	
+
 	node = (t_env *)malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
@@ -70,7 +70,7 @@ t_env	*create_node_env(char *name, char *content)
 	if (name)
 		node->name = ft_strdup(name);
 	if (content)
-		node->content = ft_strdup(content);
+        node->content = ft_strdup(content);
 	node->next = NULL;
 	return (node);
 }
@@ -88,10 +88,8 @@ t_env	*linked_node_env(char **env)
 	content = ft_strchr(env[0], '=');
 	head = create_node_env(env_name, (content += 1));
 	if (!head)
-	{
-		free(env_name);
 		return (NULL);
-	}
+	free(env_name);
 	current_node = head;
 	while (env[i] != NULL)
 	{
