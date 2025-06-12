@@ -21,7 +21,16 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	char	*input;
 	t_env	*env_copy;
 
+	env_copy = linked_node_env(envp);
 	token = NULL;
+	token = NULL;
+	while (1)
+	{
+		input = readline("minishell> ");
+       if (!*input)
+           continue ;
+		if (!check_quotes(input))
+			ft_printf("nao contem um numero par de aspas: %s\n", input);
 	    env_copy = linked_node_env(envp);
 	while (1)
 	{

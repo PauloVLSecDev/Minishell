@@ -70,6 +70,9 @@ t_env	*create_node_env(char *name, char *content)
 	if (name)
 		node->name = ft_strdup(name);
 	if (content)
+		node->content = ft_strdup(content);
+	if (!node)
+		return (NULL);
         node->content = ft_strdup(content);
 	node->next = NULL;
 	return (node);
@@ -89,6 +92,7 @@ t_env	*linked_node_env(char **env)
 	head = create_node_env(env_name, (content += 1));
 	if (!head)
 		return (NULL);
+	free(env_name);	
 	free(env_name);
 	current_node = head;
 	while (env[i] != NULL)

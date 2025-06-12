@@ -58,6 +58,30 @@ void	execution_cmd(t_env *env, t_cmd *cmd)
 {
 	char	*abs_path;
 	char	**new_envp;
+	int     status;
+    int		pid;
+
+    status = 0;
+    if (cmd == NULL)
+        return ;
+	else if (exec_builtin(cmd, env) != -1)
+		return ;
+	pid = fork();
+    if (pid == 0)
+    {
+		new_envp = recreate_env(env);
+		abs_path = join_path_with_cmd(find_path(env), cmd);
+		if (execve(abs_path, cmd->args, new_envp) == -1)
+		{
+			free_all(new_envp);
+			perror("Error in execute command");
+			exit(127);
+		}
+    }
+    if (pid > 0)
+    {
+        waitpid(pid, &status, 0);
+    }
 	int		status;
     char **path;
 	int		pid;

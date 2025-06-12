@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/11 13:42:12 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:31:39 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	is_builtin(char *input)
 		return (PWD);
 	if (!ft_strcmp(input, "cd"))
 		return (CD);
+	if (!ft_strcmp(input, "env"))
+		return (ENV);
+	if (!ft_strcmp(input, "exit"))
+		return (EXIT);
 	return (-1);
 }
 
@@ -36,6 +40,10 @@ int	exec_builtin(t_cmd *cmd, t_env *env)
 		ft_pwd();
 	if (code == CD)
 		ft_cd(cmd->args, env);
+	if (code == ENV)
+		ft_env(cmd->args, env);
+	if (code == EXIT)
+		ft_exit(cmd->args);
 	return (code);
 }
 
