@@ -15,7 +15,7 @@
 
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
-#endif
+# endif
 
 # include "minishell.h"
 
@@ -29,19 +29,19 @@ enum	e_builtin
 	EXIT,
 };
 
-//EXEC_BUILTIN
+// EXEC_BUILTIN
 int		is_builtin(char *cmd);
 int		exec_builtin(t_cmd *cmd, t_env *env);
 int		count_word(t_token *token);
 t_cmd	*token_to_cmd(t_token *tokens);
 
-//FT_ECHO
+// FT_ECHO
 int		ft_echo(char **input);
 
-//FT_PWD
+// FT_PWD
 void	ft_pwd(void);
 
-//FT_CD
+// FT_CD
 int		ft_cd(char **args, t_env *env);
 
 //FT_ENV

@@ -31,4 +31,7 @@ int	ft_env(char **args, t_env *env)
 	}
 	free_all(temp);
 	return (0);
+	char	*temp;
+
+	args = recreate_env(env);
 }

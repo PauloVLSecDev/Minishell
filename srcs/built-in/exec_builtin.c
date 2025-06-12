@@ -91,9 +91,9 @@ t_cmd	*token_to_cmd(t_token *token)
 */
 t_cmd	*token_to_cmd(t_token *token)
 {
-	t_cmd	*cmd;
-	int		i;
-	int		count;
+	t_cmd *cmd;
+	int i;
+	int count;
 
 	if (!token)
 		return (NULL);
