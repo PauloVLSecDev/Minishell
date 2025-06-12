@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/11 13:43:27 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:51:34 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			free_cmd(t_cmd *cmd);
 // execution.c
 char			**find_path(t_env *env);
 char			*join_path_with_cmd(char **path, t_cmd *cmd);
-void			execution_cmd(t_env *env, t_cmd *cmd);
+void			execution_cmd(t_shell *sh);
 char			**recreate_env(t_env *env);
 int				count_nodes(t_env *env);
 
