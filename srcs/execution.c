@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/12 15:24:55 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:45:07 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	execution_cmd(t_env *env, t_cmd *cmd)
 	pid = fork();
 	if (pid == 0)
 	{
-	    if (exec_builtin(cmd, env) != -1)
-            return ;
         path = find_path(env); 
 		new_envp = recreate_env(env);
 		abs_path = join_path_with_cmd(path, cmd);
@@ -83,6 +81,8 @@ void	execution_cmd(t_env *env, t_cmd *cmd)
 	}
 	if (pid > 0)
 	{
+	    if (exec_builtin(cmd, env) != -1)
+            return ;
 		waitpid(pid, &status, 0);
 	}
 }
