@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/12 15:45:07 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:04:23 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,39 +52,6 @@ char	**recreate_env(t_env *env)
 		i++;
 	}
 	return (env_array);
-}
-
-void	execution_cmd(t_env *env, t_cmd *cmd)
-{
-	char	*abs_path;
-	char	**new_envp;
-	int		status;
-    char **path;
-	int		pid;
-
-	status = 0;
-	if (cmd == NULL)
-		return ;
-	pid = fork();
-	if (pid == 0)
-	{
-        path = find_path(env); 
-		new_envp = recreate_env(env);
-		abs_path = join_path_with_cmd(path, cmd);
-		if (execve(abs_path, cmd->args, new_envp) == -1)
-		{
-			free_all(new_envp);
-			perror("error in execute comand");
-		    exit(1);
-		}
-		free_all(new_envp);
-	}
-	if (pid > 0)
-	{
-	    if (exec_builtin(cmd, env) != -1)
-            return ;
-		waitpid(pid, &status, 0);
-	}
 }
 
 char	*join_path_with_cmd(char **path, t_cmd *cmd)

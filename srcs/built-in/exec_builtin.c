@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/11 19:31:39 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:46:10 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_builtin(char *input)
 {
-	if (!input)
+	if (!*input)
 		return (-1);
 	if (!ft_strcmp(input, "echo"))
 		return (ECHO);
@@ -29,11 +29,8 @@ int	is_builtin(char *input)
 	return (-1);
 }
 
-int	exec_builtin(t_cmd *cmd, t_env *env)
+int	exec_builtin(t_cmd *cmd, t_env *env, int code)
 {
-	int	code;
-
-	code = is_builtin(cmd->args[0]);
 	if (code == ECHO)
 		ft_echo(cmd->args);
 	if (code == PWD)
