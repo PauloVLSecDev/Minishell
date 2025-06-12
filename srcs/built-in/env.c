@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 18:04:16 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/11 17:32:40 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:14:48 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,4 @@ int	ft_env(char **args, t_env *env)
 	}
 	free_all(temp);
 	return (0);
-	char	*temp;
-
-	args = recreate_env(env);
 }
