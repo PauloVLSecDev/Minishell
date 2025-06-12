@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 19:33:15 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/12 20:08:34 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,5 @@ int		ft_env(char **args, t_shell *sh);
 //FT_EXIT
 int		ft_exit(char **args, t_shell *sh);
 void	clean_exit(t_shell *sh, int code);
-
-
 
 #endif

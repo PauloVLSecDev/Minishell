@@ -6,11 +6,12 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 19:31:09 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/12 20:07:02 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 int	is_builtin(t_shell *sh)
 {
 	if (!sh->cmd || !sh->cmd->args || !sh->cmd->args[0])
@@ -28,10 +29,8 @@ int	is_builtin(t_shell *sh)
 	return (-1);
 }
 
-int exec_builtin(t_shell *sh)
+int exec_builtin(t_shell *sh, int code)
 {
-    int code = is_builtin(sh);
-
     if (code == ECHO)
         ft_echo(sh->cmd->args);
     else if (code == PWD)
