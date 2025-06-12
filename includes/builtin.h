@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 20:08:34 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/12 20:15:30 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ enum	e_builtin
 
 //EXEC_BUILTIN
 int		is_builtin(t_shell *sh);
-int		exec_builtin(t_shell *sh);
+int		exec_builtin(t_shell *sh, int code);
 int		count_word(t_token *token);
 void	token_to_cmd(t_shell *sh);
 

@@ -6,28 +6,28 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/12 19:33:38 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/12 20:18:55 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    exec_all(t_env *env, t_cmd *cmd)
+void    exec_all(t_shell *sh)
 {
         char **new_env;
         char **path;
 
         new_env = NULL;
         path = NULL;
-        if (!cmd)
+        if (!sh->cmd)
             return ; 
-        if (is_builtin(cmd->args[0]) != -1)
-            exec_builtin(cmd, env, is_builtin(cmd->args[0]));
+        if (is_builtin(sh) != -1)
+            exec_builtin(sh, is_builtin(sh));
         else 
         {
-            new_env = recreate_env(env);
-            path = find_path(env);
-            exec_external(cmd, new_env, path);
+            new_env = recreate_env(sh->env);
+            path = find_path(sh->env);
+            exec_external(sh->cmd, new_env, path);
         }
 		free_all(new_env);
 		free_all(path);
