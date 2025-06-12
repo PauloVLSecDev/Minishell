@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:17:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/10 15:39:03 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:47:16 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*ft_join_three(char *s1, char *s2, char *s3)
 	if (!tmp)
 		return (NULL);
 	together_all = ft_strjoin(tmp, s3);
+    free(tmp);
 	if (!together_all)
 	{
 		free(tmp);

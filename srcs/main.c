@@ -6,13 +6,14 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 18:51:03 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/12 19:41:01 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[], char *envp[])
+int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
+		char *envp[])
 {
 	t_shell	*sh;
 

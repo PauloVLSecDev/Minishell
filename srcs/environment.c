@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/11 17:41:30 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/12 19:38:25 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_env_name(char *env)
 	char	*environment_variable_name;
 	int		i;
 	int		len;
-	
+
 	i = 0;
 	len = 0;
 	if (env == NULL)
@@ -61,7 +61,7 @@ char	*get_env_value(t_env *env, char *name)
 t_env	*create_node_env(char *name, char *content)
 {
 	t_env	*node;
-	
+
 	node = (t_env *)malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);

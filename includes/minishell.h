@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 18:51:34 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/12 19:40:21 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "struct.h"
 # include "builtin.h"
 # include "parser.h"
+# include "struct.h"
 # include "token.h"
 // LIBS
 # include <fcntl.h>
@@ -56,7 +57,7 @@ t_env			*linked_node_env(char **env);
 t_env			*create_node_env(char *name, char *content);
 void			free_env(t_env *env);
 char			*get_env_name(char *env);
-char	        *get_env_value(t_env *env, char *name);
+char			*get_env_value(t_env *env, char *name);
 void			insert_node(char *env_name, t_env *curr_node, char *content);
 void			free_token_list(t_token *head);
 void			free_cmd(t_cmd *cmd);
