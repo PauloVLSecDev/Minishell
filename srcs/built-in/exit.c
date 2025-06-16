@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:42:15 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 20:01:43 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:51:36 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,6 @@ static int	count_arg(char **args)
 	while (args[i])
 		i++;
 	return (i);
-}
-
-void	clean_exit(t_shell *sh, int code)
-{
-	if (sh->input)
-		free(sh->input);
-	free_env(sh->env);
-	free_cmd(sh->cmd);
-	free_token_list(sh->token);
-    free(sh);
-	exit(code);
 }
 
 int	ft_exit(char **args, t_shell *sh)

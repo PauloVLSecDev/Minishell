@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 20:04:11 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:20:30 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,34 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	while (1)
 	{
 		sh->input = readline("minishell> ");
-		if (!sh->input || !*sh->input)
-		{
-			free(sh->input);
-			continue;
-		}
+		if (!sh->input) 
+        {
+            printf("exit\n");
+            clean_exit(sh, 0);
+            break ; 
+        }
+        if (!*sh->input)
+        {
+            free(sh->input);
+            continue;
+        }
 		if (!check_quotes(sh->input))
+        {
 			ft_printf("nao contem um numero par de aspas: %s\n", sh->input);
+            free(sh->input);
+            sh->input = NULL;
+            continue ;
+        }
 		add_history(sh->input);
 		sh->token = tokenization(sh->token, sh->input);
-		valid_pipe(sh->token);
-		valid_redir_in(sh->token);
-		valid_redir_out(sh->token);
-		valid_heredoc(sh->token);
+//		valid_pipe(sh->token);
+//		valid_redir_in(sh->token);
+//		valid_redir_out(sh->token);
+//		valid_heredoc(sh->token);
 		token_to_cmd(sh);
 		exec_all(sh);
 		ft_print_token(sh->token);
-		free_token_list(sh->token);
-		free_cmd(sh->cmd);
-		free(sh->input);
+        cleanup_iteration(sh);
 		sh->token = NULL;
 		sh->cmd = NULL;
 		sh->input = NULL;

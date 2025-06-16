@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:35:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/11 16:08:40 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:34:10 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,45 @@ void	free_env(t_env *env)
 
 void	free_cmd(t_cmd *cmd)
 {
-	int	i;
 
-	if (!cmd)
-		return ;
-	if (cmd->args)
-	{
-		i = 0;
-		while (cmd->args[i])
-		{
-			free(cmd->args[i]);
-			i++;
-		}
-		free(cmd->args);
-	}
-	free(cmd);
+    t_cmd *tmp;
+
+    tmp = cmd;
+    while (tmp != NULL)
+    {
+        free_all(tmp->args);
+        free(tmp);
+        tmp = tmp->next;
+    }
+    return ;
+}
+
+void	clean_exit(t_shell *sh, int code)
+{
+	if (sh->input)
+		free(sh->input);
+	free_env(sh->env);
+	free_cmd(sh->cmd);
+	free_token_list(sh->token);
+    free(sh);
+	exit(code);
+}
+
+void cleanup_iteration(t_shell *sh)
+{
+    if (sh->token)
+    {
+        free_token_list(sh->token);
+        sh->token = NULL;
+    }
+    if (sh->cmd)
+    {
+        free_cmd(sh->cmd);
+        sh->cmd = NULL;
+    }
+    if (sh->input)
+    {
+        free(sh->input);
+        sh->input = NULL;
+    }
 }

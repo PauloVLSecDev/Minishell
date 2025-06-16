@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 20:15:03 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:04:51 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int				valid_redir_in(t_token *list);
 
 // free.c
 void			free_token_list(t_token *head);
+void            cleanup_iteration(t_shell *sh);
 
 // environment.c
 t_env			*linked_node_env(char **env);
