@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:35:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/16 19:34:10 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/17 14:46:32 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	free_cmd(t_cmd *cmd)
 
     t_cmd *tmp;
 
-    tmp = cmd;
-    while (tmp != NULL)
+    while (cmd != NULL)
     {
-        free_all(tmp->args);
-        free(tmp);
-        tmp = tmp->next;
+        tmp = cmd->next;
+        free_all(cmd->args);
+        free(cmd);
+        cmd = tmp;
     }
     return ;
 }
