@@ -6,42 +6,44 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 20:07:02 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/17 21:05:23 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(t_shell *sh)
+int	is_builtin(void)
 {
-	if (!sh->cmd || !sh->cmd->args || !sh->cmd->args[0])
+    t_cmd  *cmd;
+    
+    cmd = get_shell()->cmd;
+	if (!cmd || !cmd->args || !cmd->args[0])
 		return (-1);
-	if (!ft_strcmp(sh->cmd->args[0], "echo"))
+	if (!ft_strcmp(cmd->args[0], "echo"))
 		return (ECHO);
-	if (!ft_strcmp(sh->cmd->args[0], "pwd"))
+	if (!ft_strcmp(cmd->args[0], "pwd"))
 		return (PWD);
-	if (!ft_strcmp(sh->cmd->args[0], "cd"))
+	if (!ft_strcmp(cmd->args[0], "cd"))
 		return (CD);
-	if (!ft_strcmp(sh->cmd->args[0], "env"))
+	if (!ft_strcmp(cmd->args[0], "env"))
 		return (ENV);
-	if (!ft_strcmp(sh->cmd->args[0], "exit"))
+	if (!ft_strcmp(cmd->args[0], "exit"))
 		return (EXIT);
 	return (-1);
 }
 
-int exec_builtin(t_shell *sh, int code)
+int exec_builtin(int code)
 {
     if (code == ECHO)
-        ft_echo(sh->cmd->args);
+        ft_echo(get_shell()->cmd->args);
     else if (code == PWD)
         ft_pwd();
     else if (code == CD)
-        ft_cd(sh->cmd->args, sh);
+        ft_cd(get_shell()->cmd->args);
     else if (code == ENV)
-        ft_env(sh->cmd->args, sh);
+        ft_env(get_shell()->cmd->args);
     else if (code == EXIT)
-        ft_exit(sh->cmd->args, sh);
-
+        ft_exit(get_shell()->cmd->args);
     return (code);
 }
 
@@ -61,39 +63,39 @@ int	count_word(t_token *token)
 	return (count);
 }
 
-void	token_to_cmd(t_shell *sh)
+void	token_to_cmd(void)
 {
 	t_token	*temp;
 	int		i;
 	int		count;
 
-	if (!sh->token)
+	if (!get_shell()->token)
 		return ;
-	count = count_word(sh->token);
-	sh->cmd = malloc(sizeof(t_cmd));
-	if (!sh->cmd)
+	count = count_word(get_shell()->token);
+	get_shell()->cmd = malloc(sizeof(t_cmd));
+	if (!get_shell()->cmd)
 		return ;
-	sh->cmd->args = malloc(sizeof(char *) * (count + 1));
-	if (!sh->cmd->args)
+	get_shell()->cmd->args = malloc(sizeof(char *) * (count + 1));
+	if (!get_shell()->cmd->args)
 	{
-		free(sh->cmd);
-		sh->cmd = NULL;
+		free(get_shell()->cmd);
+		get_shell()->cmd = NULL;
 		return ;
 	}
-	temp = sh->token;
+	temp = get_shell()->token;
 	i = 0;
 	while (temp)
 	{
 		if (temp->type == TOKEN_WORD)
 		{
-			sh->cmd->args[i] = ft_strdup(temp->value);
-			if (!sh->cmd->args[i])
+			get_shell()->cmd->args[i] = ft_strdup(temp->value);
+			if (!get_shell()->cmd->args[i])
 			{
 				while (i > 0)
-					free(sh->cmd->args[--i]);
-				free(sh->cmd->args);
-				free(sh->cmd);
-				sh->cmd = NULL;
+					free(get_shell()->cmd->args[--i]);
+				free(get_shell()->cmd->args);
+				free(get_shell()->cmd);
+				get_shell()->cmd = NULL;
 				return ;
 			}
 			i++;
@@ -102,35 +104,7 @@ void	token_to_cmd(t_shell *sh)
 			break ;
 		temp = temp->next;
 	}
-	sh->cmd->args[i] = NULL;
-	sh->cmd->next = NULL;
+	get_shell()->cmd->args[i] = NULL;
+	get_shell()->cmd->next = NULL;
 }
 
-
-/*
-t_cmd	*token_to_cmd(t_token *token)
-{
-	t_cmd	*cmd;
-	int		i;
-	int		count;
-
-	i = 0;
-	count = count_word(token);
-	cmd = malloc(sizeof(t_cmd));
-	sh->cmd->args = malloc(sizeof(char *) * (count + 1));
-	while (token)
-	{
-		if (token->type == TOKEN_WORD)
-		{
-			sh->cmd->args[i] = ft_strdup(token->value);
-			i++;
-		}
-		else
-			break ;
-		token = token->next;
-	}
-	sh->cmd->args[i] = NULL;
-	cmd->next = NULL;
-	return (cmd);
-}
-*/

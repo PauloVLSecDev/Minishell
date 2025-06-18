@@ -6,28 +6,28 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/17 14:49:03 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/17 21:06:50 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    exec_all(t_shell *sh)
+void    exec_all(void)
 {
         char **new_env;
         char **path;
 
         new_env = NULL;
         path = NULL;
-        if (!sh->cmd)
+        if (!get_shell()->cmd)
             return ; 
-        if (is_builtin(sh) != -1)
-            exec_builtin(sh, is_builtin(sh));
+        if (is_builtin() != -1)
+            exec_builtin(is_builtin());
         else 
         {
-            new_env = recreate_env(sh->env);
-            path = find_path(sh->env);
-            exec_external(sh->cmd, new_env, path);
+            new_env = recreate_env(get_shell()->env);
+            path = find_path(get_shell()->env);
+            exec_external(get_shell()->cmd, new_env, path);
         }
 		free_all(new_env);
 		free_all(path);
@@ -55,38 +55,3 @@ void exec_external(t_cmd *cmd, char **env, char **path)
     if (pid > 0)
         waitpid(pid, &status, 0);
 }
-
-/*
-void    exec_external(t_cmd *cmd, char **env, char **path)
-{
-    char *abs_path;
-    int status;
-    int pid;
-
-	status = 0;
-    abs_path = NULL;
-	if (cmd == NULL)
-		return ;
-	pid = fork();
-	if (pid == 0)
-	{
-	    abs_path = join_path_with_cmd(path, cmd);
-		if (execve(abs_path, cmd->args, env) == -1)
-		{
-			perror("error in execute comand");
-            free(abs_path);
-		    exit(1);
-		}
-	}
-    else if (pid > 0)
-    {
-        free(abs_path);
-        waitpid(pid, &status, 0);
-    }
-    else 
-    {
-        free(abs_path);
-        perror("faild in make a fork");
-    }
-}
-*/

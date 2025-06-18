@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:35:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/17 14:46:32 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/17 21:10:47 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,31 @@ void	free_cmd(t_cmd *cmd)
     return ;
 }
 
-void	clean_exit(t_shell *sh, int code)
+void	clean_exit(int code)
 {
-	if (sh->input)
-		free(sh->input);
-	free_env(sh->env);
-	free_cmd(sh->cmd);
-	free_token_list(sh->token);
-    free(sh);
+	if (get_shell()->input)
+		free(get_shell()->input);
+	free_env(get_shell()->env);
+	free_cmd(get_shell()->cmd);
+	free_token_list(get_shell()->token);
 	exit(code);
 }
 
-void cleanup_iteration(t_shell *sh)
+void cleanup_iteration()
 {
-    if (sh->token)
+    if (get_shell()->token)
     {
-        free_token_list(sh->token);
-        sh->token = NULL;
+        free_token_list(get_shell()->token);
+        get_shell()->token = NULL;
     }
-    if (sh->cmd)
+    if (get_shell()->cmd)
     {
-        free_cmd(sh->cmd);
-        sh->cmd = NULL;
+        free_cmd(get_shell()->cmd);
+        get_shell()->cmd = NULL;
     }
-    if (sh->input)
+    if (get_shell()->input)
     {
-        free(sh->input);
-        sh->input = NULL;
+        free(get_shell()->input);
+        get_shell()->input = NULL;
     }
 }

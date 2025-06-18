@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/12 20:10:24 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:31:02 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	**recreate_env(t_env *env)
 		curr_env = curr_env->next;
 		i++;
 	}
+    env_array[i] = NULL;
 	return (env_array);
 }
 
