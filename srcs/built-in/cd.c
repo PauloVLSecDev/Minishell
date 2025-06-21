@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-int ft_cd(char **args, t_shell *sh)
+int ft_cd(char **args)
 {
     char *home ;
 	
-	home = get_env_value(sh->env, "HOME");
+	home = get_env_value(get_shell()->env, "HOME");
     if (!args[1] || args[1][0] == '\0')
     {
         if (!home)

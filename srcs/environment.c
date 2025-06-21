@@ -40,14 +40,15 @@ char	*get_env_name(char *env)
 
 char	*get_env_value(t_env *env, char *name)
 {
-	int		i;
-	int		len;
+
+//	int		i;
+// 	int		len;
 	t_env	*temp;
 
 	if (name == NULL)
 		return (NULL);
-	i = 0;
-	len = 0;
+//	i = 0;
+// len = 0;
 	temp = env;
 	while (temp)
 	{

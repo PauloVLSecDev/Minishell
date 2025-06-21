@@ -43,13 +43,16 @@ void exec_external(t_cmd *cmd, char **env, char **path)
         return ;
     abs_path = join_path_with_cmd(path, cmd);
     if (!abs_path)
+	{
+		printf("comand not found\n");
         return ;
+	}
     pid = fork();
     if (pid == 0)
     {
-        execve(abs_path, cmd->args, env);
-        perror("execve");
-        exit(127);
+		if (execve(abs_path, cmd->args, env) == -1)
+			printf("execve");
+    	exit(127);
     }
     free(abs_path);
     if (pid > 0)
