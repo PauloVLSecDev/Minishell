@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/23 14:51:32 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:28:35 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	token_to_cmd(void);
 
 //FT_ECHO
 int		ft_echo(char **args);
+void ambient_var(char *arg, t_env *env, int has_next);
+
 
 //FT_PWD
 void	ft_pwd(void);
