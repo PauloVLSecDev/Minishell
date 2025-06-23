@@ -40,7 +40,7 @@ static int	count_arg(char **args)
 	return (i);
 }
 
-int	ft_exit(char **args, t_shell *sh)
+int	ft_exit(char **args)
 {
 	int		ac;
 	long	code;
@@ -56,13 +56,13 @@ int	ft_exit(char **args, t_shell *sh)
 		ft_putstr_fd("exit: ", 2);
 		ft_putstr_fd(args[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
-		clean_exit(sh, 2);
+		clean_exit(2);
 	}
 	if (args[1])
 	{
 		code = ft_atoi(args[1]);
-		clean_exit(sh, (unsigned char)code);
+		clean_exit((unsigned char)code);
 	}
-	clean_exit(sh, 0);
+	clean_exit(0);
 	return (0);
 }

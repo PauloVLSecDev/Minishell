@@ -25,9 +25,6 @@ char	*ft_join_three(char *s1, char *s2, char *s3)
 	together_all = ft_strjoin(tmp, s3);
     free(tmp);
 	if (!together_all)
-	{
-		free(tmp);
 		return (NULL);
-	}
 	return (together_all);
 }

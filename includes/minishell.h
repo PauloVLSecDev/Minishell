@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/16 18:04:51 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/17 20:56:37 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int				valid_redir_in(t_token *list);
 
 // free.c
 void			free_token_list(t_token *head);
-void            cleanup_iteration(t_shell *sh);
+void            cleanup_iteration(void);
 
 // environment.c
 t_env			*linked_node_env(char **env);
@@ -70,8 +70,15 @@ char			**recreate_env(t_env *env);
 int				count_nodes(t_env *env);
 
 // global_exection.c 
-void			exec_all(t_shell *sh);
+void			exec_all(void);
 void			exec_external(t_cmd *cmd, char **env, char **path);
 // utils.c
 char			*ft_join_three(char *s1, char *s2, char *s3);
+void            init_shell(t_env *env);
+t_shell         *get_shell(void);
+
+
+//pipe.c
+int	count_pipes(t_token *token);
+
 #endif
