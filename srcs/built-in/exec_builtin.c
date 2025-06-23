@@ -108,3 +108,30 @@ void	token_to_cmd(void)
 	get_shell()->cmd->next = NULL;
 }
 
+
+/*
+void	token_to_cmd(t_cmd *cmd, t_token *token)
+{
+	int len_nodes;
+	t_cmd *parse_cmd;
+	t_token *current;
+
+	current = token;
+	len_nodes = count_word;
+	parse_cmd = cmd;
+	parse_cmd = malloc(sizeof(t_cmd));
+	parse_cmd->args = (char **)malloc((len_nodes + 1) * sizeof(char *));
+
+	while (current)
+	{
+		if (current == TOKEN_PIPE)
+			parse = parse->next;'
+		else if (current->type == TOKEN_WORD)
+		{
+			parse->args[i] = ft_strdup(current->value);	
+			if (
+		}
+	}
+	
+}
+*/

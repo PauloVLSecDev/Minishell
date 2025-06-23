@@ -19,6 +19,7 @@ void    exec_all(void)
 
         new_env = NULL;
         path = NULL;
+//		count_pipes(get_shell()->token);
         if (!get_shell()->cmd)
             return ; 
         if (is_builtin() != -1)
@@ -50,8 +51,7 @@ void exec_external(t_cmd *cmd, char **env, char **path)
     pid = fork();
     if (pid == 0)
     {
-		if (execve(abs_path, cmd->args, env) == -1)
-			printf("execve");
+		execve(abs_path, cmd->args, env);
     	exit(127);
     }
     free(abs_path);

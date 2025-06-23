@@ -76,4 +76,9 @@ void			exec_external(t_cmd *cmd, char **env, char **path);
 char			*ft_join_three(char *s1, char *s2, char *s3);
 void            init_shell(t_env *env);
 t_shell         *get_shell(void);
+
+
+//pipe.c
+int	count_pipes(t_token *token);
+
 #endif

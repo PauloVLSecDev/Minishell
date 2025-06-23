@@ -34,7 +34,8 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/environment.c \
 		$(SRC_DIR)/execution.c \
 		$(SRC_DIR)/global_execute.c \
-		$(SRC_DIR)/utils.c 
+		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/pipe.c 
 
 VALGRIND = valgrind --leak-check=full \
 	--show-leak-kinds=all \
