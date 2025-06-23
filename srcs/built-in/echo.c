@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:48:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 18:55:07 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:39:20 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int ft_echo(char **args)
     }
     while (args[i])
     {
+        // if (args[i][0] == '$')
+        //     ambient_var(args[i], recreate_env(envp));
         ft_putstr_fd(args[i], 1);
         if (args[i + 1])
             ft_putstr_fd(" ", 1);

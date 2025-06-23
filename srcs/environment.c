@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/12 19:38:25 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:54:18 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_env_name(char *env)
 	if (env == NULL)
 		return (NULL);
 	while (env[len] && env[len] != '=')
-		len++;
+        len++;
 	if (env[len] != '=')
 		return (NULL);
 	environment_variable_name = malloc((len + 1) * sizeof(char));
@@ -40,14 +40,15 @@ char	*get_env_name(char *env)
 
 char	*get_env_value(t_env *env, char *name)
 {
-	int		i;
-	int		len;
+
+//	int		i;
+// 	int		len;
 	t_env	*temp;
 
 	if (name == NULL)
 		return (NULL);
-	i = 0;
-	len = 0;
+//	i = 0;
+// len = 0;
 	temp = env;
 	while (temp)
 	{
@@ -70,9 +71,7 @@ t_env	*create_node_env(char *name, char *content)
 	if (name)
 		node->name = ft_strdup(name);
 	if (content)
-		node->content = ft_strdup(content);
-	if (!node)
-		return (NULL);
+        node->content = ft_strdup(content);
 	node->next = NULL;
 	return (node);
 }
@@ -91,7 +90,7 @@ t_env	*linked_node_env(char **env)
 	head = create_node_env(env_name, (content += 1));
 	if (!head)
 		return (NULL);
-	free(env_name);	
+	free(env_name);
 	current_node = head;
 	while (env[i] != NULL)
 	{
@@ -111,9 +110,6 @@ void	insert_node(char *env_name, t_env *curr_node, char *content)
 
 	node_to_add = create_node_env(env_name, content);
 	if (!node_to_add)
-	{
-		free(env_name);
 		return ;
-	}
 	curr_node->next = node_to_add;
 }

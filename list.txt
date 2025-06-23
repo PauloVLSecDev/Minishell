@@ -45,3 +45,8 @@ brunogue - feito o refatoramento da tokenization e arrumado o makefile para que 
 8/6
 brunogue - juntado as builtins com os parsings do token. Tirei a flag -Werror do makefile da lib para poder compilar no wsl. ******************** LEMBRETE PARA RECOLOCAR A  FLAG ************************************
 
+17/6
+brunogue - variavel de ambiente, $$ e saida das builtins
+
+23/6
+brunogue - objs organizados

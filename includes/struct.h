@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 18:47:03 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/17 20:45:30 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ typedef struct s_shell
 	t_token	*token;
 	t_cmd	*cmd;
 	t_env	*env;
-	char	*input;
+    char    *input;
+    char    **env_copy;
+    int     exit_status; 
 }	t_shell;
 
 

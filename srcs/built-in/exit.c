@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:42:15 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 19:54:49 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:52:39 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,7 @@ static int	count_arg(char **args)
 	return (i);
 }
 
-void	clean_exit(t_shell *sh, int code)
-{
-	if (sh->input)
-		free(sh->input);
-	free_env(sh->env);
-	free_token_list(sh->token);
-	free_cmd(sh->cmd);
-	free(sh);
-	exit(code);
-}
-
-int	ft_exit(char **args, t_shell *sh)
+int	ft_exit(char **args)
 {
 	int		ac;
 	long	code;
@@ -67,13 +56,13 @@ int	ft_exit(char **args, t_shell *sh)
 		ft_putstr_fd("exit: ", 2);
 		ft_putstr_fd(args[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
-		clean_exit(sh, 2);
+		clean_exit(2);
 	}
 	if (args[1])
 	{
 		code = ft_atoi(args[1]);
-		clean_exit(sh, (unsigned char)code);
+		clean_exit((unsigned char)code);
 	}
-	clean_exit(sh, 0);
+	clean_exit(0);
 	return (0);
 }

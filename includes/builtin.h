@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 19:42:39 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:51:32 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ enum	e_builtin
 };
 
 //EXEC_BUILTIN
-int		is_builtin(t_shell *sh);
-int		exec_builtin(t_shell *sh);
+int		is_builtin(void);
+int		exec_builtin(int code);
 int		count_word(t_token *token);
-void	token_to_cmd(t_shell *sh);
+void	token_to_cmd(void);
 
 //FT_ECHO
 int		ft_echo(char **args);
@@ -42,15 +42,13 @@ int		ft_echo(char **args);
 void	ft_pwd(void);
 
 //FT_CD
-int		ft_cd(char **args, t_shell *sh);
+int		ft_cd(char **args);
 
 //FT_ENV
-int		ft_env(char **args, t_shell *sh);
+int		ft_env(char **args);
 
 //FT_EXIT
-int		ft_exit(char **args, t_shell *sh);
-void	clean_exit(t_shell *sh, int code);
-
-
+int		ft_exit(char **args);
+void	clean_exit(int code);
 
 #endif
