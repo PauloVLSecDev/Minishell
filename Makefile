@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/06/12 17:12:44 by pvitor-l         ###   ########.fr        #
+#    Updated: 2025/06/23 13:41:14 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ VALGRIND = valgrind --leak-check=full \
 	--trace-children-skip='*/bin/*,*/sbin/*,/usr/bin/*' \
 	--suppressions=supress.supp
 
-OBJ = $(FILES:.c=.o)
+OBJ = $(FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(LIBFT) $(NAME)
 
@@ -54,11 +54,12 @@ $(LIBFT):
 $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME) $(INCLUDES)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 
 fclean: clean

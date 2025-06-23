@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 20:15:30 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/17 20:19:36 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		count_word(t_token *token);
 void	token_to_cmd(t_shell *sh);
 
 //FT_ECHO
-int		ft_echo(char **args);
+int		ft_echo(char **args, t_env *envp);
 
 //FT_PWD
 void	ft_pwd(void);

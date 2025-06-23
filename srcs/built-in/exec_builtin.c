@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/12 20:07:02 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:33:45 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_builtin(t_shell *sh)
 int exec_builtin(t_shell *sh, int code)
 {
     if (code == ECHO)
-        ft_echo(sh->cmd->args);
+        ft_echo(sh->cmd->args, sh->env);
     else if (code == PWD)
         ft_pwd();
     else if (code == CD)
@@ -105,7 +105,6 @@ void	token_to_cmd(t_shell *sh)
 	sh->cmd->args[i] = NULL;
 	sh->cmd->next = NULL;
 }
-
 
 /*
 t_cmd	*token_to_cmd(t_token *token)

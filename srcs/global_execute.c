@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_execute.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/17 14:49:03 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:16:58 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,38 +55,3 @@ void exec_external(t_cmd *cmd, char **env, char **path)
     if (pid > 0)
         waitpid(pid, &status, 0);
 }
-
-/*
-void    exec_external(t_cmd *cmd, char **env, char **path)
-{
-    char *abs_path;
-    int status;
-    int pid;
-
-	status = 0;
-    abs_path = NULL;
-	if (cmd == NULL)
-		return ;
-	pid = fork();
-	if (pid == 0)
-	{
-	    abs_path = join_path_with_cmd(path, cmd);
-		if (execve(abs_path, cmd->args, env) == -1)
-		{
-			perror("error in execute comand");
-            free(abs_path);
-		    exit(1);
-		}
-	}
-    else if (pid > 0)
-    {
-        free(abs_path);
-        waitpid(pid, &status, 0);
-    }
-    else 
-    {
-        free(abs_path);
-        perror("faild in make a fork");
-    }
-}
-*/
