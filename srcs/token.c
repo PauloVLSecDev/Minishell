@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/17 19:38:39 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/24 19:20:28 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,49 @@ t_token_type	find_token_type(char *str)
 	else
 		return (TOKEN_WORD);
 }
-
-t_token	*tokenization(t_token *token, char *input)
+t_token *tokenization(t_token *token, char *input)
 {
-	t_token	*current;
-	char	*value;
-	int		i;
-	int		start;
-
-	i = 0;
-	current = NULL;
-    value = NULL;
-	while (input[i] != '\0')
-	{
-		while (input[i] && ft_strchr(AVOID_TOKENS, input[i]))
-			i++;
-		if (input[i] == '\0')
-			break ;
-		if (!handle_quotes(input, &i, &token, &current))
-		{
-			start = i;
-			while (input[i] && !ft_strchr(AVOID_TOKENS, input[i]))
-				i++;
-			value = ft_substr(input, start, i - start);
-			append_token(&token, &current, value);
+    t_token *current;
+    char *value;
+    int i;
+    int start;
+    
+    i = 0;
+    current = NULL;
+    while (input[i] != '\0')
+    {
+        while (input[i] && ft_strchr(AVOID_TOKENS, input[i]))
+            i++;
+        if (input[i] == '\0')
+            break;
+        if (handle_quotes(input, &i, &token, &current))
+            continue;
+        if (input[i] == '|' || input[i] == '<' || input[i] == '>')
+        {
+            start = i;
+            if ((input[i] == '<' && input[i + 1] == '<') || 
+                (input[i] == '>' && input[i + 1] == '>'))
+                i += 2;
+            else
+                i++;
+            value = ft_substr(input, start, i - start);
+            append_token(&token, &current, value);
             free(value);
-		}
-	}
-	return (token);
+            continue;
+        }
+        start = i;
+            while (input[i] && !ft_strchr(AVOID_TOKENS, input[i]) && 
+               input[i] != '\'' && input[i] != '"' &&
+               input[i] != '|' && input[i] != '<' && input[i] != '>')
+            i++;
+        if (i > start)
+        {
+            value = ft_substr(input, start, i - start);
+            append_token(&token, &current, value);
+            free(value);
+        }
+    }
+    return (token);
 }
 
 int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
