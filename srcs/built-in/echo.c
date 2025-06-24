@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:48:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/23 19:00:17 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:23:32 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void ambient_var(char *arg, t_env *env, int has_next)
     if (has_next)
         ft_putstr_fd(" ", 1);
 }
-
 
 int ft_echo(char **args)
 {

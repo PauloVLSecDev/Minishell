@@ -51,3 +51,6 @@ brunogue - variavel de ambiente, $$ e saida das builtins
 23/6
 brunogue - objs organizados e variavel de ambiente concluida, somente faltando o tratamento certo do parsing, pois passando o comando tudo junto, ele n funcionais
 ex: echo $$$HOME 
+
+24/6
+brunogue - fazer o cd ~ e echo $? 
