@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/17 19:38:39 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:55:38 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,32 @@ t_token_type	find_token_type(char *str)
 		return (TOKEN_WORD);
 }
 
-t_token	*tokenization(t_token *token, char *input)
+t_token *tokenization(t_token *token, char *input, t_token *current)
 {
-	t_token	*current;
-	char	*value;
-	int		i;
-	int		start;
-
-	i = 0;
-	current = NULL;
-    value = NULL;
-	while (input[i] != '\0')
-	{
-		while (input[i] && ft_strchr(AVOID_TOKENS, input[i]))
+    char	*value;
+    int 	i;
+    int 	start;
+    
+    i = 0;
+    while (input[i] != '\0')
+    {
+		if (ft_avoid_tokens(input, &i))
+			continue ;
+        if (handle_quotes(input, &i, &token, &current))
+            continue ;
+		if (extract_redir_or_pipe(input, &i, &token, &current))
+			continue ;
+        start = i;
+        while (input[i] && !ft_strchr(AVOID_TOKENS, input[i]) && !ft_strchr(SPECIALS_CHARS, input[i]))
 			i++;
-		if (input[i] == '\0')
-			break ;
-		if (!handle_quotes(input, &i, &token, &current))
-		{
-			start = i;
-			while (input[i] && !ft_strchr(AVOID_TOKENS, input[i]))
-				i++;
-			value = ft_substr(input, start, i - start);
-			append_token(&token, &current, value);
+        if (i > start)
+        {
+            value = ft_substr(input, start, i - start);
+            append_token(&token, &current, value);
             free(value);
-		}
-	}
-	return (token);
+        }
+    }
+    return (token);
 }
 
 int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
@@ -96,7 +95,7 @@ void	ft_print_token(t_token *list)
 {
 	while (list != NULL)
 	{
-		ft_printf("token: %s         | type de token %d\n", list->value,
+		ft_printf("token: %s         | type of token %d\n", list->value,
 			list->type);
 		list = list->next;
 	}

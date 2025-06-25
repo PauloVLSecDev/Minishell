@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/23 19:00:20 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:51:39 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		char *envp[])
 {
-    t_env *new_envp;
-    char *input;
+    t_env   *new_envp;
+    t_token *current;
+    char    *input;
 
+    current = NULL;
     new_envp = linked_node_env(envp);
     init_shell(new_envp);
     input = get_shell()->input;
@@ -43,14 +45,14 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
             continue ;
         }
 		add_history(input);
-		get_shell()->token = tokenization(get_shell()->token, input);
-//		valid_pipe(sh->token);
-//		valid_redir_in(sh->token);
-//		valid_redir_out(sh->token);
-//		valid_heredoc(sh->token);
+		get_shell()->token = tokenization(get_shell()->token, input, current);
+		valid_pipe(get_shell()->token);
+		valid_redir_in(get_shell()->token);
+		valid_redir_out(get_shell()->token);
+		valid_heredoc(get_shell()->token);
 		token_to_cmd();
 		exec_all();
-//	    ft_print_token(get_shell()>token);
+	    ft_print_token(get_shell()->token);
         cleanup_iteration();
 	}
 	return (0);
