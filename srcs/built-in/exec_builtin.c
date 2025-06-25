@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/25 19:04:21 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/25 20:19:53 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,9 @@ int	count_word(t_token *token)
 
 	temp = token;
 	count = 0;
-	while (temp)
-	{
-		if (temp->type == TOKEN_WORD)
-			count++;
+	while (temp && temp->type == TOKEN_WORD) 
+    {
+		count++;
 		temp = temp->next;
 	}
 	return (count);
@@ -82,21 +81,32 @@ void	handle_command(t_token *token)
 		{
             curr_cmd->args[i] = ft_strdup(current->value); 
             if (!curr_cmd->args[i])
-                return ;                
+                return ; 
             i++; 
 		}
-        else if (current->type == TOKEN_PIPE)
+        else if ((curr_cmd = linked_node_pipe(curr_cmd, current)))
         {
-            curr_cmd->next = create_cmd_node(current);
-            curr_cmd = curr_cmd->next; 
+            curr_cmd->args[i] = NULL;
             i = 0;
         }
-	    else 
+        else
             break ;
         current = current->next;
 	}
     curr_cmd->args[i] = NULL;
-    get_shell()->cmd =  head;;
+    get_shell()->cmd = head;;
+}
+
+t_cmd *linked_node_pipe(t_cmd *cmd, t_token *token)
+{
+    if (token->type == TOKEN_PIPE)
+    {
+        cmd->next = create_cmd_node(token->next);
+        if (!cmd->next)
+            return (NULL);
+        return (cmd->next); 
+    }
+    return (NULL);
 }
 
 t_cmd *create_cmd_node(t_token *token)
