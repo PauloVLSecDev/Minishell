@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/06/23 14:53:58 by brunogue         ###   ########.fr        #
+#    Updated: 2025/06/25 17:55:23 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/free.c \
 		$(SRC_DIR)/parser.c \
 		$(SRC_DIR)/token.c \
+		$(SRC_DIR)/token_utils.c \
 		$(SRC_DIR)/built-in/exec_builtin.c \
 		$(SRC_DIR)/built-in/pwd.c \
 		$(SRC_DIR)/built-in/cd.c \

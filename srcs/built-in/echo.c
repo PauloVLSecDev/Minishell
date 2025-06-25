@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:48:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/23 19:00:17 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:45:51 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void ambient_var(char *arg, t_env *env, int has_next)
 
 	if (arg[0] == '$' && arg[1] == '$' && arg[2] == '\0')
 		ft_putnbr_fd(getpid(), 1);
-    if (arg[0] == '$')
+	if (arg[0] == '$')
     {
-        if (!arg[1] || arg[1] == ' ')
+		if (!arg[1] || arg[1] == ' ')
             ft_putstr_fd("$", 1);
         else
         {
             var = get_env_value(env, arg + 1);
             if (var)
-                ft_putstr_fd(var, 1);
+				ft_putstr_fd(var, 1);
         }
     }
     else
@@ -34,7 +34,6 @@ void ambient_var(char *arg, t_env *env, int has_next)
     if (has_next)
         ft_putstr_fd(" ", 1);
 }
-
 
 int ft_echo(char **args)
 {
