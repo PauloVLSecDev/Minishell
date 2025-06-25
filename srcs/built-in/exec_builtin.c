@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/23 14:52:27 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:04:21 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,74 +63,80 @@ int	count_word(t_token *token)
 	return (count);
 }
 
-void	token_to_cmd(void)
+void	handle_command(t_token *token)
 {
-	t_token	*temp;
-	int		i;
-	int		count;
+	t_cmd *curr_cmd;
+    t_cmd *head;      
+	t_token *current;
+    int i;
 
-	if (!get_shell()->token)
-		return ;
-	count = count_word(get_shell()->token);
-	get_shell()->cmd = malloc(sizeof(t_cmd));
-	if (!get_shell()->cmd)
-		return ;
-	get_shell()->cmd->args = malloc(sizeof(char *) * (count + 1));
-	if (!get_shell()->cmd->args)
+    i = 0;
+	current = token;
+	curr_cmd = create_cmd_node(current);
+    head = curr_cmd;
+    if (!curr_cmd)
+        return ;
+    while (current)
 	{
-		free(get_shell()->cmd);
-		get_shell()->cmd = NULL;
-		return ;
-	}
-	temp = get_shell()->token;
-	i = 0;
-	while (temp)
-	{
-		if (temp->type == TOKEN_WORD)
+        if (current->type == TOKEN_WORD)
 		{
-			get_shell()->cmd->args[i] = ft_strdup(temp->value);
-			if (!get_shell()->cmd->args[i])
-			{
-				while (i > 0)
-					free(get_shell()->cmd->args[--i]);
-				free(get_shell()->cmd->args);
-				free(get_shell()->cmd);
-				get_shell()->cmd = NULL;
-				return ;
-			}
-			i++;
+            curr_cmd->args[i] = ft_strdup(current->value); 
+            if (!curr_cmd->args[i])
+                return ;                
+            i++; 
 		}
-		else
-			break ;
-		temp = temp->next;
+        else if (current->type == TOKEN_PIPE)
+        {
+            curr_cmd->next = create_cmd_node(current);
+            curr_cmd = curr_cmd->next; 
+            i = 0;
+        }
+	    else 
+            break ;
+        current = current->next;
 	}
-	get_shell()->cmd->args[i] = NULL;
-	get_shell()->cmd->next = NULL;
+    curr_cmd->args[i] = NULL;
+    get_shell()->cmd =  head;;
+}
+
+t_cmd *create_cmd_node(t_token *token)
+{
+    t_cmd * new_cmd;
+    new_cmd = malloc(sizeof(t_cmd));
+    if (!new_cmd)
+        return (NULL);
+    new_cmd->args = (char **)malloc((count_word(token) + 1) * (sizeof(char *)));
+    if (!new_cmd->args)
+        return (NULL);
+    new_cmd->input_file = NULL;
+    new_cmd->output_file = NULL;
+    new_cmd->next = NULL;
+    return (new_cmd);
 }
 
 /*
-void	token_to_cmd(t_cmd *cmd, t_token *token)
+void    redirect_command(t_token *current, t_cmd *curr_cmd)
 {
-	int len_nodes;
-	t_cmd *parse_cmd;
-	t_token *current;
+   if (current->type == TOKEN_REDIRIN) 
+        curr_cmd->input_file = valid_redirect(current->next->value);
+   else if (current->type == TOKEN_REDIROUT) 
+        curr_cmd->output_file = valid_redirect(current->next->value);
+   else 
+   {
+        curr_cmd->input_file = 0;
+        curr_cmd->output_file = 1;
+   }
 
-	current = token;
-	len_nodes = count_word;
-	parse_cmd = cmd;
-	parse_cmd = malloc(sizeof(t_cmd));
-	parse_cmd->args = (char **)malloc((len_nodes + 1) * sizeof(char *));
-
-	while (current)
-	{
-		if (current == TOKEN_PIPE)
-			parse = parse->next;'
-		else if (current->type == TOKEN_WORD)
-		{
-			parse->args[i] = ft_strdup(current->value);	
-			if (
-		}
-	}
-	
 }
+
+int     is_valid(char *file)
+{
+    int fd = open("file", );
+
+
+
+}
+
 */
+
+

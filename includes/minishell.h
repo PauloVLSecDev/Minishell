@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/23 14:51:44 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:59:33 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int				handle_quotes(char *input, int *i, t_token **token,
 					t_token **current);
 void			append_token(t_token **token, t_token **current, char *value);
 void			ft_print_token(t_token *list);
+void        	handle_command(t_token *token);
+t_cmd           *create_cmd_node(t_token *token);
 
 // parser.c
 int				check_quotes(char *input);
@@ -72,6 +74,7 @@ int				count_nodes(t_env *env);
 // global_exection.c 
 void			exec_all(void);
 void			exec_external(t_cmd *cmd, char **env, char **path);
+
 // utils.c
 char			*ft_join_three(char *s1, char *s2, char *s3);
 void            init_shell(t_env *env);

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/23 14:54:18 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:10:02 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,10 @@ char	*get_env_name(char *env)
 char	*get_env_value(t_env *env, char *name)
 {
 
-//	int		i;
-// 	int		len;
 	t_env	*temp;
 
 	if (name == NULL)
 		return (NULL);
-//	i = 0;
-// len = 0;
 	temp = env;
 	while (temp)
 	{
