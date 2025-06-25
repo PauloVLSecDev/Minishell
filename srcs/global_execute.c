@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/23 18:54:39 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:46:23 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void    exec_all(void)
 
         new_env = NULL;
         path = NULL;
-//		count_pipes(get_shell()->token);
         if (!get_shell()->cmd)
-            return ; 
+            return ;
+        expand_all_args(get_shell()->cmd, get_shell()->env);
         if (is_builtin() != -1)
             exec_builtin(is_builtin());
         else 
@@ -57,4 +57,18 @@ void exec_external(t_cmd *cmd, char **env, char **path)
     free(abs_path);
     if (pid > 0)
         waitpid(pid, &status, 0);
+}
+
+void	expand_all_args(t_cmd *cmd, t_env *env)
+{
+	int		i;
+	char	*expanded;
+	
+	i = 0;
+	while (cmd->args[i])
+	{
+		expanded = ambient_var(expanded, env);
+		
+	}	
+	
 }
