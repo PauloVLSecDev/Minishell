@@ -1,24 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipe.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/25 15:46:45 by pvitor-l          #+#    #+#             */
+/*   Updated: 2025/06/25 15:47:00 by pvitor-l         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 
-/*
-#include "minishell.h"
 
-int count_pipes(t_token *token)
-{
-	t_token *list;
-	int count_process;
-
-	count_process = 0;
-	list = token;
-	printf("value list->type %d\n", list->type);
-	while (list && list->type == TOKEN_PIPE)
-	{
-		printf("valid loop\n");
-		count_process++;	
-		printf("number of pipes %d\n", count_process);
-		list = list->next;
-	}
-	printf("end number %d\n", count_process);
-	return (count_process);
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/25 17:49:42 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:32:29 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "struct.h"
 # include "builtin.h"
 # include "parser.h"
-# include "struct.h"
 # include "token.h"
 // LIBS
 # include <fcntl.h>
@@ -80,8 +79,11 @@ char			*ft_join_three(char *s1, char *s2, char *s3);
 void            init_shell(t_env *env);
 t_shell         *get_shell(void);
 
-
-//pipe.c
-int				count_pipes(t_token *token);
+//command.c
+void        	handle_command(t_token *token);
+void    process_all(t_cmd **cmd, t_token **token, int *i);
+void    process_pipe(t_cmd **cmd, t_token **token, int *i);
+void    process_word(t_cmd **cmd, t_token **token, int *i);
+t_cmd           *create_cmd_node(t_token *token);
 
 #endif

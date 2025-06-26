@@ -6,7 +6,11 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2025/06/25 17:55:23 by brunogue         ###   ########.fr        #
+=======
+#    Updated: 2025/06/26 16:14:27 by pvitor-l         ###   ########.fr        #
+>>>>>>> init_paulo
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +39,7 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/environment.c \
 		$(SRC_DIR)/execution.c \
 		$(SRC_DIR)/global_execute.c \
+		$(SRC_DIR)/command.c \
 		$(SRC_DIR)/utils.c \
 		$(SRC_DIR)/pipe.c 
 

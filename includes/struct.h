@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/23 19:00:44 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:50:25 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct s_cmd
 {
 	char			**args;
 	int				is_builtin;
-	int				input_file;
-	int				output_file;
+	char            *input_file;
+	char			*output_file;
 	int				append_mode;
 	struct s_cmd	*next;
 }					t_cmd;
