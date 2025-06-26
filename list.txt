@@ -53,4 +53,8 @@ brunogue - objs organizados e variavel de ambiente concluida, somente faltando o
 ex: echo $$$HOME 
 
 24/6
-brunogue - fazer o cd ~ e echo $? 
+brunogue - fazer o cd ~ e echo $?
+
+26/6
+brunogue - expansao de variavel de ambiente corretas, agr fazer o exit status
+

@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:17:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/11 18:47:16 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:57:46 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,19 @@ char	*ft_join_three(char *s1, char *s2, char *s3)
 	if (!together_all)
 		return (NULL);
 	return (together_all);
+}
+
+int count_word(t_token *token)
+{
+	t_token	*temp;
+	int		count;
+
+	temp = token;
+	count = 0;
+	while (temp && temp->type == TOKEN_WORD) 
+    {
+		count++;
+		temp = temp->next;
+	}
+	return (count);
 }
