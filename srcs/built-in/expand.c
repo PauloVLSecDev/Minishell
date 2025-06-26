@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:00:06 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/25 19:52:49 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:38:39 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	*expand_var(char *arg, t_env *env)
 {
-	char	*out;
+	char	*expanded;
 	char	*temp;
 	int		i;
 	char	buffer[2];
 	
-	out = ft_strdup("");
+	expanded = ft_strdup("");
 	i = 0;
 	while (arg[i])
 	{
@@ -31,19 +31,19 @@ char	*expand_var(char *arg, t_env *env)
 				i = i + 2;
 			}
 			else
-				temp = other_function();
-			out = append_str(out, temp);
+				temp = expand_env(arg, &i, env);
+			expanded = append_str(expanded, temp);
 			free(temp);
 		}
 		else
 		{
 			buffer[0] = arg[i];
 			buffer[1] = '\0';
-			out = append_str(out, buffer);
+			expanded = append_str(expanded, buffer);
 			i++;
 		}
 	}
-	return (out);
+	return (expanded);
 }
 
 static char	*which_expand(char c)
@@ -62,4 +62,24 @@ static char	*append_str(char *dest, const char *src)
 	temp = ft_strjoin(dest, src);
 	free(dest);
 	return (temp);
+}
+
+char	*expand_env(char *arg, int *i, t_env *env)
+{
+	char	*name;
+	char	*value;
+	int		start;
+	int		len;
+
+	start = *i + 1;
+	len = 0;
+	while (ft_isalnum(arg[start + len]) || arg[start + len] == '_')
+		len++;
+	name = ft_substr(arg, start, len);
+	value = get_env_value(env, name);
+	free(name);
+	*i = start + len;
+	if (value)
+		return (ft_strdup(value));
+	return (ft_strdup(""));
 }
