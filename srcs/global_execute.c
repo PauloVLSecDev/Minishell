@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/25 18:46:23 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/26 18:27:24 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ void	expand_all_args(t_cmd *cmd, t_env *env)
 	i = 0;
 	while (cmd->args[i])
 	{
-		expanded = ambient_var(expanded, env);
-		
-	}	
-	
+		expanded = expand_var(cmd->args[i], env);
+        free(cmd->args[i]);
+        cmd->args[i] = expanded;
+        i++;        
+	}
 }

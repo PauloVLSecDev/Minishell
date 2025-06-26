@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/06/25 19:54:37 by brunogue         ###   ########.fr        #
+#    Updated: 2025/06/26 18:09:37 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/global_execute.c \
 		$(SRC_DIR)/utils.c \
 		$(SRC_DIR)/pipe.c \
-		$(SRC_DIR)/built-in/expand.c 
+		$(SRC_DIR)/expand.c 
 
 VALGRIND = valgrind --leak-check=full \
 	--show-leak-kinds=all \

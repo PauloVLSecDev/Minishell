@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:00:06 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/26 17:38:39 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/26 18:22:31 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*expand_var(char *arg, t_env *env)
 	{
 		if (arg[i] == '$')
 		{
+			if (arg[i + 1] == ' ' || arg[i + 1] == '\0')
+				ft_putstr_fd("$", 1);
 			if (arg[i + 1] == '$' || arg[i + 1] == '?')
 			{
 				temp = which_expand(arg[i + 1]);
@@ -46,7 +48,7 @@ char	*expand_var(char *arg, t_env *env)
 	return (expanded);
 }
 
-static char	*which_expand(char c)
+char	*which_expand(char c)
 {
 	if (c == '$')
 		return (ft_itoa(getpid()));
@@ -55,7 +57,7 @@ static char	*which_expand(char c)
 	return (ft_strdup(""));
 }
 
-static char	*append_str(char *dest, const char *src)
+char	*append_str(char *dest, const char *src)
 {
 	char	*temp;
 
