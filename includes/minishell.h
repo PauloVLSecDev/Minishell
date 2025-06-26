@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/25 20:03:19 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/26 16:38:39 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "struct.h"
 # include "builtin.h"
 # include "parser.h"
-# include "struct.h"
 # include "token.h"
 // LIBS
 # include <fcntl.h>
@@ -41,9 +40,6 @@ int				handle_quotes(char *input, int *i, t_token **token,
 					t_token **current);
 void			append_token(t_token **token, t_token **current, char *value);
 void			ft_print_token(t_token *list);
-void        	handle_command(t_token *token);
-t_cmd           *create_cmd_node(t_token *token);
-t_cmd           *linked_node_pipe(t_cmd *cmd, t_token *token);
 
 // parser.c
 int				check_quotes(char *input);
@@ -82,7 +78,11 @@ void            init_shell(t_env *env);
 t_shell         *get_shell(void);
 
 
-//pipe.c
-int	count_pipes(t_token *token);
+//command.c
+void        	handle_command(t_token *token);
+void    process_all(t_cmd **cmd, t_token **token, int *i);
+void    process_pipe(t_cmd **cmd, t_token **token, int *i);
+void    process_word(t_cmd **cmd, t_token **token, int *i);
+t_cmd           *create_cmd_node(t_token *token);
 
 #endif

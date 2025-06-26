@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/23 18:54:39 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:56:10 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void    exec_all(void)
 
         new_env = NULL;
         path = NULL;
-//		count_pipes(get_shell()->token);
         if (!get_shell()->cmd)
             return ; 
         if (is_builtin() != -1)
