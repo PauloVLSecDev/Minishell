@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/26 17:10:01 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:51:19 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_cmd *create_cmd_node(t_token *token)
     if (!new_cmd)
         return (NULL);
     new_cmd->args = (char **)malloc((count_word(token) + 1) * (sizeof(char *)));
+    new_cmd->args[0] = NULL;
     if (!new_cmd->args)
         return (NULL);
     new_cmd->input_file = NULL;

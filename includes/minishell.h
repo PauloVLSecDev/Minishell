@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/26 16:38:39 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:08:41 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char			**recreate_env(t_env *env);
 int				count_nodes(t_env *env);
 
 // global_exection.c 
-void			exec_all(void);
+void			exec_all(t_cmd *cmd);
 void			exec_external(t_cmd *cmd, char **env, char **path);
 
 // utils.c
@@ -84,5 +84,8 @@ void    process_all(t_cmd **cmd, t_token **token, int *i);
 void    process_pipe(t_cmd **cmd, t_token **token, int *i);
 void    process_word(t_cmd **cmd, t_token **token, int *i);
 t_cmd           *create_cmd_node(t_token *token);
+
+//pipe.c
+void	execute_pipe(t_cmd *cmd);
 
 #endif
