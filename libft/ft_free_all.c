@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/09 13:38:10 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:36:43 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	free_all(char **matrix)
 {
 	int	i;
 
+	i = 0;
 	if (!matrix)
 		return ;
-	i = 0;
 	while (matrix[i] != NULL)
 	{
 		free(matrix[i]);
