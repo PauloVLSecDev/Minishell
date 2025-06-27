@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/27 17:18:24 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:02:02 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void exec_external(t_cmd *cmd, char **env, char **path)
 	if (pid == 0)
 	{
 		execve(abs_path, cmd->args, env);
-		exit(127); // se execve falhar
+		exit(127);
 	}
 	else if (pid < 0)
 	{
 		ft_putstr_fd("fork failed\n", 2);
 		get_shell()->exit_status = 1;
 		free(abs_path);
-		return;
+		return ;
 	}
 	free(abs_path);
 	waitpid(pid, &status, 0);
