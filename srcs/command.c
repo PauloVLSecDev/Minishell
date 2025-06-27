@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/26 18:57:02 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:37:47 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_cmd   *create_cmd_node(t_token *token)
     return (new_cmd);
 }
 
-void    process_all(t_cmd **cmd, t_token **token, int *i)
+void	process_all(t_cmd **cmd, t_token **token, int *i)
 {
     while (*token)
     {
@@ -59,7 +59,7 @@ void    process_all(t_cmd **cmd, t_token **token, int *i)
     }
 }
 
-void    process_word(t_cmd **curr_cmd, t_token **token, int *i)
+void	process_word(t_cmd **curr_cmd, t_token **token, int *i)
 {
         (*curr_cmd)->args[*i] = ft_strdup((*token)->value); 
         if (!(*curr_cmd)->args[*i])
@@ -67,7 +67,7 @@ void    process_word(t_cmd **curr_cmd, t_token **token, int *i)
         (*i)++; 
 }
 
-void    process_pipe(t_cmd **cmd, t_token **token, int *i)
+void	process_pipe(t_cmd **cmd, t_token **token, int *i)
 {
     
     (*cmd)->next = create_cmd_node((*token)->next);

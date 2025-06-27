@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/26 15:58:58 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:26:40 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	is_builtin(void)
 int exec_builtin(int code)
 {
     if (code == ECHO)
-        ft_echo(get_shell()->cmd->args);
+        get_shell()->exit_status = ft_echo(get_shell()->cmd->args);
     else if (code == PWD)
-        ft_pwd();
+        get_shell()->exit_status = ft_pwd();
     else if (code == CD)
-        ft_cd(get_shell()->cmd->args);
+        get_shell()->exit_status = ft_cd(get_shell()->cmd->args);
     else if (code == ENV)
-        ft_env(get_shell()->cmd->args);
+        get_shell()->exit_status = ft_env(get_shell()->cmd->args);
     else if (code == EXIT)
-        ft_exit(get_shell()->cmd->args);
-    return (code);
+        get_shell()->exit_status = ft_exit(get_shell()->cmd->args);
+    return (get_shell()->exit_status);
 }

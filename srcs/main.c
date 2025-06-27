@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/26 17:31:50 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:48:19 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
         {
             printf("exit\n");
             clean_exit(0);
-            break ; 
+            break ;
         }
         if (!*input)
         {
@@ -60,8 +60,8 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 
 t_shell *get_shell()
 {
-    static t_shell minishell; 
-
+    static t_shell minishell;
+ 
     return (&minishell);
 }
 
@@ -74,4 +74,3 @@ void    init_shell(t_env *envp)
 	get_shell()->exit_status = 0;
 	get_shell()->input = NULL;
 }	
-

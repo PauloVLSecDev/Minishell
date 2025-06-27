@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/25 18:10:02 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/26 19:12:10 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_env_name(char *env)
 {
-	char	*environment_variable_name;
+	char	*env_var_name;
 	int		i;
 	int		len;
 
@@ -26,16 +26,16 @@ char	*get_env_name(char *env)
         len++;
 	if (env[len] != '=')
 		return (NULL);
-	environment_variable_name = malloc((len + 1) * sizeof(char));
-	if (!environment_variable_name)
+	env_var_name = malloc((len + 1) * sizeof(char));
+	if (!env_var_name)
 		return (NULL);
 	while (env[i] && env[i] != '=')
 	{
-		environment_variable_name[i] = env[i];
+		env_var_name[i] = env[i];
 		i++;
 	}
-	environment_variable_name[i] = '\0';
-	return (environment_variable_name);
+	env_var_name[i] = '\0';
+	return (env_var_name);
 }
 
 char	*get_env_value(t_env *env, char *name)

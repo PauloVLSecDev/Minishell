@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/25 18:50:25 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:59:36 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ typedef struct s_env	t_env;
 
 typedef struct s_shell
 {
-	t_token	*token;
-	t_cmd	*cmd;
-	t_env	*env;
-    char    *input;
-    char    **env_copy;
-    int     exit_status; 
+	t_token			*token;
+	t_cmd			*cmd;
+	t_env			*env;
+	char			*input;
+    char			**env_copy;
+    int				exit_status; 
 }	t_shell;
 
 
@@ -42,7 +42,7 @@ typedef enum e_token_type
 	TOKEN_APPEND,
 	TOKEN_HEREDOC,
 	TOKEN_EOF,
-}					t_token_type;
+}	t_token_type;
 
 typedef struct s_token
 {
