@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/27 17:52:55 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:36:41 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		valid_redir_out(get_shell()->token);
 		valid_heredoc(get_shell()->token);
 		handle_command(get_shell()->token);
-		exec_all();
+		execute_pipe(get_shell()->cmd);
 	    ft_print_token(get_shell()->token);
         cleanup_iteration();
 	}

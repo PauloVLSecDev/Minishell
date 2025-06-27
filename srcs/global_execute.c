@@ -6,45 +6,45 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/27 17:18:24 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:38:28 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_all(void)
+void    exec_all(t_cmd *cmd)
 {
-    char	**new_env;
-    char	**path;
-	int		builtin_code;
+        char **new_env;
+        char **path;
+		int builtin_index;
 
-	builtin_code = is_builtin();
-    new_env = NULL;
-    path = NULL;
-    if (!get_shell()->cmd)
-        return ;
-    expand_all_args(get_shell()->cmd, get_shell()->env);
-    if (builtin_code != -1)
-        exec_builtin(builtin_code);
-    else
-    {
-        new_env = recreate_env(get_shell()->env);
-        path = find_path(get_shell()->env);
-        exec_external(get_shell()->cmd, new_env, path);
-    }
-    free_all(new_env);
-    free_all(path);
+        new_env = NULL;
+        path = NULL;
+        if (!cmd)
+            return ; 
+    	expand_all_args(cmd, get_shell()->env);
+		builtin_index = is_builtin(cmd->args);
+		if (builtin_index != -1)
+		{
+            exec_builtin(builtin_index, cmd);
+			exit(0);
+		}
+        else 
+        {
+            new_env = recreate_env(get_shell()->env);
+            path = find_path(get_shell()->env);
+            exec_external(cmd, new_env, path);
+        }
+		free_all(new_env);
+		free_all(path);
 }
 
 void exec_external(t_cmd *cmd, char **env, char **path)
 {
-	char	*abs_path;
-	int		status;
-	pid_t	pid;
+	char *abs_path;
 
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return ;
-
 	abs_path = join_path_with_cmd(path, cmd);
 	if (!abs_path)
 	{
@@ -52,25 +52,9 @@ void exec_external(t_cmd *cmd, char **env, char **path)
 		get_shell()->exit_status = 127;
 		return;
 	}
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execve(abs_path, cmd->args, env);
-		exit(127); // se execve falhar
-	}
-	else if (pid < 0)
-	{
-		ft_putstr_fd("fork failed\n", 2);
-		get_shell()->exit_status = 1;
-		free(abs_path);
-		return;
-	}
-	free(abs_path);
-	waitpid(pid, &status, 0);
-	get_shell()->exit_status = WEXITSTATUS(status);
+	execve(abs_path, cmd->args, env);
+    free(abs_path);
 }
-
 
 void	expand_all_args(t_cmd *cmd, t_env *env)
 {
