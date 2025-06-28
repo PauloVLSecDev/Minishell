@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/27 19:36:41 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:42:38 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
         }
 		add_history(input);
 		get_shell()->token = tokenization(get_shell()->token, input, current);
-		valid_pipe(get_shell()->token);
+		if (valid_pipe(get_shell()->token))
+		{
+			cleanup_iteration();
+			continue ;
+		}
+				
 		valid_redir_in(get_shell()->token);
 		valid_redir_out(get_shell()->token);
 		valid_heredoc(get_shell()->token);

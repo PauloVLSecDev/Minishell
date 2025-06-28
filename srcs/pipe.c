@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:46:45 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/27 17:08:56 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:59:18 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	execute_pipe(t_cmd *cmd)
 				prev_fd = pipefd[0];
 			}
 			exec_all(cmd);
-			exit(1);
+			exit(get_shell()->exit_status);
 		}
         else if (pid > 0)
 		{

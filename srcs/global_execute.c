@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/27 19:38:28 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:17:14 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void    exec_all(t_cmd *cmd)
 		builtin_index = is_builtin(cmd->args);
 		if (builtin_index != -1)
 		{
-            exec_builtin(builtin_index, cmd);
-			exit(0);
+            get_shell()->exit_status = exec_builtin(builtin_index, cmd);
+			exit(get_shell()->exit_status);
 		}
         else 
         {
@@ -49,10 +49,10 @@ void exec_external(t_cmd *cmd, char **env, char **path)
 	if (!abs_path)
 	{
 		ft_putstr_fd("command not found\n", 2);
-		get_shell()->exit_status = 127;
-		return;
+		exit(get_shell()->exit_status = 127);
 	}
-	execve(abs_path, cmd->args, env);
+	if (execve(abs_path, cmd->args, env) == -1)
+			exit(get_shell()->exit_status = 127);
     free(abs_path);
 }
 
