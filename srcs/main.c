@@ -56,7 +56,7 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		valid_redir_out(get_shell()->token);
 		valid_heredoc(get_shell()->token);
 		handle_command(get_shell()->token);
-		execute_pipe(get_shell()->cmd);
+		smart_execute(get_shell()->cmd);
 	    ft_print_token(get_shell()->token);
         cleanup_iteration();
 	}

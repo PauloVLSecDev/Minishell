@@ -95,5 +95,11 @@ t_cmd			*create_cmd_node(t_token *token);
 
 //pipe.c
 void	execute_pipe(t_cmd *cmd);
+void	childrin_process(int *prev_fd, pid_t pid, t_cmd *cmd, int *pipefd);
+void	parent_process(int *prev_fd, pid_t pid, t_cmd *cmd, int *pipefd);
+
+//single_command
+void	smart_execute(t_cmd *cmd);
+void	exec_single_command(t_cmd *cmd);
 
 #endif

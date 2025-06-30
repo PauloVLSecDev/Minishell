@@ -38,6 +38,7 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/command.c \
 		$(SRC_DIR)/utils.c \
 		$(SRC_DIR)/pipe.c \
+		$(SRC_DIR)/smart_execute.c \
 		$(SRC_DIR)/expand.c 
 
 VALGRIND = valgrind --leak-check=full \
