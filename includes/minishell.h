@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/27 15:37:30 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:37:09 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char			**recreate_env(t_env *env);
 int				count_nodes(t_env *env);
 
 // global_exection.c 
-void			exec_all(void);
+void			exec_all(t_cmd *cmd);
 void			exec_external(t_cmd *cmd, char **env, char **path);
 void	        expand_all_args(t_cmd *cmd, t_env *env);
 
@@ -80,6 +80,7 @@ char			*expand_var(char *arg, t_env *env);
 char			*expand_env(char *arg, int *i, t_env *env);
 char			*which_expand(char c);
 char			*append_str(char *dest, const char *src);
+
 // utils.c
 char			*ft_join_three(char *s1, char *s2, char *s3);
 void            init_shell(t_env *env);
@@ -91,5 +92,8 @@ void			process_all(t_cmd **cmd, t_token **token, int *i);
 void			process_pipe(t_cmd **cmd, t_token **token, int *i);
 void			process_word(t_cmd **cmd, t_token **token, int *i);
 t_cmd			*create_cmd_node(t_token *token);
+
+//pipe.c
+void	execute_pipe(t_cmd *cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:42:15 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/23 14:52:39 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:11:59 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	is_numeric(char *str)
 {
 	int	i;
-	
+
 	if (!str || !str[0])
 		return (0);
 	i = 0;
