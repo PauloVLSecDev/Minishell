@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/30 21:09:36 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/01 16:17:51 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define DOUBLE_QUOTE '"'
 
 // token.c
-t_token_type	find_token_type(char *str);
+t_token_type    find_token_type(char *str);
 t_token			*tokenization(t_token *token, char *input, t_token *current);
 int				handle_quotes(char *input, int *i, t_token **token, t_token **current);
 void			append_token(t_token **token, t_token **current, char *value);
@@ -98,7 +98,7 @@ void	execute_pipeline(t_cmd *cmd);
 void	create_process(int *pipefd, t_cmd *cmd, int *prev_fd);
 
 //single_command
-void	smart_execute(t_cmd *cmd);
-void	exec_single_command(t_cmd *cmd);
+void            smart_execute(t_cmd *cmd);
+void            exec_single_command(t_cmd *cmd);
 
 #endif

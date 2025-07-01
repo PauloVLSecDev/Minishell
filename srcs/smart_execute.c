@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   smart_execute.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/01 12:26:54 by brunogue          #+#    #+#             */
+/*   Updated: 2025/07/01 16:39:54 by pvitor-l         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h" 
 
@@ -9,9 +19,7 @@ void	smart_execute(t_cmd *cmd)
 		if (is_builtin(cmd->args) != -1)
 			exec_builtin(is_builtin(cmd->args), cmd);
 		else 
-		{
 			exec_single_command(cmd);
-		}
 	}
 	else if (cmd->next != NULL)
 		execute_pipeline(cmd);
@@ -40,7 +48,10 @@ void	exec_single_command(t_cmd *cmd)
 		exit(0);
 	}
 	else if (pid > 0)
+	{
 		waitpid(pid, &status, 0);
+		get_shell()->exit_status = WEXITSTATUS(status);
+	}
 	else 
 		return ;
 }

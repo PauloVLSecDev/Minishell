@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:46:45 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/30 20:55:11 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/01 16:39:34 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	execute_pipeline(t_cmd *cmd)
 void	create_process(int *pipefd, t_cmd *cmd, int *prev_fd)
 {
 		pid_t pid;
+		int status;
 		
 	 	pid = fork();
 		if (pid == 0)
@@ -51,12 +52,14 @@ void	create_process(int *pipefd, t_cmd *cmd, int *prev_fd)
 			exec_all(cmd);
 			exit(1);
 		}
-		else 
+		else if (pid > 0) 
 		{
 			if (*prev_fd != STDIN_FILENO)
 				close(*prev_fd);
 			if (cmd->next != NULL)\
 				close(pipefd[1]);
 			*prev_fd = pipefd[0];
+			waitpid(pid, &status, 0);
+			get_shell()->exit_status = WEXITSTATUS(status);
 		}
 }
