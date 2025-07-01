@@ -14,7 +14,7 @@ void	smart_execute(t_cmd *cmd)
 		}
 	}
 	else if (cmd->next != NULL)
-		execute_pipe(cmd);
+		execute_pipeline(cmd);
 	else 
 		return ;
 }
