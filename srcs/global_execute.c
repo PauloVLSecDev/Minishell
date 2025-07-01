@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/27 20:49:06 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/01 14:43:26 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,19 @@ void    exec_all(t_cmd *cmd)
 {
         char **new_env;
         char **path;
-		int builtin_code;
+		int isbuiltin;
 
         new_env = NULL;
         path = NULL;
         if (!cmd)
             return ;
     	expand_all_args(cmd, get_shell()->env);
-		builtin_code = is_builtin(cmd->args);
-		if (builtin_code != -1)
-            exec_builtin(builtin_code, cmd);
+		isbuiltin = is_builtin(cmd->args);
+		if (isbuiltin != -1)
+		{
+            get_shell()->exit_status = exec_builtin(isbuiltin, cmd);
+			return ;
+		}
         else 
         {
             new_env = recreate_env(get_shell()->env);
@@ -46,10 +49,10 @@ void exec_external(t_cmd *cmd, char **env, char **path)
 	if (!abs_path)
 	{
 		ft_putstr_fd("command not found\n", 2);
-		get_shell()->exit_status = 127;
-		return;
+		exit(get_shell()->exit_status = 127);
 	}
-	execve(abs_path, cmd->args, env);
+	if (execve(abs_path, cmd->args, env) == -1)
+			exit(get_shell()->exit_status = 127);
     free(abs_path);
 }
 

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/27 19:37:09 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:08:35 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define DOUBLE_QUOTE '"'
 
 // token.c
-t_token_type	find_token_type(char *str);
+t_token_type    find_token_type(char *str);
 t_token			*tokenization(t_token *token, char *input, t_token *current);
 int				handle_quotes(char *input, int *i, t_token **token, t_token **current);
 void			append_token(t_token **token, t_token **current, char *value);
@@ -94,6 +94,12 @@ void			process_word(t_cmd **cmd, t_token **token, int *i);
 t_cmd			*create_cmd_node(t_token *token);
 
 //pipe.c
-void	execute_pipe(t_cmd *cmd);
+void            execute_pipe(t_cmd *cmd);
+void	        children_process(int *prev_fd, pid_t pid, t_cmd *cmd, int *pipefd);
+void           	parent_process(int *prev_fd, pid_t pid, t_cmd *cmd, int *pipefd);
+
+//single_command
+void            smart_execute(t_cmd *cmd);
+void            exec_single_command(t_cmd *cmd);
 
 #endif

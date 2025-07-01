@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:42:15 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/27 20:11:59 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/01 14:52:51 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int	ft_exit(char **args)
 		ft_putstr_fd("exit: ", 2);
 		ft_putstr_fd(args[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
-		clean_exit(2);
+		clean_exit(get_shell()->exit_status);
 	}
 	if (args[1])
 	{
 		code = ft_atoi(args[1]);
 		clean_exit((unsigned char)code);
 	}
-	clean_exit(0);
+	clean_exit(get_shell()->exit_status);
 	return (0);
 }
