@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/01 14:43:26 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:14:16 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,16 @@ void    exec_all(t_cmd *cmd)
         {
             new_env = recreate_env(get_shell()->env);
             path = find_path(get_shell()->env);
-            exec_external(cmd, new_env, path);
+            exec_external(cmd, new_env, path, 0);
         }
 		free_all(new_env);
 		free_all(path);
 }
 
-void exec_external(t_cmd *cmd, char **env, char **path)
+void exec_external(t_cmd *cmd, char **env, char **path, pid_t pid)
 {
-	char *abs_path;
+	(void)pid;
+	char	*abs_path;
 
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return ;
@@ -49,14 +50,17 @@ void exec_external(t_cmd *cmd, char **env, char **path)
 	if (!abs_path)
 	{
 		ft_putstr_fd("command not found\n", 2);
+		get_shell()->exit_status = 127;
 		free_env(get_shell()->env);
+		cleanup_iteration();
+		exit(127);
 		return ;
 	}
 	if (execve(abs_path, cmd->args, env) == -1)
 	{
-			free_env(get_shell()->env);
-			cleanup_iteration();
-			exit(get_shell()->exit_status = 127);	
+		free_env(get_shell()->env);
+		cleanup_iteration();
+		exit(get_shell()->exit_status = 127);	
 	}
     free(abs_path);
 }

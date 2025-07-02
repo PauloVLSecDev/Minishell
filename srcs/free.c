@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:35:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/23 18:59:34 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/02 17:16:54 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	free_token_list(t_token *token)
 		free(token);
 		token = tmp;
 	}
-    printf("entrou dentro do freee_token \t\n");
 }
 
 void	free_env(t_env *env)
@@ -42,7 +41,6 @@ void	free_env(t_env *env)
 
 void	free_cmd(t_cmd *cmd)
 {
-
     t_cmd *tmp;
 
     while (cmd != NULL)
@@ -52,7 +50,6 @@ void	free_cmd(t_cmd *cmd)
         free(cmd);
         cmd = tmp;
     }
-    return ;
 }
 
 void	clean_exit(int code)

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/01 19:22:42 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:54:10 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_token *tokenization(t_token *token, char *input, t_token *current)
         {
             value = ft_substr(input, start, i - start);
             append_token(&token, &current, value);
-            free(value);
         }
     }
     return (token);
@@ -70,7 +69,6 @@ int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
 		(*i)++;
 	value = ft_substr(input, start, *i - start);
 	append_token(token, current, value);
-    free(value);
 	if (input[*i] == verify_quotes)
 		(*i)++;
 	return (1);
@@ -84,7 +82,13 @@ void	append_token(t_token **token, t_token **current, char *value)
 	 if (!new)
         return ;
 	new->value = ft_strdup(value);
+	if (!new->value)
+	{
+		free(new);
+		return ;
+	}
 	new->type = find_token_type(value);
+	free(value);
 	new->next = NULL;
 	if (*token == NULL)
 		*token = new;

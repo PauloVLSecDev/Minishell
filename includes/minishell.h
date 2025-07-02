@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/01 16:17:51 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/02 17:54:37 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int				count_nodes(t_env *env);
 
 // global_exection.c 
 void			exec_all(t_cmd *cmd);
-void			exec_external(t_cmd *cmd, char **env, char **path);
+void			exec_external(t_cmd *cmd, char **env, char **path, pid_t pid);
 void	        expand_all_args(t_cmd *cmd, t_env *env);
 
 // expand.c

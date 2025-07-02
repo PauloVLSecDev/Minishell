@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/01 21:57:39 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/02 16:41:24 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void    handle_command(t_token *token)
     head = curr_cmd;
     process_all(&curr_cmd, &curr_token, &i);
     curr_cmd->args[i] = NULL;
-    get_shell()->cmd = head;;
+    get_shell()->cmd = head;
 }
 
 t_cmd   *create_cmd_node(t_token *token)
@@ -64,7 +64,10 @@ void	process_word(t_cmd **curr_cmd, t_token **token, int *i)
 {
         (*curr_cmd)->args[*i] = ft_strdup((*token)->value); 
         if (!(*curr_cmd)->args[*i])
+        {
+            cleanup_iteration();
             return ; 
+        }
         (*i)++; 
 }
 

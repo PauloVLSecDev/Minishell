@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:26:54 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/01 21:32:29 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:20:26 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,24 @@ void	smart_execute(t_cmd *cmd)
 
 void	exec_single_command(t_cmd *cmd)
 {
-	pid_t pid;
-	char **path;
-	char **new_env;
-	int	status;
+	pid_t	pid;
+	char	**path;
+	char	**new_env;
+	int		status;
+	int		exec_exit;
 
 	path = find_path(get_shell()->env);
 	if (!path)
 		exit (get_shell()->exit_status = 1);
 	new_env = recreate_env(get_shell()->env);
 	pid = fork();
+	exec_exit = exec_external(cmd, new_env, path);
 	if (pid == 0)
 	{
-		exec_external(cmd, new_env, path);\
+		if (exec_exit != 0)
+		{
+			
+		}
 		free_all(new_env);
 		free_all(path);
 		exit(0);
