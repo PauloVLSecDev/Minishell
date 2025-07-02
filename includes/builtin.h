@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/27 19:30:50 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/01 18:00:43 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ enum	e_builtin
 	CD,
 	PWD,
 	ENV,
+	EXPORT,
 	EXIT,
 };
 
@@ -48,6 +49,9 @@ int		ft_cd(char **args);
 
 //FT_ENV
 int		ft_env(char **args);
+
+//FT_EXPORT
+void	ft_export();
 
 //FT_EXIT
 int		ft_exit(char **args);
