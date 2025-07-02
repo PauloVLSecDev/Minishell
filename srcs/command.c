@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/01 12:50:11 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/01 21:57:39 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void    handle_command(t_token *token)
     i = 0;
 	curr_token = token;
 	curr_cmd = create_cmd_node(curr_token);
-    head = curr_cmd;
     if (!curr_cmd)
         return ;
+    head = curr_cmd;
     process_all(&curr_cmd, &curr_token, &i);
     curr_cmd->args[i] = NULL;
     get_shell()->cmd = head;;
@@ -32,7 +32,7 @@ void    handle_command(t_token *token)
 
 t_cmd   *create_cmd_node(t_token *token)
 {
-    t_cmd * new_cmd;
+    t_cmd *new_cmd;
     new_cmd = malloc(sizeof(t_cmd));
     if (!new_cmd)
         return (NULL);

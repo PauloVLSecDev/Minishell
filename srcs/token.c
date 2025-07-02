@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/25 17:55:38 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/01 19:22:42 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	append_token(t_token **token, t_token **current, char *value)
 	t_token	*new;
 
 	new = ft_calloc(1, sizeof(t_token));
+	 if (!new)
+        return ;
 	new->value = ft_strdup(value);
 	new->type = find_token_type(value);
 	new->next = NULL;
