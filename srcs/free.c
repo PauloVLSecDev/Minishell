@@ -23,6 +23,7 @@ void	free_token_list(t_token *token)
 		free(token);
 		token = tmp;
 	}
+    printf("entrou dentro do freee_token \t\n");
 }
 
 void	free_env(t_env *env)

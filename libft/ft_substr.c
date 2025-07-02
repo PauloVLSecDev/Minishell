@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:59:20 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/04 19:35:15 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/01 19:25:16 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-//	size_t	i;
 	char	*sub_str;
 	size_t	s_len;
 
-//	i = 0;
 	if (s == NULL)
 		return (NULL);
 	s_len = ft_strlen(s);

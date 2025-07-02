@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:26:54 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/01 16:39:54 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/01 21:32:29 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,16 @@ void	exec_single_command(t_cmd *cmd)
 	char **new_env;
 	int	status;
 
-	new_env = recreate_env(get_shell()->env);
 	path = find_path(get_shell()->env);
 	if (!path)
-	{
-		get_shell()->exit_status = 1;
-		exit (get_shell()->exit_status);
-	}
+		exit (get_shell()->exit_status = 1);
+	new_env = recreate_env(get_shell()->env);
 	pid = fork();
 	if (pid == 0)
 	{
-		exec_external(cmd, new_env, path);
+		exec_external(cmd, new_env, path);\
+		free_all(new_env);
+		free_all(path);
 		exit(0);
 	}
 	else if (pid > 0)
@@ -52,6 +51,6 @@ void	exec_single_command(t_cmd *cmd)
 		waitpid(pid, &status, 0);
 		get_shell()->exit_status = WEXITSTATUS(status);
 	}
-	else 
-		return ;
+	free_all(path);
+	free_all(new_env);
 }

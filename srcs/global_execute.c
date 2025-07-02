@@ -49,10 +49,15 @@ void exec_external(t_cmd *cmd, char **env, char **path)
 	if (!abs_path)
 	{
 		ft_putstr_fd("command not found\n", 2);
-		exit(get_shell()->exit_status = 127);
+		free_env(get_shell()->env);
+		return ;
 	}
 	if (execve(abs_path, cmd->args, env) == -1)
-			exit(get_shell()->exit_status = 127);
+	{
+			free_env(get_shell()->env);
+			cleanup_iteration();
+			exit(get_shell()->exit_status = 127);	
+	}
     free(abs_path);
 }
 
