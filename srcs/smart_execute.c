@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:26:54 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/02 19:06:17 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:00:51 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ void	exec_single_command(t_cmd *cmd)
 	pid = fork();
 	if (pid == 0)
 	{
-		exec_external(cmd, new_env, path, pid);
+		exec_external(cmd, new_env, path);
 		free_all(new_env);
 		free_all(path);
-		exit(0);
+		if (exec_external(cmd, new_env, path) == 127)
+			exit(127);
+		else
+			exit (0);
 	}
 	else if (pid > 0)
 	{

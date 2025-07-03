@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/02 19:06:47 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:58:11 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,18 @@ void    exec_all(t_cmd *cmd)
         {
             new_env = recreate_env(get_shell()->env);
             path = find_path(get_shell()->env);
-            exec_external(cmd, new_env, path, 0);
+            exec_external(cmd, new_env, path);
         }
 		free_all(new_env);
 		free_all(path);
 }
 
-
-void exec_external(t_cmd *cmd, char **env, char **path, pid_t pid)
+int exec_external(t_cmd *cmd, char **env, char **path)
 {
-	(void)pid;
 	char	*abs_path;
 
 	if (!cmd || !cmd->args || !cmd->args[0])
-		return ;
+		return (127);
 	abs_path = join_path_with_cmd(path, cmd);
 	if (!abs_path)
 	{
@@ -54,7 +52,8 @@ void exec_external(t_cmd *cmd, char **env, char **path, pid_t pid)
 		get_shell()->exit_status = 127;
 		free_env(get_shell()->env);
 		cleanup_iteration();
-		return ;
+		printf("entrou, error commando exec tesfaf\t\n");
+		return (127);
 	}
 	if (execve(abs_path, cmd->args, env) == -1)
 	{
@@ -63,6 +62,7 @@ void exec_external(t_cmd *cmd, char **env, char **path, pid_t pid)
 		exit(get_shell()->exit_status = 127);	
 	}
     free(abs_path);
+	return (0);
 }
 
 // int	exec_external(t_cmd *cmd, char **env, char **path)
