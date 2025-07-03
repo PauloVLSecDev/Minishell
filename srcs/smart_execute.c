@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:26:54 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/03 17:00:51 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:02:17 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	exec_single_command(t_cmd *cmd)
 		exec_external(cmd, new_env, path);
 		free_all(new_env);
 		free_all(path);
-		if (exec_external(cmd, new_env, path) == 127)
+		if (get_shell()->exit_status == 127)
 			exit(127);
 		else
 			exit (0);

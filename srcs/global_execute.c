@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/03 16:58:11 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:03:14 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void    exec_all(t_cmd *cmd)
 		free_all(path);
 }
 
-int exec_external(t_cmd *cmd, char **env, char **path)
+void	exec_external(t_cmd *cmd, char **env, char **path)
 {
 	char	*abs_path;
 
 	if (!cmd || !cmd->args || !cmd->args[0])
-		return (127);
+		return ;
 	abs_path = join_path_with_cmd(path, cmd);
 	if (!abs_path)
 	{
@@ -52,8 +52,7 @@ int exec_external(t_cmd *cmd, char **env, char **path)
 		get_shell()->exit_status = 127;
 		free_env(get_shell()->env);
 		cleanup_iteration();
-		printf("entrou, error commando exec tesfaf\t\n");
-		return (127);
+		return ;
 	}
 	if (execve(abs_path, cmd->args, env) == -1)
 	{
@@ -62,7 +61,6 @@ int exec_external(t_cmd *cmd, char **env, char **path)
 		exit(get_shell()->exit_status = 127);	
 	}
     free(abs_path);
-	return (0);
 }
 
 // int	exec_external(t_cmd *cmd, char **env, char **path)
