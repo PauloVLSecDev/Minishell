@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-int ft_echo(char **args)
+int	ft_echo(char **args)
 {
-    int		i;
-    int		n_flag;
-    char	*expanded;
+	int		i;
+	int		n_flag;
+	char	*expanded;
 
 	i = 1;
 	n_flag = 0;

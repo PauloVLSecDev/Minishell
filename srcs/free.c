@@ -41,15 +41,15 @@ void	free_env(t_env *env)
 
 void	free_cmd(t_cmd *cmd)
 {
-    t_cmd *tmp;
+	t_cmd	*tmp;
 
-    while (cmd != NULL)
-    {
-        tmp = cmd->next;
-        free_all(cmd->args);
-        free(cmd);
-        cmd = tmp;
-    }
+	while (cmd != NULL)
+	{
+		tmp = cmd->next;
+		free_all(cmd->args);
+		free(cmd);
+		cmd = tmp;
+	}
 }
 
 void	clean_exit(int code)
@@ -62,21 +62,21 @@ void	clean_exit(int code)
 	exit(code);
 }
 
-void cleanup_iteration()
+void	cleanup_iteration(void)
 {
-    if (get_shell()->token)
-    {
-        free_token_list(get_shell()->token);
-        get_shell()->token = NULL;
-    }
-    if (get_shell()->cmd)
-    {
-        free_cmd(get_shell()->cmd);
-        get_shell()->cmd = NULL;
-    }
-    if (get_shell()->input)
-    {
-        free(get_shell()->input);
-        get_shell()->input = NULL;
-    }
+	if (get_shell()->token)
+	{
+		free_token_list(get_shell()->token);
+		get_shell()->token = NULL;
+	}
+	if (get_shell()->cmd)
+	{
+		free_cmd(get_shell()->cmd);
+		get_shell()->cmd = NULL;
+	}
+	if (get_shell()->input)
+	{
+		free(get_shell()->input);
+		get_shell()->input = NULL;
+	}
 }

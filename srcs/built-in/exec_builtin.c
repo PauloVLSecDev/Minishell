@@ -31,19 +31,19 @@ int	is_builtin(char **args)
 	return (-1);
 }
 
-int exec_builtin(int code, t_cmd *cmd)
+int	exec_builtin(int code, t_cmd *cmd)
 {
-    if (code == ECHO)
-        get_shell()->exit_status = ft_echo(cmd->args);
-    else if (code == PWD)
-        get_shell()->exit_status = ft_pwd();
-    else if (code == CD)
-        get_shell()->exit_status = ft_cd(cmd->args);
-    else if (code == ENV)
-        get_shell()->exit_status = ft_env(cmd->args);
+	if (code == ECHO)
+		get_shell()->exit_status = ft_echo(cmd->args);
+	else if (code == PWD)
+		get_shell()->exit_status = ft_pwd();
+	else if (code == CD)
+		get_shell()->exit_status = ft_cd(cmd->args);
+	else if (code == ENV)
+		get_shell()->exit_status = ft_env(cmd->args);
 	// else if (code == EXPORT)
-    //     get_shell()->exit_status = ft_export();
-    else if (code == EXIT)
-        get_shell()->exit_status = ft_exit(cmd->args);
-    return (get_shell()->exit_status);
+	//     get_shell()->exit_status = ft_export();
+	else if (code == EXIT)
+		get_shell()->exit_status = ft_exit(cmd->args);
+	return (get_shell()->exit_status);
 }

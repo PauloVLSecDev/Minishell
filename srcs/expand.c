@@ -18,7 +18,7 @@ char	*expand_var(char *arg, t_env *env)
 	char	*temp;
 	int		i;
 	char	buffer[2];
-	
+
 	expanded = ft_strdup("");
 	i = 0;
 	while (arg[i])

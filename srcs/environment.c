@@ -23,7 +23,7 @@ char	*get_env_name(char *env)
 	if (env == NULL)
 		return (NULL);
 	while (env[len] && env[len] != '=')
-        len++;
+		len++;
 	if (env[len] != '=')
 		return (NULL);
 	env_var_name = malloc((len + 1) * sizeof(char));
@@ -40,7 +40,6 @@ char	*get_env_name(char *env)
 
 char	*get_env_value(t_env *env, char *name)
 {
-
 	t_env	*temp;
 
 	if (name == NULL)
@@ -67,7 +66,7 @@ t_env	*create_node_env(char *name, char *content)
 	if (name)
 		node->name = ft_strdup(name);
 	if (content)
-        node->content = ft_strdup(content);
+		node->content = ft_strdup(content);
 	node->next = NULL;
 	return (node);
 }

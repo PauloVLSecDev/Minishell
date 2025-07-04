@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/22 19:04:01 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/03 17:07:27 by brunogue         ###   ########.fr       */
+/*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
+/*   Updated: 2025/07/04 18:07:08 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		char *envp[])
 {
-    t_env   *new_envp;
-    t_token *current;
-    char    *input;
+	t_env	*new_envp;
+	t_token	*current;
+	char	*input;
 
 	current = NULL;
 	new_envp = linked_node_env(envp);
@@ -26,7 +26,7 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	while (1)
 	{
 		input = readline("minishell> ");
-		if (!input) 
+		if (!input)
 		{
 			printf("exit\n");
 			clean_exit(0);
@@ -39,13 +39,15 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		}
 		if (!check_quotes(input))
 		{
-			ft_printf("Does not contain an even number of quotation marks: %s\n", input);
+			ft_printf("Does not contain an even number of quotation marks \
+				%s\n", input);
 			free(input);
 			input = NULL;
 			continue ;
 		}
 		add_history(input);
 		get_shell()->token = tokenization(get_shell()->token, input, current);
+		free_token_list(current);
 		if (valid_pipe(get_shell()->token))
 		{
 			cleanup_iteration();
@@ -56,17 +58,16 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		valid_heredoc(get_shell()->token);
 		handle_command(get_shell()->token);
 		smart_execute(get_shell()->cmd);
-//		ft_print_token(get_shell()->token);
+		//		ft_print_token(get_shell()->token);
 		cleanup_iteration();
 	}
-	free_env(new_envp);
 	return (0);
 }
 
-t_shell *get_shell()
+t_shell	*get_shell(void)
 {
-	static t_shell minishell;
- 
+	static t_shell	minishell;
+
 	return (&minishell);
 }
 

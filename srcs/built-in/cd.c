@@ -12,33 +12,33 @@
 
 #include "minishell.h"
 
-int ft_cd(char **args)
+int	ft_cd(char **args)
 {
-    char *home ;
-	
+	char	*home;
+
 	home = get_env_value(get_shell()->env, "HOME");
-    if (!args[1] || args[1][0] == '\0')
-    {
-        if (!home)
-        {
-            ft_putendl_fd("cd: HOME not set.", 2);
-            return (1);
-        }
-        if (chdir(home) != 0)
-        {
-            perror("cd");
-            return (1);
-        }
-    }
-    else if (args[2])
-    {
-        ft_putendl_fd("cd: Too many arguments.", 2);
-        return (1);
-    }
-    else if (chdir(args[1]) != 0)
-    {
-        perror("cd");
-        return (1);
-    }
-    return (0);
+	if (!args[1] || args[1][0] == '\0')
+	{
+		if (!home)
+		{
+			ft_putendl_fd("cd: HOME not set.", 2);
+			return (1);
+		}
+		if (chdir(home) != 0)
+		{
+			perror("cd");
+			return (1);
+		}
+	}
+	else if (args[2])
+	{
+		ft_putendl_fd("cd: Too many arguments.", 2);
+		return (1);
+	}
+	else if (chdir(args[1]) != 0)
+	{
+		perror("cd");
+		return (1);
+	}
+	return (0);
 }
