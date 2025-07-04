@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/02 16:41:24 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/04 15:48:14 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void    handle_command(t_token *token)
 t_cmd   *create_cmd_node(t_token *token)
 {
     t_cmd *new_cmd;
+
     new_cmd = malloc(sizeof(t_cmd));
     if (!new_cmd)
         return (NULL);
+    new_cmd->args = NULL;
     new_cmd->args = (char **)malloc((count_word(token) + 1) * (sizeof(char *)));
 	new_cmd->args[0] = NULL;
     if (!new_cmd->args)

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/02 15:54:10 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:09:01 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_token *tokenization(t_token *token, char *input, t_token *current)
             append_token(&token, &current, value);
         }
     }
+	free(value);
     return (token);
 }
 
@@ -61,6 +62,7 @@ int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
 	int		verify_quotes;
 	char	*value;
 
+	value = NULL;
 	if (input[*i] != QUOTE && input[*i] != DOUBLE_QUOTE)
 		return (0);
 	verify_quotes = input[*i];
@@ -88,7 +90,6 @@ void	append_token(t_token **token, t_token **current, char *value)
 		return ;
 	}
 	new->type = find_token_type(value);
-	free(value);
 	new->next = NULL;
 	if (*token == NULL)
 		*token = new;
