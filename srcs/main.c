@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/04 18:07:08 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/04 19:00:54 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		}
 		add_history(input);
 		get_shell()->token = tokenization(get_shell()->token, input, current);
-		free_token_list(current);
 		if (valid_pipe(get_shell()->token))
 		{
 			cleanup_iteration();

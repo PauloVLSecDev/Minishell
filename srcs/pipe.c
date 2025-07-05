@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:46:45 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/04 15:55:06 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/04 19:11:00 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	create_process(int *pipefd, t_cmd *cmd, int *prev_fd)
 			close(pipefd[0]);
 		}
 		exec_all(cmd);
+		close(pipefd[1]);
+		close(pipefd[0]);
 		exit(1);
 	}
 	else if (pid > 0)

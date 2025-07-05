@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:26:54 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/04 18:13:58 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/04 19:16:24 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,21 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 	pid_t	pid;
 	int		status;
 
+	expand_all_args(cmd, get_shell()->env);
 	path = find_path(get_shell()->env);
 	new_env = recreate_env(get_shell()->env);
 	if (!path)
+	{
+		free_env(get_shell()->env);
+		cleanup_iteration();
 		exit(get_shell()->exit_status = 1);
+	}
 	pid = fork();
 	if (pid == 0)
 	{
-		expand_all_args(cmd, get_shell()->env);
 		exec_external(cmd, new_env, path);
 		free_all(new_env);
-		free_all(path);
+		cleanup_iteration();
 		if (get_shell()->exit_status == 127)
 			exit(127);
 		else

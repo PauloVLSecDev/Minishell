@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/02 15:50:00 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/04 19:41:53 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ char	**recreate_env(t_env *env)
 		return (NULL);
 	while (curr_env != NULL)
 	{
-		absolute_env_line = ft_join_three(curr_env->name, "=",
+		env_array[i] = ft_join_three(curr_env->name, "=",
 				curr_env->content);
-		env_array[i] = ft_strdup(absolute_env_line);
-		free(absolute_env_line);
 		curr_env = curr_env->next;
 		i++;
 	}
@@ -68,10 +66,14 @@ char	*join_path_with_cmd(char **path, t_cmd *cmd)
 	{
 		path_with_cmd = ft_join_three(path[i], "/", cmd->args[0]);
 		if (access(path_with_cmd, X_OK) == 0)
+		{
+			free_all(path);
 			return (path_with_cmd);
+		}
 		free(path_with_cmd);
 		i++;
 	}
+	free_all(path);
 	return (NULL);
 }
 
