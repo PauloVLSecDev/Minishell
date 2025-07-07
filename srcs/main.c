@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/04 19:00:54 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/07 15:39:22 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,21 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		}
 		if (!check_quotes(input))
 		{
-			ft_printf("Does not contain an even number of quotation marks \
-				%s\n", input);
+			ft_printf("used "" or '' don´t %s\n",input);
 			free(input);
-			input = NULL;
 			continue ;
 		}
 		add_history(input);
 		get_shell()->token = tokenization(get_shell()->token, input, current);
-		if (valid_pipe(get_shell()->token))
+		free(input);
+		if (valid_metacharacteres(get_shell()->token))
 		{
 			cleanup_iteration();
+			get_shell()->exit_status = 2;
 			continue ;
 		}
-		valid_redir_in(get_shell()->token);
-		valid_redir_out(get_shell()->token);
-		valid_heredoc(get_shell()->token);
 		handle_command(get_shell()->token);
 		smart_execute(get_shell()->cmd);
-		//		ft_print_token(get_shell()->token);
 		cleanup_iteration();
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/04 17:51:20 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/07 19:23:04 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	handle_command(t_token *token)
 		return ;
 	head = curr_cmd;
 	process_all(&curr_cmd, &curr_token, &i);
-	// curr_cmd->args[i] = NULL;
 	get_shell()->cmd = head;
 }
 
@@ -41,8 +40,8 @@ t_cmd	*create_cmd_node(t_token *token)
 			(sizeof(char *)));
 	if (!new_cmd->args)
 		return (NULL);
-	new_cmd->input_file = NULL;
-	new_cmd->output_file = NULL;
+	new_cmd->infile = NULL;
+	new_cmd->outfile = NULL;
 	new_cmd->next = NULL;
 	return (new_cmd);
 }
@@ -55,11 +54,12 @@ void	process_all(t_cmd **cmd, t_token **token, int *i)
 			process_word(cmd, token, i);
 		else if ((*token)->type == TOKEN_PIPE)
 			process_pipe(cmd, token, i);
+	//		else if 
+	//		process_redirect(cmd, token, i);
 		else
 			break ;
 		*token = (*token)->next;
 	}
-	//	(*cmd)->args[*i] = NULL;
 }
 
 void	process_word(t_cmd **curr_cmd, t_token **token, int *i)
@@ -81,3 +81,53 @@ void	process_pipe(t_cmd **cmd, t_token **token, int *i)
 	*cmd = (*cmd)->next;
 	*i = 0;
 }
+
+/*
+void	process_redirect(t_cmd **cmd, t_token **token, int *i)
+{
+	if ((*token)->type == TOKEN_WORD && (*token)->next->type == TOKEN_REDIRIN)
+	{
+		if (valid_file(*token))
+		{
+			clenup_iteration();
+			return ;
+		}
+		(*cmd)->infile = (*token); 
+	}
+	else if ((*token)->type == TOKEN_REDIROUT && (*token)->next->type == TOKEN_WORD)
+	{
+		if (valid_file(*token));
+		{
+			perror((*token->value));
+			clenup_iteration();
+			return ;
+		}
+		(*cmd)->outfile = toke->next;
+	}
+}
+
+int	valid_file(t_token *token)
+{
+	int fd;
+	if (token->next->type == TOKEN_REDIRIN)	
+	{
+		if (access(token->value, R_OK) == -1)
+		{
+			perror("");
+			get_shell()->exit_status = 2;
+			return (1);
+		}
+	}
+	else if (token->type == TOKEN_REDIROUT)	
+	{
+		fd = opem(token->next->value, O_RDONLY | O_WRONLY | O_TRUNC | O_CREAT, 0644); 
+		if (fd <= -1)
+		{
+			perror("");
+			get_shell()->exit_status = 2;
+			return (1);
+		}
+	}
+	return (0);
+}
+*/

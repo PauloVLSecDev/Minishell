@@ -44,8 +44,7 @@ char	**recreate_env(t_env *env)
 		return (NULL);
 	while (curr_env != NULL)
 	{
-		env_array[i] = ft_join_three(curr_env->name, "=",
-				curr_env->content);
+		env_array[i] = ft_join_three(curr_env->name, "=", curr_env->content);
 		curr_env = curr_env->next;
 		i++;
 	}

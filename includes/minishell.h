@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/04 18:05:35 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/07 13:48:29 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,14 @@ t_cmd			*create_cmd_node(t_token *token);
 
 // pipe.c
 void			execute_pipeline(t_cmd *cmd);
-void			create_process(int *pipefd, t_cmd *cmd, int *prev_fd);
+void			create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd);
 
-// single_command
+// single_command.c
 void			smart_execute(t_cmd *cmd);
 void			exec_single_command(t_cmd *cmd, char **new_env, char **path);
+
+
+//valid_all.c 
+int	valid_metacharacteres(t_token *token);
 
 #endif

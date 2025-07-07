@@ -26,9 +26,8 @@ char	*expand_var(char *arg, t_env *env)
 	{
 		if (arg[i] == '$')
 		{
-			//if (arg[i + 1] == ' ' || arg[i + 1] == '\0')
+			// if (arg[i + 1] == ' ' || arg[i + 1] == '\0')
 			//{
-
 			//}
 			if (arg[i + 1] == '$' || arg[i + 1] == '?')
 			{
