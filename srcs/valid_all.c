@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_all.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 13:37:32 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/08 17:27:31 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:41:58 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 int	valid_metacharacteres(t_token *token)
 {
+	if (!token)
+		return (0);
 	if (valid_pipe(token))
 	{
 		ft_printf("invalid pipe |\n");
