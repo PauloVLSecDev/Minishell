@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/08 12:25:02 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:34:10 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		}
 		if (!check_quotes(input))
 		{
-			ft_printf("used "" or '' don´t %s\n",input);
+			ft_printf("used "" or '' don't %s\n",input);
 			free(input);
 			continue ;
 		}

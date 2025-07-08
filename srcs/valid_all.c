@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 13:37:32 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/07 13:45:57 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:27:31 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,24 @@
 int	valid_metacharacteres(t_token *token)
 {
 	if (valid_pipe(token))
-			return (1);
+	{
+		ft_printf("invalid pipe |\n");
+		return (1);
+	}
 	else if (valid_redir_in(token))
-			return (2);
+	{
+		ft_printf("invalid redirect <\n");
+		return (2);
+	}
 	else if (valid_redir_out(token))
-			return (3);
+	{
+		ft_printf("invalid redirect >\n");
+		return (3);
+	}
 	else if (valid_heredoc(token))
-			return (4);
+	{
+		ft_printf("invalid heredoc <<\n");
+		return (4);
+	}
 	return (0);
 }
