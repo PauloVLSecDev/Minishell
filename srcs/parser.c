@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:32:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/07 14:11:24 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:26:27 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,83 +42,73 @@ int	valid_pipe(t_token *list)
 	t_token	*head;
 
 	head = list;
-	while (list != NULL)
+	if (head->type == TOKEN_PIPE)
+		return (1);
+	while (head != NULL)
 	{
-		if (list->type == TOKEN_PIPE && list->next == NULL)
-		{
-			ft_printf("pipe syntax error\n");
+		if (head->type == TOKEN_PIPE && head->next == NULL)
 			return (1);
-		}
-		else if (head->type == TOKEN_PIPE)
+		else if (head->type == TOKEN_PIPE && head->next != NULL)
 		{
-			ft_printf("syntax error near unexpected token `|'\n");
-			return (1);
+			if (head->next->type == TOKEN_PIPE)
+				return (1);
 		}
-		list = list->next;
+		head = head->next;
 	}
 	return (0);
 }
 
 int	valid_redir_in(t_token *list)
 {
-	if (list == NULL)
+	t_token *head;
+
+	head = list;
+	if (head == NULL)
 		return (1);
-	while (list != NULL)
+	while (head != NULL)
 	{
-		if ((list->type == TOKEN_REDIR_IN) && (list->next == NULL))
-		{
-			ft_printf("syntax error near unexpected token '<' \n");
+		if ((head->type == TOKEN_REDIR_IN) && (head->next == NULL))
 			return (1);
-		}
-		else if (list->type == TOKEN_REDIR_IN && list->next->type != TOKEN_WORD)
-		{
-			ft_printf("redirect syntax error\n");
+		else if (head->type == TOKEN_REDIR_IN && head->next->type != TOKEN_WORD)
 			return (1);
-		}
-		list = list->next;
+		head = head->next;
 	}
 	return (0);
 }
 
 int	valid_redir_out(t_token *list)
 {
-	if (list == NULL)
+	t_token *head;
+
+	head = list;
+	if (head == NULL)
 		return (1);
-	while (list != NULL)
+	while (head != NULL)
 	{
-		if (list->type == TOKEN_REDIR_OUT && list->next == NULL)
-		{
-			ft_printf("syntax error near unexpected token `>'\n");
+		if (head->type == TOKEN_REDIR_OUT && head->next == NULL)
 			return (1);
-		}
-		else if (list->type == TOKEN_REDIR_OUT
-			&& list->next->type != TOKEN_WORD)
-		{
-			ft_printf("redirect syntax error\n");
+		else if (head->type == TOKEN_REDIR_OUT
+			&& head->next->type != TOKEN_WORD)
 			return (1);
-		}
-		list = list->next;
+		head = head->next;
 	}
 	return (0);
 }
 
 int	valid_heredoc(t_token *list)
 {
-	if (list == NULL)
+	t_token *head;
+
+	head = list;
+	if (head == NULL)
 		return (1);
-	while (list != NULL)
+	while (head != NULL)
 	{
-		if (list->type == TOKEN_HEREDOC && list->next == NULL)
-		{
-			ft_printf("syntax error near unexpected token `>>'\n");
+		if (head->type == TOKEN_HEREDOC && head->next == NULL)
 			return (1);
-		}
-		else if (list->type == TOKEN_HEREDOC && list->next->type != TOKEN_WORD)
-		{
-			ft_printf("heredoc syntax error\n");
+		else if (head->type == TOKEN_HEREDOC && head->next->type != TOKEN_WORD)
 			return (1);
-		}
-		list = list->next;
+		head = head->next;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/08 14:51:00 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:49:02 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,12 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		add_history(input);
 		get_shell()->token = tokenization(get_shell()->token, input, current);
 		free(input);
-		ft_print_token(get_shell()->token);
 		if (valid_metacharacteres(get_shell()->token))
 		{
-			//free_env(get_shell()->env);	
 			cleanup_iteration();
 			get_shell()->exit_status = 2;
 			continue ;
 		}
-		ft_print_token(get_shell()->token);
 		handle_command(get_shell()->token);
 		smart_execute(get_shell()->cmd);
 		cleanup_iteration();
