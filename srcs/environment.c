@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/02 16:05:26 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/04 19:03:07 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_env_name(char *env)
 	if (env == NULL)
 		return (NULL);
 	while (env[len] && env[len] != '=')
-        len++;
+		len++;
 	if (env[len] != '=')
 		return (NULL);
 	env_var_name = malloc((len + 1) * sizeof(char));
@@ -40,7 +40,6 @@ char	*get_env_name(char *env)
 
 char	*get_env_value(t_env *env, char *name)
 {
-
 	t_env	*temp;
 
 	if (name == NULL)
@@ -67,7 +66,7 @@ t_env	*create_node_env(char *name, char *content)
 	if (name)
 		node->name = ft_strdup(name);
 	if (content)
-        node->content = ft_strdup(content);
+		node->content = ft_strdup(content);
 	node->next = NULL;
 	return (node);
 }

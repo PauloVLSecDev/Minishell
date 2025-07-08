@@ -30,30 +30,29 @@ enum	e_builtin
 	EXIT,
 };
 
-//EXEC_BUILTIN
+// EXEC_BUILTIN
 int		is_builtin(char **args);
 int		exec_builtin(int codem, t_cmd *cmd);
 int		count_word(t_token *token);
 void	token_to_cmd(void);
 
-//FT_ECHO
+// FT_ECHO
 int		ft_echo(char **args);
-void ambient_var(char *arg, t_env *env, int has_next);
+void	ambient_var(char *arg, t_env *env, int has_next);
 
+// FT_PWD
+int		ft_pwd(void);
 
-//FT_PWD
-int	ft_pwd(void);
-
-//FT_CD
+// FT_CD
 int		ft_cd(char **args);
 
-//FT_ENV
+// FT_ENV
 int		ft_env(char **args);
 
-//FT_EXPORT
-// void	ft_export();
+// FT_EXPORT
+// void	ft_export(void);
 
-//FT_EXIT
+// FT_EXIT
 int		ft_exit(char **args);
 void	clean_exit(int code);
 

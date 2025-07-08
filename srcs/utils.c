@@ -23,21 +23,21 @@ char	*ft_join_three(char *s1, char *s2, char *s3)
 	if (!tmp)
 		return (NULL);
 	together_all = ft_strjoin(tmp, s3);
-    free(tmp);
+	free(tmp);
 	if (!together_all)
 		return (NULL);
 	return (together_all);
 }
 
-int count_word(t_token *token)
+int	count_word(t_token *token)
 {
 	t_token	*temp;
 	int		count;
 
 	temp = token;
 	count = 0;
-	while (temp && temp->type == TOKEN_WORD) 
-    {
+	while (temp && temp->type == TOKEN_WORD)
+	{
 		count++;
 		temp = temp->next;
 	}

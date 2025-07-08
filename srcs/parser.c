@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:32:53 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/08 16:22:57 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/07 14:11:24 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	check_quotes(char *input)
 		i++;
 	}
 	if (!(count_quote % 2 == 0) || !(count_double_quote % 2 == 0))
+	{
+		get_shell()->exit_status = 2;
 		return (0);
+	}
 	return (1);
 }
 

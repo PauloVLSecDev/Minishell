@@ -21,23 +21,24 @@ int	ft_avoid_tokens(char *input, int *i)
 	return (0);
 }
 
-int	extract_redir_or_pipe(char *input, int *i, t_token **token, t_token **current)
+int	extract_redir_or_pipe(char *input, int *i, t_token **token,
+		t_token **current)
 {
-	int		start;
-	char	*value;
+	int start;
+	char *value;
 
 	if (input[*i] == '|' || input[*i] == '<' || input[*i] == '>')
-		{
-			start = *i;
-			if ((input[*i] == '<' && input[*i + 1] == '<') || 
-				(input[*i] == '>' && input[*i + 1] == '>'))
-				*i += 2;
-			else
-				(*i)++;
-			value = ft_substr(input, start, *i - start);
-			append_token(token, current, value);
-			free(value);
-			return (1);
-		}
+	{
+		start = *i;
+		if ((input[*i] == '<' && input[*i + 1] == '<') || (input[*i] == '>'
+				&& input[*i + 1] == '>'))
+			*i += 2;
+		else
+			(*i)++;
+		value = ft_substr(input, start, *i - start);
+		append_token(token, current, value);
+		free(value);
+		return (1);
+	}
 	return (0);
 }

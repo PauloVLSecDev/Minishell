@@ -18,15 +18,17 @@ char	*expand_var(char *arg, t_env *env)
 	char	*temp;
 	int		i;
 	char	buffer[2];
-	
+
+	(void)env;
 	expanded = ft_strdup("");
 	i = 0;
 	while (arg[i])
 	{
 		if (arg[i] == '$')
 		{
-			if (arg[i + 1] == ' ' || arg[i + 1] == '\0')
-				ft_putstr_fd("$", 1);
+			// if (arg[i + 1] == ' ' || arg[i + 1] == '\0')
+			//{
+			//}
 			if (arg[i + 1] == '$' || arg[i + 1] == '?')
 			{
 				temp = which_expand(arg[i + 1]);
