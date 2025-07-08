@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:35:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/03 17:07:34 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:00:07 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,12 @@ void	clean_exit(int code)
 {
 	if (get_shell()->input)
 		free(get_shell()->input);
-	free_env(get_shell()->env);
-	free_cmd(get_shell()->cmd);
-	free_token_list(get_shell()->token);
+	if (get_shell()->env)
+		free_env(get_shell()->env);
+	if (get_shell()->cmd)
+		free_cmd(get_shell()->cmd);
+	if (get_shell()->token)
+		free_token_list(get_shell()->token);
 	exit(code);
 }
 
