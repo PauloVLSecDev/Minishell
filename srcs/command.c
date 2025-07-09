@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/08 20:33:49 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/09 15:03:18 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_cmd	*create_cmd_node(t_token *token)
 		return (NULL);
 	new_cmd->infile = NULL;
 	new_cmd->outfile = NULL;
+	new_cmd->in_fd = -1;
+	new_cmd->out_fd = -1;
 	new_cmd->next = NULL;
 	return (new_cmd);
 }
@@ -55,7 +57,10 @@ void	process_all(t_cmd **cmd, t_token **token, int *i)
 		else if ((*token)->type == TOKEN_PIPE)
 			process_pipe(cmd, token, i);
 		else if ((*token)->type != TOKEN_WORD)
-			process_redirect(cmd, token);
+		{
+			if (process_redirect(cmd, token))
+				cleanup_iteration();
+		}
 		else
 			break ;
 		*token = (*token)->next;
