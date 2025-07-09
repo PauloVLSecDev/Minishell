@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/03 17:08:53 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/09 17:00:54 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int		ft_cd(char **args);
 int		ft_env(char **args);
 
 // FT_EXPORT
-// void	ft_export(void);
+void print_export(void);
+int ft_export(char **args);
 
 // FT_EXIT
 int		ft_exit(char **args);

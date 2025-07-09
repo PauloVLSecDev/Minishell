@@ -60,3 +60,4 @@ brunogue - expansao de variavel de ambiente corretas, agr fazer o exit status
 
 3/7
 brunogue - arrumei os still reachables restantes e o exit status que tinha parado de funcionar, so que agr o unico problema é o pipe que ta dando double free. 
+fazer aspas no value do export
