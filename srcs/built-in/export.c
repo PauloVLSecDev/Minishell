@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 17:14:59 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/10 18:55:52 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/10 19:17:57 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,33 +147,63 @@ int	ft_export(char **args)
 	return (0);
 }
 
-void	valid_export(char **args, char *name, char *value, int *i)
-{
-	char	*equal;
-	t_env	*found;
+// static int	is_equal_or_not(char **args, char *name, char *value, int *i)
+// {
 
-	equal = ft_strchr(args[*i], '=');
-	
+// 	if (equal)
+// 	{
+// 		name = ft_substr(args[*i], 0, equal - args[*i]);
+// 		value = ft_strdup(equal + 1);
+// 	}
+// 	else
+// 	{
+// 		name = ft_strdup(args[*i]);
+// 		value = ft_strdup("\"\"");
+// 	}
+// 	return (*i);
+// }
+
+static int error_identifier(char *name, char *value)
+{
 	if (!is_valid_identifier(name))
 	{
 		ft_error_export(name);
 		free(name);
 		free(value);
-		return ;
+		return (1);
 	}
+	free(name);
+	free(value);
+	return (0);
+}
+
+void	valid_export(char **args, char *name, char *value, int *i)
+{
+	t_env	*found;
+	char	*equal;
+
+	equal = ft_strchr(args[*i], '=');
+	if (equal)
+	{
+		name = ft_substr(args[*i], 0, equal - args[*i]);
+		value = ft_strdup(equal + 1);
+	}
+	else
+	{
+		name = ft_strdup(args[*i]);
+		value = ft_strdup("\"\"");
+	}
+	if (!error_identifier(name, value))
+		return ;
 	else
 	{
 		found = find_env_node(name);
 		if (found)
-			update_node(found, value);
+		update_node(found, value);
 		else
-			add_env_node(name, value);
+		add_env_node(name, value);
 	}
 	free(value);
 	free(name);
-}
-
-void is_equal_or_not()
-{
 	
 }
