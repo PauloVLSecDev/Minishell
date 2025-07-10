@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/07/09 19:14:18 by brunogue         ###   ########.fr        #
+#    Updated: 2025/07/10 20:05:22 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,10 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/built-in/cd.c \
 		$(SRC_DIR)/built-in/echo.c \
 		$(SRC_DIR)/built-in/env.c \
-		$(SRC_DIR)/built-in/export.c \
 		$(SRC_DIR)/built-in/exit.c \
+		$(SRC_DIR)/built-in/export/export.c \
+		$(SRC_DIR)/built-in/export/export_utils.c \
+		$(SRC_DIR)/built-in/export/valid_export.c \
 		$(SRC_DIR)/environment.c \
 		$(SRC_DIR)/execution.c \
 		$(SRC_DIR)/global_execute.c \

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/10 19:01:21 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/10 20:09:42 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,30 @@ int		ft_cd(char **args);
 // FT_ENV
 int		ft_env(char **args);
 
-// FT_EXPORT
-void print_export(void);
-int ft_export(char **args);
-void	valid_export(char **args, char *name, char *value, int *i);
-
 
 // FT_EXIT
 int		ft_exit(char **args);
 void	clean_exit(int code);
+
+/*   EXPORT   */
+
+// FT_EXPORT
+void	print_export(void);
+int		ft_export(char **args);
+void	valid_export(char **args, char *name, char *value, int *i);
+void	add_env_node(char *name, char *value);
+void	update_node(t_env *node, char *value);
+
+
+//EXPORT_UTILS
+void	ft_error_export(char *name);
+void	ft_swap_str(char **i, char **j);
+t_env	*find_env_node(char *name);
+
+// VALIDS_EXPORT
+void	valid_export(char **args, char *name, char *value, int *i);
+int		is_valid_identifier(char *name);
+int		error_identifier(char *name, char *value);
+void	correct_identifier(char *name, char *value);
 
 #endif
