@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/09 15:03:18 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/10 19:30:42 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ void	process_all(t_cmd **cmd, t_token **token, int *i)
 			process_word(cmd, token, i);
 		else if ((*token)->type == TOKEN_PIPE)
 			process_pipe(cmd, token, i);
-		else if ((*token)->type != TOKEN_WORD)
+		else if ((*token)->type == TOKEN_REDIR_IN || (*token)->type == TOKEN_REDIR_OUT)
 		{
 			if (process_redirect(cmd, token))
 				cleanup_iteration();
+			if (*token && (*token)->next)
+				*token = (*token)->next;
 		}
 		else
 			break ;

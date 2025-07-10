@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:26:54 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/04 19:16:24 by pvitor-l         ###   ########.fr       */
+/*   Update: 2025/07/10 18:25:18 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 	pid = fork();
 	if (pid == 0)
 	{
+		if (redir_actions(cmd))
+			exit(2);
 		exec_external(cmd, new_env, path);
 		free_all(new_env);
 		cleanup_iteration();
