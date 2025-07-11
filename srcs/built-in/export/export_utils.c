@@ -6,18 +6,20 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 19:59:39 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/10 20:05:43 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/11 19:59:22 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_swap_str(char **i, char **j)
+
+void	ft_swap_str(char **a, char **b)
 {
-	char *temp;
-	temp = *i;
-	*i = *j;
-	*j = temp;
+	char *tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 void	ft_error_export(char *name)
@@ -29,10 +31,12 @@ void	ft_error_export(char *name)
 
 t_env	*find_env_node(char *name)
 {
-	t_env *curr = get_shell()->env;
+	t_env *curr;
+
+	curr = get_shell()->env;
 	while (curr)
 	{
-		if (!ft_strcmp(curr->name, name))
+		if (ft_strcmp(curr->name, name) == 0)
 			return (curr);
 		curr = curr->next;
 	}
