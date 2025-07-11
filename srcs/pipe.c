@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:46:45 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/07 13:22:27 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/11 20:05:23 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	execute_pipeline(t_cmd *cmd)
 {
 	int	pipefd[2];
 	int	prev_fd;
+	t_fd_backup backup;
 
 	prev_fd = STDIN_FILENO;
 	while (cmd != NULL)
@@ -30,6 +31,8 @@ void	execute_pipeline(t_cmd *cmd)
 		cmd = cmd->next;
 	}
 	close_two(pipefd);
+	close(prev_fd);
+	restaure_for_origin_fds(&backup);
 	return ;
 }
 
@@ -52,13 +55,17 @@ void	create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd)
 			dup2(pipefd[1], STDOUT_FILENO);
 			close_two(pipefd);
 		}
+		if(redir_actions(cmd))
+				exit(3);
 		exec_all(cmd);
 		close_two(pipefd);
 		exit(1);
 	}
 	else if (pid > 0)
+	{
 		process_parrent(pipefd, prev_fd, status, cmd);
-	waitpid(pid, &status, 0);
+		waitpid(pid, &status, 0);
+	}
 }
 
 static void	process_parrent(int *pipefd, int *prev_fd, int status, t_cmd *cmd)

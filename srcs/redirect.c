@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */ 
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/10 19:36:43 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:37:54 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int redir_actions(t_cmd *cmd)
 		if (fd_in == -1)
 			return (1);
 		dup2(fd_in, STDIN_FILENO);
-		printf("entrou no cmd->oufile %s, %i", cmd->infile, fd_in);
 		close(fd_in);
 	}
 	if (cmd->outfile)
@@ -32,7 +31,6 @@ int redir_actions(t_cmd *cmd)
 		if (fd_out == -1)
 			return (1);
 		dup2(fd_out, STDOUT_FILENO);
-		printf("entrou no cmd->oufile %s, %i", cmd->outfile, fd_out);
 		close(fd_out);
 	}
 	//else if (cmd->append_mode)

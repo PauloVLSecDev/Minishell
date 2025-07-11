@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/09 15:03:07 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:19:42 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_cmd	t_cmd;
 
 typedef struct s_env	t_env;
 
+typedef struct s_fd_backup	t_fd_backup;
+
 typedef struct s_shell
 {
 	t_token				*token;
@@ -30,6 +32,13 @@ typedef struct s_shell
 	char				**env_copy;
 	int					exit_status;
 }						t_shell;
+
+typedef struct s_fd_backup
+{
+	int		std_infile;
+	int		std_outfile;
+	int		std_err;
+}			t_fd_backup;
 
 typedef enum e_token_type
 {
@@ -56,8 +65,6 @@ typedef struct s_cmd
 	int					is_builtin;
 	char				*infile;
 	char				*outfile;
-	int					in_fd;
-	int					out_fd;
 	int					append_mode;
 	struct s_cmd		*next;
 }						t_cmd;

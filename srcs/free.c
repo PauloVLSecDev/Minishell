@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:35:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/08 15:00:07 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:07:07 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	free_cmd(t_cmd *cmd)
 	{
 		tmp = cmd->next;
 		free_all(cmd->args);
+		if (cmd->outfile)
+			free(cmd->outfile);
+		if (cmd->infile)
+			free(cmd->infile);
 		free(cmd);
 		cmd = tmp;
 	}

@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/07/08 20:27:14 by pvitor-l         ###   ########.fr        #
+#    Updated: 2025/07/11 15:39:54 by pvitor-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/smart_execute.c \
 		$(SRC_DIR)/valid_all.c \
 		$(SRC_DIR)/redirect.c \
+		$(SRC_DIR)/redirect_utils.c \
 		$(SRC_DIR)/expand.c 
 
 VALGRIND = valgrind --leak-check=full \

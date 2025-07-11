@@ -52,6 +52,7 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 		if (redir_actions(cmd))
 			exit(2);
 		exec_external(cmd, new_env, path);
+//		restaure_for_origin_fds(&backup);
 		free_all(new_env);
 		cleanup_iteration();
 		if (get_shell()->exit_status == 127)

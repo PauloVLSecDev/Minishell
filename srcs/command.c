@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/10 19:30:42 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/11 20:46:20 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ t_cmd	*create_cmd_node(t_token *token)
 		return (NULL);
 	new_cmd->infile = NULL;
 	new_cmd->outfile = NULL;
-	new_cmd->in_fd = -1;
-	new_cmd->out_fd = -1;
 	new_cmd->next = NULL;
 	return (new_cmd);
 }
@@ -67,6 +65,7 @@ void	process_all(t_cmd **cmd, t_token **token, int *i)
 			break ;
 		*token = (*token)->next;
 	}
+	free_token_list(*token);
 }
 
 void	process_word(t_cmd **curr_cmd, t_token **token, int *i)
