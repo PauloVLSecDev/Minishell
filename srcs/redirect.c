@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */ 
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/11 16:37:54 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/12 20:47:34 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int redir_actions(t_cmd *cmd)
 	int fd_in;
 	int fd_out;
 
-	if (cmd->infile) { fd_in = open(cmd->infile, O_RDONLY); 
+	if (cmd->infile)
+	{
+		fd_in = open(cmd->infile, O_RDONLY); 
 		if (fd_in == -1)
 			return (1);
 		dup2(fd_in, STDIN_FILENO);
@@ -40,12 +42,8 @@ int redir_actions(t_cmd *cmd)
 
 int	process_redirect(t_cmd **cmd, t_token **token)
 {
-	if ((*token)->type == TOKEN_REDIR_IN && (*token)->next->type == TOKEN_WORD )
-	{
-		if (valid_file(*token))
-			return (1);
+	if ((*token)->type == TOKEN_REDIR_IN && (*token)->next->type == TOKEN_WORD)
 		(*cmd)->infile = ft_strdup((*token)->next->value); 
-	}
 	else if ((*token)->type == TOKEN_REDIR_OUT && (*token)->next && (*token)->next->type == TOKEN_WORD)
 	{
 		if (valid_file(*token))
@@ -97,13 +95,8 @@ int	valid_file(t_token *token)
 	file_name = token->next->value;
 	if (token->type == TOKEN_REDIR_IN)
 	{
-		if (access(file_name, F_OK | R_OK) == -1)
-			return (1);
-	}
-	else if (token->type == TOKEN_REDIR_OUT)
-	{
-		if (access(file_name, F_OK)) 
-				return (0);
+		if (access(file_name, R_OK) == -1) 
+				return (1);
 	/*
 	else 
 		tmp_fd = open(file_name, O_WRONLY | O_CREAT | O_EXCL, 0644); 
