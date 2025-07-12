@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/08 12:25:10 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/11 20:59:39 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	process_all(t_cmd **cmd, t_token **token, int *i)
 			process_word(cmd, token, i);
 		else if ((*token)->type == TOKEN_PIPE)
 			process_pipe(cmd, token, i);
-	//		else if 
-	//		process_redirect(cmd, token, i);
+		else if ((*token)->type != TOKEN_WORD)
+			process_redirect(cmd, token);
 		else
 			break ;
 		*token = (*token)->next;
@@ -81,53 +81,3 @@ void	process_pipe(t_cmd **cmd, t_token **token, int *i)
 	*cmd = (*cmd)->next;
 	*i = 0;
 }
-
-/*
-void	process_redirect(t_cmd **cmd, t_token **token, int *i)
-{
-	if ((*token)->type == TOKEN_WORD && (*token)->next->type == TOKEN_REDIRIN)
-	{
-		if (valid_file(*token))
-		{
-			clenup_iteration();
-			return ;
-		}
-		(*cmd)->infile = (*token); 
-	}
-	else if ((*token)->type == TOKEN_REDIROUT && (*token)->next->type == TOKEN_WORD)
-	{
-		if (valid_file(*token));
-		{
-			perror((*token->value));
-			clenup_iteration();
-			return ;
-		}
-		(*cmd)->outfile = toke->next;
-	}
-}
-
-int	valid_file(t_token *token)
-{
-	int fd;
-	if (token->next->type == TOKEN_REDIRIN)	
-	{
-		if (access(token->value, R_OK) == -1)
-		{
-			perror("");
-			get_shell()->exit_status = 2;
-			return (1);
-		}
-	}
-	else if (token->type == TOKEN_REDIROUT)	
-	{
-		fd = opem(token->next->value, O_RDONLY | O_WRONLY | O_TRUNC | O_CREAT, 0644); 
-		if (fd <= -1)
-		{
-			perror("");
-			get_shell()->exit_status = 2;
-			return (1);
-		}
-	}
-	return (0);
-}
-*/
