@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/09 16:57:51 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/12 18:01:22 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ int	is_builtin(char **args)
 
 int	exec_builtin(int code, t_cmd *cmd)
 {
+	t_fd_backup backup;
+	backup_fds(&backup);	
+	if (redir_actions(cmd))
+	{
+		restaure_for_origin_fds(&backup);
+		return (-1);
+	}
 	if (code == ECHO)
 		get_shell()->exit_status = ft_echo(cmd->args);
 	else if (code == PWD)
@@ -45,5 +52,6 @@ int	exec_builtin(int code, t_cmd *cmd)
 	    get_shell()->exit_status = ft_export(cmd->args);
 	else if (code == EXIT)
 		get_shell()->exit_status = ft_exit(cmd->args);
+	restaure_for_origin_fds(&backup);
 	return (get_shell()->exit_status);
 }
