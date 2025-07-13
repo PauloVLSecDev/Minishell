@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/13 16:40:20 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:27:57 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	redir_actions(t_cmd *cmd)
 		dup2(fd_in, STDIN_FILENO);
 		close(fd_in);
 	}
-	if (cmd->outfile)
+	if (cmd->outfile && cmd->append_mode == 0)
 	{
 		fd_out = open(cmd->outfile, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		if (fd_out == -1)
@@ -87,9 +87,11 @@ static	int ft_append(t_cmd *cmd)
 
 	append_file = cmd->outfile;
 	fd_append = open(append_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (fd_append <= -1)
 		return (1);
 	dup2(fd_append, STDOUT_FILENO);
 	close(fd_append);
+	return (0);
 }
 
 int	valid_file(t_token *token)
