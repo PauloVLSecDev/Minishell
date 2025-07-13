@@ -18,9 +18,9 @@ static void	process_parrent(int *pipefd, int *prev_fd, int status, t_cmd *cmd);
 
 void	execute_pipeline(t_cmd *cmd)
 {
-	int	pipefd[2];
-	int	prev_fd;
-	t_fd_backup backup;
+	int			pipefd[2];
+	int			prev_fd;
+	t_fd_backup	backup;
 
 	prev_fd = STDIN_FILENO;
 	while (cmd != NULL)
@@ -55,8 +55,8 @@ void	create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd)
 			dup2(pipefd[1], STDOUT_FILENO);
 			close_two(pipefd);
 		}
-		if(redir_actions(cmd))
-				exit(3);
+		if (redir_actions(cmd))
+			exit(3);
 		exec_all(cmd);
 		close_two(pipefd);
 		exit(1);

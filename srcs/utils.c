@@ -41,13 +41,13 @@ int	count_word(t_token *token)
 		if (temp->type == TOKEN_WORD)
 			count++;
 		else if (temp->type == TOKEN_PIPE)
-			break;
-		else if (temp->type == TOKEN_REDIR_IN || temp->type == TOKEN_REDIR_OUT ||
-				temp->type == TOKEN_APPEND || temp->type == TOKEN_HEREDOC)
+			break ;
+		else if (temp->type == TOKEN_REDIR_IN || temp->type == TOKEN_REDIR_OUT
+			|| temp->type == TOKEN_APPEND || temp->type == TOKEN_HEREDOC)
 		{
 			temp = temp->next;
 			if (temp == NULL)
-				break; 
+				break ;
 		}
 		temp = temp->next;
 	}

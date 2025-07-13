@@ -14,9 +14,9 @@
 
 static void	_sort_env_array(char **array, size_t count)
 {
-	size_t i;
-	size_t j;
-	
+	size_t	i;
+	size_t	j;
+
 	i = 0;
 	while (i < count)
 	{
@@ -24,7 +24,7 @@ static void	_sort_env_array(char **array, size_t count)
 		while (j < count)
 		{
 			if (ft_strcmp(array[i], array[j]) > 0)
-			ft_swap_str(&array[i], &array[j]);
+				ft_swap_str(&array[i], &array[j]);
 			j++;
 		}
 		i++;
@@ -33,16 +33,16 @@ static void	_sort_env_array(char **array, size_t count)
 
 void	print_export(void)
 {
-	t_env *node;
-	char **args;
-	size_t count;
-	size_t i;
-	
+	t_env	*node;
+	char	**args;
+	size_t	count;
+	size_t	i;
+
 	node = get_shell()->env;
 	args = recreate_env(node);
 	count = 0;
 	while (args[count])
-	count++;
+		count++;
 	_sort_env_array(args, count);
 	i = 0;
 	while (i < count)
@@ -65,13 +65,13 @@ void	update_node(t_env *node, char *value)
 
 void	add_env_node(char *name, char *value)
 {
-	t_env *new;
-	t_env *last;
+	t_env	*new;
+	t_env	*last;
 
 	last = get_shell()->env;
 	new = malloc(sizeof(t_env));
 	if (!new)
-		return;
+		return ;
 	new->name = ft_strdup(name);
 	new->content = value ? ft_strdup(value) : NULL;
 	new->exported = 1;
@@ -79,7 +79,7 @@ void	add_env_node(char *name, char *value)
 	if (!last)
 	{
 		get_shell()->env = new;
-		return;
+		return ;
 	}
 	while (last->next)
 		last = last->next;
@@ -88,7 +88,7 @@ void	add_env_node(char *name, char *value)
 
 int	ft_export(char **args)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (!args[1])

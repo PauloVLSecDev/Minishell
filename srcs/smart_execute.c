@@ -51,8 +51,11 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 	{
 		if (redir_actions(cmd))
 		{
-			printf("entrou no loop dentro do redirect external\n"); 
+			free_all(path);
+			free_env(get_shell()->env);
+			free_all(new_env);
 			perror("");
+			cleanup_iteration();
 			exit(2);
 		}
 		exec_external(cmd, new_env, path);

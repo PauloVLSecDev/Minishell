@@ -60,7 +60,7 @@ int	valid_pipe(t_token *list)
 
 int	valid_redir_in(t_token *list)
 {
-	t_token *head;
+	t_token	*head;
 
 	head = list;
 	if (head == NULL)
@@ -78,7 +78,7 @@ int	valid_redir_in(t_token *list)
 
 int	valid_redir_out(t_token *list)
 {
-	t_token *head;
+	t_token	*head;
 
 	head = list;
 	if (head == NULL)
@@ -97,7 +97,7 @@ int	valid_redir_out(t_token *list)
 
 int	valid_heredoc(t_token *list)
 {
-	t_token *head;
+	t_token	*head;
 
 	head = list;
 	if (head == NULL)

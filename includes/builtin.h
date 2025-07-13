@@ -49,7 +49,6 @@ int		ft_cd(char **args);
 // FT_ENV
 int		ft_env(char **args);
 
-
 // FT_EXIT
 int		ft_exit(char **args);
 void	clean_exit(int code);
@@ -63,8 +62,7 @@ void	valid_export(char **args, int *i);
 void	add_env_node(char *name, char *value);
 void	update_node(t_env *node, char *value);
 
-
-//EXPORT_UTILS
+// EXPORT_UTILS
 void	ft_error_export(char *name);
 void	ft_swap_str(char **i, char **j);
 t_env	*find_env_node(char *name);

@@ -14,10 +14,10 @@
 
 void	valid_export(char **args, int *i)
 {
-	char *arg;
-	char *equal;
-	char *name;
-	char *value;
+	char	*arg;
+	char	*equal;
+	char	*name;
+	char	*value;
 
 	arg = args[*i];
 	equal = ft_strchr(arg, '=');
@@ -32,7 +32,7 @@ void	valid_export(char **args, int *i)
 		value = ft_strdup("\"\"");
 	}
 	if (error_identifier(name, value))
-		return;
+		return ;
 	correct_identifier(name, value);
 	free(name);
 	free(value);
@@ -40,7 +40,7 @@ void	valid_export(char **args, int *i)
 
 int	is_valid_identifier(char *name)
 {
-	int i;
+	int	i;
 
 	if (!name || (!ft_isalpha(name[0]) && name[0] != '_'))
 		return (0);
@@ -68,7 +68,7 @@ int	error_identifier(char *name, char *value)
 
 void	correct_identifier(char *name, char *value)
 {
-	t_env *found;
+	t_env	*found;
 
 	found = find_env_node(name);
 	if (found)
