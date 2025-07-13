@@ -6,13 +6,14 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/12 20:47:34 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/13 16:40:20 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static int	valid_append(t_token *token);
+static int	valid_append(t_token *token);
+static int	ft_append(t_cmd *cmd);
 
 int	redir_actions(t_cmd *cmd)
 {
@@ -35,8 +36,11 @@ int	redir_actions(t_cmd *cmd)
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 	}
-	// else if (cmd->append_mode)
-	//	append_function(cmd);
+	else if (cmd->append_mode)
+	{
+		if (ft_append(cmd))
+			return (1);
+	}
 	return (0);
 }
 
@@ -51,19 +55,17 @@ int	process_redirect(t_cmd **cmd, t_token **token)
 			return (1);
 		(*cmd)->outfile = ft_strdup((*token)->next->value);
 	}
-	/*
 	else if ((*token)->type == TOKEN_APPEND
 		&& (*token)->next->type == TOKEN_WORD)
 	{
 		if (valid_append(*token))
 				return (1);
 		(*cmd)->append_mode = 1;
+		(*cmd)->outfile = ft_strdup((*token)->next->value);
 	}
-	*/
 	return (0);
 }
 
-/*
 static int	valid_append(t_token *token)
 {
 	int		tmp_append;
@@ -71,42 +73,34 @@ static int	valid_append(t_token *token)
 
 	append_file = token->next->value;
 	tmp_append = open(append_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (tmp_append == -1)
+	if (tmp_append <= -1)
 		return (1);
 	close(tmp_append);
 	unlink(append_file);
 	return (0);
 }
-*/
 
-/*
-static	ft_append(t_cmd *cmd)
+static	int ft_append(t_cmd *cmd)
 {
-	int	tmp_append;
+	int	fd_append;
+	char *append_file;
 
-	tmp_append = open(append_file, O_WRONLY | O_CREAT | O_APPEND, 0644));
-	if tmp_append <= -1)
+	append_file = cmd->outfile;
+	fd_append = open(append_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		return (1);
+	dup2(fd_append, STDOUT_FILENO);
+	close(fd_append);
 }
-*/
 
 int	valid_file(t_token *token)
 {
 	char	*file_name;
 
-	//	int tmp_fd;
 	file_name = token->next->value;
 	if (token->type == TOKEN_REDIR_IN)
 	{
 		if (access(file_name, R_OK) == -1)
 			return (1);
-		/*
-		else
-			tmp_fd = open(file_name, O_WRONLY | O_CREAT | O_EXCL, 0644);
-			if (tmp_fd == -1)
-				return (1);
-			close(tmp_fd);
-			unlink(file_name);
-		*/
 	}
 	return (0);
 }
