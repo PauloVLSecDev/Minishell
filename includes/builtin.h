@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/11 20:00:58 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/13 16:30:52 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ enum	e_builtin
 	PWD,
 	ENV,
 	EXPORT,
+	UNSET,
 	EXIT,
 };
 
@@ -63,7 +64,6 @@ void	valid_export(char **args, int *i);
 void	add_env_node(char *name, char *value);
 void	update_node(t_env *node, char *value);
 
-
 //EXPORT_UTILS
 void	ft_error_export(char *name);
 void	ft_swap_str(char **i, char **j);
@@ -73,5 +73,8 @@ t_env	*find_env_node(char *name);
 int		is_valid_identifier(char *name);
 int		error_identifier(char *name, char *value);
 void	correct_identifier(char *name, char *value);
+
+// FT_UNSET
+int		ft_unset(t_env **env, char **args);
 
 #endif

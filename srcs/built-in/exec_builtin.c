@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/12 18:01:22 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/13 16:28:23 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	is_builtin(char **args)
 		return (ENV);
 	if (!ft_strcmp(args[0], "export"))
 		return (EXPORT);
+	if (!ft_strcmp(args[0], "unset"))
+		return (UNSET);
 	if (!ft_strcmp(args[0], "exit"))
 		return (EXIT);
 	return (-1);
@@ -34,7 +36,8 @@ int	is_builtin(char **args)
 int	exec_builtin(int code, t_cmd *cmd)
 {
 	t_fd_backup backup;
-	backup_fds(&backup);	
+
+	backup_fds(&backup);
 	if (redir_actions(cmd))
 	{
 		restaure_for_origin_fds(&backup);
@@ -50,8 +53,13 @@ int	exec_builtin(int code, t_cmd *cmd)
 		get_shell()->exit_status = ft_env(cmd->args);
 	else if (code == EXPORT)
 	    get_shell()->exit_status = ft_export(cmd->args);
+	else if (code == UNSET)
+		get_shell()->exit_status = ft_unset(&(get_shell()->env), cmd->args);
 	else if (code == EXIT)
+	{
+		restaure_for_origin_fds(&backup);
 		get_shell()->exit_status = ft_exit(cmd->args);
+	}
 	restaure_for_origin_fds(&backup);
 	return (get_shell()->exit_status);
 }

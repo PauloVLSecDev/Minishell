@@ -6,12 +6,11 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 19:59:39 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/11 19:59:22 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:46:31 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	ft_swap_str(char **a, char **b)
 {
