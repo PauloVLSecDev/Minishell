@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:17:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/06/26 15:57:46 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/12 19:06:54 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,19 @@ int	count_word(t_token *token)
 
 	temp = token;
 	count = 0;
-	while (temp && temp->type == TOKEN_WORD)
+	while (temp)
 	{
-		count++;
+		if (temp->type == TOKEN_WORD)
+			count++;
+		else if (temp->type == TOKEN_PIPE)
+			break ;
+		else if (temp->type == TOKEN_REDIR_IN || temp->type == TOKEN_REDIR_OUT
+			|| temp->type == TOKEN_APPEND || temp->type == TOKEN_HEREDOC)
+		{
+			temp = temp->next;
+			if (temp == NULL)
+				break ;
+		}
 		temp = temp->next;
 	}
 	return (count);

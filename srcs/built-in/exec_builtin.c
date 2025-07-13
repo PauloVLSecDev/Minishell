@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/13 16:28:23 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:07:07 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	exec_builtin(int code, t_cmd *cmd)
 	backup_fds(&backup);
 	if (redir_actions(cmd))
 	{
+		perror("");
 		restaure_for_origin_fds(&backup);
 		return (-1);
 	}

@@ -15,30 +15,30 @@
 
 # include "minishell.h"
 
-typedef struct s_token	t_token;
+typedef struct s_token		t_token;
 
-typedef struct s_cmd	t_cmd;
+typedef struct s_cmd		t_cmd;
 
-typedef struct s_env	t_env;
+typedef struct s_env		t_env;
 
 typedef struct s_fd_backup	t_fd_backup;
 
 typedef struct s_shell
 {
-	t_token				*token;
-	t_cmd				*cmd;
-	t_env				*env;
-	char				*input;
-	char				**env_copy;
-	int					exit_status;
-}						t_shell;
+	t_token					*token;
+	t_cmd					*cmd;
+	t_env					*env;
+	char					*input;
+	char					**env_copy;
+	int						exit_status;
+}							t_shell;
 
 typedef struct s_fd_backup
 {
-	int		std_infile;
-	int		std_outfile;
-	int		std_err;
-}			t_fd_backup;
+	int						std_infile;
+	int						std_outfile;
+	int						std_err;
+}							t_fd_backup;
 
 typedef enum e_token_type
 {
@@ -50,31 +50,31 @@ typedef enum e_token_type
 	TOKEN_APPEND,
 	TOKEN_HEREDOC,
 	TOKEN_EOF,
-}						t_token_type;
+}							t_token_type;
 
 typedef struct s_token
 {
-	t_token_type		type;
-	char				*value;
-	struct s_token		*next;
-}						t_token;
+	t_token_type			type;
+	char					*value;
+	struct s_token			*next;
+}							t_token;
 
 typedef struct s_cmd
 {
-	char				**args;
-	int					is_builtin;
-	char				*infile;
-	char				*outfile;
-	int					append_mode;
-	struct s_cmd		*next;
-}						t_cmd;
+	char					**args;
+	int						is_builtin;
+	char					*infile;
+	char					*outfile;
+	int						append_mode;
+	struct s_cmd			*next;
+}							t_cmd;
 
 typedef struct s_env
 {
-	char				*name;
-	char				*content;
-	int					exported;
-	struct s_env		*next;
-}						t_env;
+	char					*name;
+	char					*content;
+	int						exported;
+	struct s_env			*next;
+}							t_env;
 
 #endif

@@ -14,7 +14,7 @@
 
 void	ft_swap_str(char **a, char **b)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = *a;
 	*a = *b;
@@ -30,7 +30,7 @@ void	ft_error_export(char *name)
 
 t_env	*find_env_node(char *name)
 {
-	t_env *curr;
+	t_env	*curr;
 
 	curr = get_shell()->env;
 	while (curr)
