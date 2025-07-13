@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/11 20:00:58 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:06:34 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ enum	e_builtin
 	PWD,
 	ENV,
 	EXPORT,
+	UNSET,
 	EXIT,
 };
 
@@ -71,5 +72,8 @@ t_env	*find_env_node(char *name);
 int		is_valid_identifier(char *name);
 int		error_identifier(char *name, char *value);
 void	correct_identifier(char *name, char *value);
+
+// FT_UNSET
+int		ft_unset(t_env **env, char **args);
 
 #endif
