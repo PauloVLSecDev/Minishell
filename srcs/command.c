@@ -57,7 +57,7 @@ void	process_all(t_cmd **cmd, t_token **token, int *i)
 			process_pipe(cmd, token, i);
 		else if ((*token)->type == TOKEN_REDIR_IN
 			|| (*token)->type == TOKEN_REDIR_OUT
-			|| (*token)->type == TOKEN_APPEND)  
+			|| (*token)->type == TOKEN_APPEND)
 		{
 			if (process_redirect(cmd, token))
 				cleanup_iteration();

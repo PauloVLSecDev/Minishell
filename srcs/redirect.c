@@ -6,13 +6,12 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/13 17:27:57 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:00:58 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	valid_append(t_token *token);
 static int	ft_append(t_cmd *cmd);
 
 int	redir_actions(t_cmd *cmd)
@@ -58,32 +57,16 @@ int	process_redirect(t_cmd **cmd, t_token **token)
 	else if ((*token)->type == TOKEN_APPEND
 		&& (*token)->next->type == TOKEN_WORD)
 	{
-		if (valid_append(*token))
-				return (1);
 		(*cmd)->append_mode = 1;
 		(*cmd)->outfile = ft_strdup((*token)->next->value);
 	}
 	return (0);
 }
 
-static int	valid_append(t_token *token)
+static int	ft_append(t_cmd *cmd)
 {
-	int		tmp_append;
+	int		fd_append;
 	char	*append_file;
-
-	append_file = token->next->value;
-	tmp_append = open(append_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (tmp_append <= -1)
-		return (1);
-	close(tmp_append);
-	unlink(append_file);
-	return (0);
-}
-
-static	int ft_append(t_cmd *cmd)
-{
-	int	fd_append;
-	char *append_file;
 
 	append_file = cmd->outfile;
 	fd_append = open(append_file, O_WRONLY | O_CREAT | O_APPEND, 0644);

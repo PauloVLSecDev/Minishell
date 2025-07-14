@@ -14,9 +14,9 @@
 
 int	remove_env_node(t_env **env, char *name)
 {
-	t_env *current;
-	t_env *prev;
-	
+	t_env	*current;
+	t_env	*prev;
+
 	current = *env;
 	prev = NULL;
 	while (current != NULL)

@@ -6,12 +6,10 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/10 16:19:20 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/13 22:10:14 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "minishell.h"
-
 int	count_nodes(t_env *env)
 {
 	t_env	*new;
@@ -61,6 +59,17 @@ char	*join_path_with_cmd(char **path, t_cmd *cmd)
 	path_with_cmd = NULL;
 	if (!path)
 		return (NULL);
+	if (ft_strchr(cmd->args[0], '/'))
+	{
+		if (access(cmd->args[0], X_OK) == 0)
+		{
+			free_all(path);
+			return (ft_strdup(cmd->args[0]));
+		}
+		if (path)
+			free_all(path);
+		return (NULL);
+	}
 	while (path[i] != NULL)
 	{
 		path_with_cmd = ft_join_three(path[i], "/", cmd->args[0]);

@@ -35,7 +35,7 @@ int	is_builtin(char **args)
 
 int	exec_builtin(int code, t_cmd *cmd)
 {
-	t_fd_backup backup;
+	t_fd_backup	backup;
 
 	backup_fds(&backup);
 	if (redir_actions(cmd))
@@ -53,7 +53,7 @@ int	exec_builtin(int code, t_cmd *cmd)
 	else if (code == ENV)
 		get_shell()->exit_status = ft_env(cmd->args);
 	else if (code == EXPORT)
-	    get_shell()->exit_status = ft_export(cmd->args);
+		get_shell()->exit_status = ft_export(cmd->args);
 	else if (code == UNSET)
 		get_shell()->exit_status = ft_unset(&(get_shell()->env), cmd->args);
 	else if (code == EXIT)
