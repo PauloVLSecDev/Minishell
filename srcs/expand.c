@@ -6,39 +6,51 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:00:06 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/03 17:19:57 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/14 17:23:08 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*expand_var(char *arg, t_env *env)
+int verify_dollar_sign(char *arg, char **expanded)
 {
-	char	*expanded;
-	char	*temp;
-	int		i;
-	char	buffer[2];
+    t_env   *env;
+    int     i;
+    char    *temp;
 
-	(void)env;
+    env = get_shell()->env;
+    i = 0;
+    if (arg[i] == '$')
+    {
+        if (arg[i + 1] == ' ' || arg[i + 1] == '\0')
+            ft_putstr_fd("$", 1);
+        if (arg[i + 1] == '$' || arg[i + 1] == '?')
+        {
+            temp = which_expand(arg[i + 1]);
+            i += 2;
+        }
+        else
+            temp = expand_env(arg, &i, env);
+        *expanded = append_str(*expanded, temp);
+        free(temp);
+    }
+    return (i);
+}
+
+char *expand_var(char *arg)
+{
+    char	*expanded;
+    int		i;
+    char	buffer[2];
+    int		curr_i;
+
 	expanded = ft_strdup("");
 	i = 0;
 	while (arg[i])
 	{
-		if (arg[i] == '$')
-		{
-			// if (arg[i + 1] == ' ' || arg[i + 1] == '\0')
-			//{
-			//}
-			if (arg[i + 1] == '$' || arg[i + 1] == '?')
-			{
-				temp = which_expand(arg[i + 1]);
-				i = i + 2;
-			}
-			else
-				temp = expand_env(arg, &i, env);
-			expanded = append_str(expanded, temp);
-			free(temp);
-		}
+		curr_i = verify_dollar_sign(&arg[i], &expanded);
+		if (curr_i > 0)
+			i += curr_i;
 		else
 		{
 			buffer[0] = arg[i];

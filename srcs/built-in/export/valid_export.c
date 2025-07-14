@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 19:57:47 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/11 19:59:45 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/14 14:08:25 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	valid_export(char **args, int *i)
 	else
 	{
 		name = ft_strdup(arg);
-		value = ft_strdup("\"\"");
+		value = ft_strdup("\'\'");
 	}
 	if (error_identifier(name, value))
 		return ;

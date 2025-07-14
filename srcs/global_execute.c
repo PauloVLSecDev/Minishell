@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/08 14:41:11 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/14 16:28:28 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,12 @@ void	expand_all_args(t_cmd *cmd, t_env *env)
 {
 	int		i;
 	char	*expanded;
+	(void)env;
 
 	i = 0;
 	while (cmd->args[i])
 	{
-		expanded = expand_var(cmd->args[i], env);
+		expanded = expand_var(cmd->args[i]);
 		free(cmd->args[i]);
 		cmd->args[i] = expanded;
 		i++;
