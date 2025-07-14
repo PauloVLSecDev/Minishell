@@ -6,9 +6,15 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:17:14 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/14 14:17:35 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/14 18:57:19 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
+
+void	setup_signals(void)
+{
+	
+}
