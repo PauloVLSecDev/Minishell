@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/15 16:03:09 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/15 18:48:00 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	exec_builtin(int code, t_cmd *cmd)
 		perror("");
 		restaure_for_origin_fds(&backup);
 		get_shell()->exit_status = 1;
+		close_fds(&backup);
 		return (-1);
 	}
 	if (code == ECHO)

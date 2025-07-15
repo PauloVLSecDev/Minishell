@@ -6,10 +6,12 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/14 17:47:27 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:03:41 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
+
+static char	*access_valid(t_cmd *cmd, char **path);
 
 int	count_nodes(t_env *env)
 {
@@ -61,16 +63,7 @@ char	*join_path_with_cmd(char **path, t_cmd *cmd)
 	if (!path)
 		return (NULL);
 	if (ft_strchr(cmd->args[0], '/'))
-	{
-		if (access(cmd->args[0], X_OK) == 0)
-		{
-			free_all(path);
-			return (ft_strdup(cmd->args[0]));
-		}
-		if (path)
-			free_all(path);
-		return (NULL);
-	}
+		return (access_valid(cmd, path));
 	while (path[i] != NULL)
 	{
 		path_with_cmd = ft_join_three(path[i], "/", cmd->args[0]);
@@ -83,6 +76,18 @@ char	*join_path_with_cmd(char **path, t_cmd *cmd)
 		i++;
 	}
 	free_all(path);
+	return (NULL);
+}
+
+static char	*access_valid(t_cmd *cmd, char **path)
+{
+	if (access(cmd->args[0], X_OK) == 0)
+	{
+		free_all(path);
+		return (ft_strdup(cmd->args[0]));
+	}
+	if (path)
+		free_all(path);
 	return (NULL);
 }
 

@@ -40,7 +40,9 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		}
 		if (!check_quotes(input))
 		{
-			ft_printf("used "" or '' don't %s\n", input);
+			ft_printf("used "
+						" or '' don't %s\n",
+						input);
 			free(input);
 			continue ;
 		}

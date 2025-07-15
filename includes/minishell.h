@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/15 17:05:34 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:16:08 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int				count_nodes(t_env *env);
 // global_exection.c
 void			exec_all(t_cmd *cmd);
 void			exec_external(t_cmd *cmd, char **env, char **path);
-// int	exec_external(t_cmd *cmd, char **env, char **path);
 
 void			expand_all_args(t_cmd *cmd, t_env *env);
 
@@ -84,7 +83,7 @@ char			*expand_var(char *arg);
 char			*expand_env(char *arg, int *i, t_env *env);
 char			*which_expand(char c);
 char			*append_str(char *dest, const char *src);
-int 			verify_dollar_sign(char *arg, char **expanded);
+int				verify_dollar_sign(char *arg, char **expanded);
 
 // utils.c
 char			*ft_join_three(char *s1, char *s2, char *s3);
@@ -118,9 +117,8 @@ void			close_fds(t_fd_backup *backup);
 int				valid_metacharacteres(t_token *token);
 
 // SIGNALS.C
-void	setup_signals(void);
-void	on_sigint(int signum);
-void	on_sigquit(int signum);
-
+void			setup_signals(void);
+void			on_sigint(int signum);
+void			on_sigquit(int signum);
 
 #endif

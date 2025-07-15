@@ -12,22 +12,22 @@
 
 #include "minishell.h"
 
-void on_sigint(int signum)
+void	on_sigint(int signum)
 {
-    (void)signum;
-    rl_replace_line("", 0);
-    write(STDOUT_FILENO, "\n", 1);
-    rl_on_new_line();
-    rl_redisplay();
+	(void)signum;
+	rl_replace_line("", 0);
+	write(STDOUT_FILENO, "\n", 1);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
-void on_sigquit(int signum)
+void	on_sigquit(int signum)
 {
-    (void)signum;
+	(void)signum;
 }
 
-void setup_signals(void)
+void	setup_signals(void)
 {
-    signal(SIGINT, on_sigint);
-    signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, on_sigint);
+	signal(SIGQUIT, SIG_IGN);
 }

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
-	/*                                                        :::      ::::::::   */
-	/*   pipe.c                                             :+:      :+:    :+:   */
+/*                                                        :::      ::::::::   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:46:45 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/14 20:24:18 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/15 18:50:43 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	close_two(int *pipefd);
-
 static void	process_parrent(int *pipefd, int *prev_fd, int status, t_cmd *cmd);
+static void	dup_for_write_pipe(int *prev_fd);
 
 void	execute_pipeline(t_cmd *cmd)
 {
@@ -44,26 +44,21 @@ void	create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd)
 	if (pid == 0)
 	{
 		if (*prev_fd != STDIN_FILENO)
-		{
-			dup2(*prev_fd, STDIN_FILENO);
-			close(*prev_fd);
-		}
+			dup_for_write_pipe(prev_fd);
 		if (cmd->next != NULL)
 		{
 			dup2(pipefd[1], STDOUT_FILENO);
 			close_two(pipefd);
 		}
 		if (redir_actions(cmd))
-			exit(3);
+			exit(get_shell()->exit_status);
 		exec_all(cmd);
 		close_two(pipefd);
-		exit(1);
+		exit(get_shell()->exit_status);
 	}
 	else if (pid > 0)
-	{
 		process_parrent(pipefd, prev_fd, status, cmd);
-		waitpid(pid, &status, 0);
-	}
+	waitpid(pid, &status, 0);
 }
 
 static void	process_parrent(int *pipefd, int *prev_fd, int status, t_cmd *cmd)
@@ -75,6 +70,13 @@ static void	process_parrent(int *pipefd, int *prev_fd, int status, t_cmd *cmd)
 	*prev_fd = pipefd[0];
 	get_shell()->exit_status = WEXITSTATUS(status);
 	return ;
+}
+
+void	dup_for_write_pipe(int *prev_fd)
+{
+	if (dup2(*prev_fd, STDIN_FILENO) == -1)
+		printf("error in dup2 in trying write in pipe");
+	close(*prev_fd);
 }
 
 static void	close_two(int *pipefd)
