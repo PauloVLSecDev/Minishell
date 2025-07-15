@@ -14,7 +14,7 @@
 
 static void	close_two(int *pipefd);
 
-static void	process_parrent(int *pipefd, int *prev_fd, int status, t_cmd *cmd);
+static void	process_parent(int *pipefd, int *prev_fd, int status, t_cmd *cmd);
 
 void	execute_pipeline(t_cmd *cmd)
 {
@@ -61,12 +61,12 @@ void	create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd)
 	}
 	else if (pid > 0)
 	{
-		process_parrent(pipefd, prev_fd, status, cmd);
+		process_parent(pipefd, prev_fd, status, cmd);
 		waitpid(pid, &status, 0);
 	}
 }
 
-static void	process_parrent(int *pipefd, int *prev_fd, int status, t_cmd *cmd)
+static void	process_parent(int *pipefd, int *prev_fd, int status, t_cmd *cmd)
 {
 	if (*prev_fd != STDIN_FILENO)
 		close(*prev_fd);
