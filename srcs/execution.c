@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/13 22:10:14 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/14 17:47:27 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
@@ -100,8 +100,10 @@ char	**find_path(t_env *env)
 		current_node = current_node->next;
 	if (current_node == NULL)
 		return (NULL);
+	if (*current_node->name == '\0' || *current_node->content == '\0') 
+			return (NULL);
 	path = ft_split(current_node->content, ':');
-	if (!path)
+	if ((!path) || (!*path))
 		return (NULL);
 	return (path);
 }

@@ -1,12 +1,10 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*                                                                            */ /*                                                        :::      ::::::::   */ /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:46:45 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/11 20:05:23 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/14 20:24:18 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +20,7 @@ void	execute_pipeline(t_cmd *cmd)
 	int			prev_fd;
 	t_fd_backup	backup;
 
+	backup_fds(&backup);
 	prev_fd = STDIN_FILENO;
 	while (cmd != NULL)
 	{
@@ -33,6 +32,9 @@ void	execute_pipeline(t_cmd *cmd)
 	close_two(pipefd);
 	close(prev_fd);
 	restaure_for_origin_fds(&backup);
+	close(backup.std_infile);
+	close(backup.std_outfile);
+	close(backup.std_err);
 	return ;
 }
 

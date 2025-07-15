@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 15:29:22 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/12 19:20:04 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/14 20:15:52 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,15 @@ void	backup_fds(t_fd_backup *backup)
 	backup->std_infile = -1;
 	backup->std_outfile = -1;
 	backup->std_err = -1;
+
 	backup->std_infile = dup(STDIN_FILENO);
 	backup->std_outfile = dup(STDOUT_FILENO);
 	backup->std_err = dup(STDERR_FILENO);
+}
+
+void	close_fds(t_fd_backup *backup)
+{
+	close(backup->std_infile);
+	close(backup->std_outfile);
+	close(backup->std_err);
 }
