@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
+
 int	count_nodes(t_env *env)
 {
 	t_env	*new;
@@ -100,8 +101,8 @@ char	**find_path(t_env *env)
 		current_node = current_node->next;
 	if (current_node == NULL)
 		return (NULL);
-	if (*current_node->name == '\0' || *current_node->content == '\0') 
-			return (NULL);
+	if (*current_node->name == '\0' || *current_node->content == '\0')
+		return (NULL);
 	path = ft_split(current_node->content, ':');
 	if ((!path) || (!*path))
 		return (NULL);

@@ -1,5 +1,7 @@
 /* ************************************************************************** */
-/*                                                                            */ /*                                                        :::      ::::::::   */ /*   pipe.c                                             :+:      :+:    :+:   */
+/*                                                                            */
+	/*                                                        :::      ::::::::   */
+	/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,11 +18,9 @@ static void	process_parrent(int *pipefd, int *prev_fd, int status, t_cmd *cmd);
 
 void	execute_pipeline(t_cmd *cmd)
 {
-	int			pipefd[2];
-	int			prev_fd;
-	t_fd_backup	backup;
+	int	pipefd[2];
+	int	prev_fd;
 
-	backup_fds(&backup);
 	prev_fd = STDIN_FILENO;
 	while (cmd != NULL)
 	{
@@ -31,10 +31,6 @@ void	execute_pipeline(t_cmd *cmd)
 	}
 	close_two(pipefd);
 	close(prev_fd);
-	restaure_for_origin_fds(&backup);
-	close(backup.std_infile);
-	close(backup.std_outfile);
-	close(backup.std_err);
 	return ;
 }
 
