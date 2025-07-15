@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 17:54:27 by brunogue          #+#    #+#             */
-/*   Updated: 2025/06/25 17:55:06 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:30:01 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	ft_avoid_tokens(char *input, int *i)
 int	extract_redir_or_pipe(char *input, int *i, t_token **token,
 		t_token **current)
 {
-	int start;
-	char *value;
+	int		start;
+	char	*value;
 
 	if (input[*i] == '|' || input[*i] == '<' || input[*i] == '>')
 	{

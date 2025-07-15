@@ -37,7 +37,7 @@ int		exec_builtin(int codem, t_cmd *cmd);
 int		count_word(t_token *token);
 void	token_to_cmd(void);
 void	restore_and_close(t_fd_backup *backup);
-int	fds_error(t_fd_backup *backup, t_cmd *cmd);
+int		fds_error(t_fd_backup *backup, t_cmd *cmd);
 
 // FT_ECHO
 int		ft_echo(char **args);

@@ -12,37 +12,37 @@
 
 #include "minishell.h"
 
-int verify_dollar_sign(char *arg, char **expanded)
+int	verify_dollar_sign(char *arg, char **expanded)
 {
-    t_env   *env;
-    int     i;
-    char    *temp;
+	t_env	*env;
+	int		i;
+	char	*temp;
 
-    env = get_shell()->env;
-    i = 0;
-    if (arg[i] == '$')
-    {
-        if (arg[i + 1] == ' ' || arg[i + 1] == '\0')
-            ft_putstr_fd("$", 1);
-        if (arg[i + 1] == '$' || arg[i + 1] == '?')
-        {
-            temp = which_expand(arg[i + 1]);
-            i += 2;
-        }
-        else
-            temp = expand_env(arg, &i, env);
-        *expanded = append_str(*expanded, temp);
-        free(temp);
-    }
-    return (i);
+	env = get_shell()->env;
+	i = 0;
+	if (arg[i] == '$')
+	{
+		if (arg[i + 1] == ' ' || arg[i + 1] == '\0')
+			ft_putstr_fd("$", 1);
+		if (arg[i + 1] == '$' || arg[i + 1] == '?')
+		{
+			temp = which_expand(arg[i + 1]);
+			i += 2;
+		}
+		else
+			temp = expand_env(arg, &i, env);
+		*expanded = append_str(*expanded, temp);
+		free(temp);
+	}
+	return (i);
 }
 
-char *expand_var(char *arg)
+char	*expand_var(char *arg)
 {
-    char	*expanded;
-    int		i;
-    char	buffer[2];
-    int		curr_i;
+	char	*expanded;
+	int		i;
+	char	buffer[2];
+	int		curr_i;
 
 	expanded = ft_strdup("");
 	i = 0;

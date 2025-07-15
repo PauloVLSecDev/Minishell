@@ -71,8 +71,8 @@ void	expand_all_args(t_cmd *cmd, t_env *env)
 {
 	int		i;
 	char	*expanded;
-	(void)env;
 
+	(void)env;
 	i = 0;
 	while (cmd->args[i])
 	{
