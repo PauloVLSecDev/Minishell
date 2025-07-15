@@ -6,52 +6,53 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/15 15:45:26 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:16:39 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
-		char *envp[])
+static void	verify_input(char *input)
 {
-	t_env	*new_envp;
-	t_token	*current;
-	char	*input;
-
-	current = NULL;
-	new_envp = linked_node_env(envp);
-	init_shell(new_envp);
-	input = get_shell()->input;
-	setup_signals();
-	while (1)
-	{
-		input = readline("minishell> ");
 		if (!input)
 		{
 			printf("exit\n");
 			clean_exit(0);
-			break ;
 		}
-		if (!*input)
+		if (*input == '\0')
 		{
-			free(get_shell()->input);
-			continue ;
+			free(input);
 		}
 		if (!check_quotes(input))
 		{
-			ft_printf("used "" or '' don't %s\n", input);
+			ft_printf("used \"\" or '' don't %s\n", input);
 			free(input);
-			continue ;
 		}
+}
+
+int	main(__attribute__((unused)) int argc,
+		__attribute__((unused)) char *argv[],
+		char *envp[])
+{
+	t_env	*new_envp;
+	char	*input;
+
+	new_envp = linked_node_env(envp);
+	init_shell(new_envp);
+	setup_signals();
+
+	while (1)
+	{
+		input = readline("minishell> ");
+		verify_input(input);
 		add_history(input);
-		get_shell()->token = tokenization(get_shell()->token, input, current);
+		get_shell()->token = tokenization(get_shell()->token, input, NULL);
 		free(input);
 		if (valid_metacharacteres(get_shell()->token))
 		{
 			cleanup_iteration();
 			get_shell()->exit_status = 2;
-			continue ;
+			continue;
 		}
 		handle_command(get_shell()->token);
 		smart_execute(get_shell()->cmd);
