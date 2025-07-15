@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/14 17:01:28 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:15:50 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,11 @@ void			backup_fds(t_fd_backup *backup);
 
 // valid_all.c
 int				valid_metacharacteres(t_token *token);
+
+// SIGNALS.C
+void	setup_signals(void);
+void	on_sigint(int signum);
+void	on_sigquit(int signum);
+
 
 #endif
