@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/13 17:06:34 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/15 18:56:59 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		is_builtin(char **args);
 int		exec_builtin(int codem, t_cmd *cmd);
 int		count_word(t_token *token);
 void	token_to_cmd(void);
+void	restore_and_close(t_fd_backup *backup);
+int	fds_error(t_fd_backup *backup, t_cmd *cmd);
 
 // FT_ECHO
 int		ft_echo(char **args);
@@ -46,6 +48,7 @@ int		ft_pwd(void);
 
 // FT_CD
 int		ft_cd(char **args);
+int		verify_home(char *home);
 
 // FT_ENV
 int		ft_env(char **args);
