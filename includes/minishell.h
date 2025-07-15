@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/15 15:15:50 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/15 17:05:34 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int				redir_actions(t_cmd *cmd);
 int				valid_file(t_token *token);
 void			restaure_for_origin_fds(t_fd_backup *backup);
 void			backup_fds(t_fd_backup *backup);
+void			close_fds(t_fd_backup *backup);
 
 // valid_all.c
 int				valid_metacharacteres(t_token *token);
