@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/13 18:00:58 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/16 16:40:01 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,66 @@ int	redir_actions(t_cmd *cmd)
 
 int	process_redirect(t_cmd **cmd, t_token **token)
 {
-	if ((*token)->type == TOKEN_REDIR_IN && (*token)->next->type == TOKEN_WORD)
+	if ((*token)->type == TOKEN_REDIR_IN && (*token)->next && (*token)->next->type == TOKEN_WORD)
+	{
 		(*cmd)->infile = ft_strdup((*token)->next->value);
+		if (!(*cmd)->infile)
+			return (1);
+	}
 	else if ((*token)->type == TOKEN_REDIR_OUT && (*token)->next
 		&& (*token)->next->type == TOKEN_WORD)
 	{
 		if (valid_file(*token))
 			return (1);
 		(*cmd)->outfile = ft_strdup((*token)->next->value);
+		if (!(*cmd)->outfile)
+			return (1);
 	}
 	else if ((*token)->type == TOKEN_APPEND
-		&& (*token)->next->type == TOKEN_WORD)
+		&& (*token)->next && (*token)->next->type == TOKEN_WORD)
 	{
 		(*cmd)->append_mode = 1;
 		(*cmd)->outfile = ft_strdup((*token)->next->value);
+		if (!(*cmd)->outfile)
+			return (1);
 	}
-	return (0);
+		return (0);
 }
+
+// int process_redirect(t_cmd **cmd, t_token **token)
+// {
+//     if ((*token)->type == TOKEN_REDIR_IN
+//         && (*token)->next
+//         && (*token)->next->type == TOKEN_WORD)
+//     {
+//         free((*cmd)->infile);
+//         (*cmd)->infile = ft_strdup((*token)->next->value);
+//         if (!(*cmd)->infile)
+//             return (1);
+//     }
+//     else if ((*token)->type == TOKEN_REDIR_OUT
+//              && (*token)->next
+//              && (*token)->next->type == TOKEN_WORD)
+//     {
+//         if (valid_file(*token))
+//             return (1);
+//         free((*cmd)->outfile);
+//         (*cmd)->outfile = ft_strdup((*token)->next->value);
+//         if (!(*cmd)->outfile)
+//             return (1);
+//     }
+//     else if ((*token)->type == TOKEN_APPEND
+//              && (*token)->next
+//              && (*token)->next->type == TOKEN_WORD)
+//     {
+//         (*cmd)->append_mode = 1;
+//         free((*cmd)->outfile);
+//         (*cmd)->outfile = ft_strdup((*token)->next->value);
+//         if (!(*cmd)->outfile)
+//             return (1);
+//     }
+//     return (0);
+// }
 
 static int	ft_append(t_cmd *cmd)
 {

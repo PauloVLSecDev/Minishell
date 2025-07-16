@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/15 19:43:14 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/16 17:03:20 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,4 @@ void	init_shell(t_env *envp)
 	get_shell()->cmd = NULL;
 	get_shell()->token = NULL;
 	get_shell()->exit_status = 0;
-	get_shell()->input = NULL;
 }
