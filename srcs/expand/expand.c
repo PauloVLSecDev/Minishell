@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:00:06 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/14 17:23:08 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/16 14:21:03 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	verify_dollar_sign(char *arg, char **expanded)
 			ft_putstr_fd("$", 1);
 		if (arg[i + 1] == '$' || arg[i + 1] == '?')
 		{
+			if (arg[i + 1] == '$')
+				ft_putstr_fd("$$", 1);
 			temp = which_expand(arg[i + 1]);
 			i += 2;
 		}
@@ -64,8 +66,8 @@ char	*expand_var(char *arg)
 
 char	*which_expand(char c)
 {
-	if (c == '$')
-		return (ft_itoa(getpid()));
+	// if (c == '$')
+	// 	return (ft_itoa(getpid()));
 	if (c == '?')
 		return (ft_itoa(get_shell()->exit_status));
 	return (ft_strdup(""));
