@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/16 19:00:30 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/17 19:00:34 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_env
 {
 	char					*name;
 	char					*content;
-	int						exported;
 	struct s_env			*next;
 }							t_env;
 

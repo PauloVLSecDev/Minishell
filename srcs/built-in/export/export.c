@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 17:14:59 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/16 19:46:03 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/17 18:59:54 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	update_node(t_env *node, char *value)
 		free(node->content);
 		node->content = ft_strdup(value);
 	}
-	node->exported = 1;
 }
 
 void	add_env_node(char *name, char *value)
@@ -77,7 +76,6 @@ void	add_env_node(char *name, char *value)
 		new->content = ft_strdup(value);
 	else
 		new->content = NULL;
-	new->exported = 1;
 	new->next = NULL;
 	if (!last)
 	{

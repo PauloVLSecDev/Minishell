@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 19:57:47 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/17 14:25:40 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/17 18:48:00 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,44 +37,6 @@ void	valid_export(char **args, int *i)
 	free(name);
 	free(value);
 }
-
-// void valid_export(char **args, int *i)
-// {
-//     char    *arg     = args[*i];
-//     char    *equal   = ft_strchr(arg, '=');
-//     char    *name;
-//     char    *value;
-//     size_t  len;
-
-//     if (equal)
-// {
-//     name  = ft_substr(arg, 0, equal - arg);
-//     value = ft_strdup(equal + 1);
-
-//     /* —————— somente aqui remova aspas externas —————— */
-//     size_t len = ft_strlen(value);
-//     if (len >= 2 && (value[0] == '"' || value[0] == '\'')
-//         && value[len - 1] == value[0])
-//     {
-//         ft_memmove(value, value + 1, len - 2);
-//         value[len - 2] = '\0';
-//     }
-// }
-// else
-// {
-//     name  = ft_strdup(arg);
-//     value = NULL;
-// }
-
-
-//     if (error_identifier(name, value))
-//         return;
-//     correct_identifier(name, value);
-
-//     free(name);
-//     free(value);
-// }
-
 
 int	is_valid_identifier(char *name)
 {
