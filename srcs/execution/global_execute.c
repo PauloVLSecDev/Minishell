@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/14 16:28:28 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/16 19:02:34 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	exec_external(t_cmd *cmd, char **env, char **path)
 	abs_path = join_path_with_cmd(path, cmd);
 	if (!abs_path)
 	{
-		ft_putstr_fd("command not found\n", 1);
+		ft_putstr_fd("command not found\n", 2);
 		get_shell()->exit_status = 127;
 		free_env(get_shell()->env);
 		cleanup_iteration();

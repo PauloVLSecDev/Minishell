@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:05:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/15 19:18:32 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/16 19:02:10 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 	if (!path)
 	{
 		cleanup_iteration();
-		ft_printf("command not found\n");
+		perror("command not found\n");
 		get_shell()->exit_status = 1;
 		return ;
 	}

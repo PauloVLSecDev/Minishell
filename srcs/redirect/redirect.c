@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/13 18:00:58 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/16 19:30:19 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,30 @@ int	redir_actions(t_cmd *cmd)
 
 int	process_redirect(t_cmd **cmd, t_token **token)
 {
-	if ((*token)->type == TOKEN_REDIR_IN && (*token)->next->type == TOKEN_WORD)
-		(*cmd)->infile = ft_strdup((*token)->next->value);
-	else if ((*token)->type == TOKEN_REDIR_OUT && (*token)->next
-		&& (*token)->next->type == TOKEN_WORD)
+	char	*filename;
+	int		fd;
+
+	filename = (*token)->next->value;
+	if ((*token)->type == TOKEN_REDIR_OUT)
 	{
-		if (valid_file(*token))
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd < 0)
 			return (1);
-		(*cmd)->outfile = ft_strdup((*token)->next->value);
+		close(fd);
+		free((*cmd)->outfile);
+		(*cmd)->outfile = ft_strdup(filename);
 	}
-	else if ((*token)->type == TOKEN_APPEND
-		&& (*token)->next->type == TOKEN_WORD)
+	else if ((*token)->type == TOKEN_APPEND)
 	{
+		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (fd < 0)
+			return (1);
+		close(fd);
 		(*cmd)->append_mode = 1;
-		(*cmd)->outfile = ft_strdup((*token)->next->value);
+		(*cmd)->outfile = ft_strdup(filename);
 	}
+	else if ((*token)->type == TOKEN_REDIR_IN)
+		(*cmd)->infile = ft_strdup(filename);
 	return (0);
 }
 
