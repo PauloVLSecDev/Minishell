@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/17 17:14:45 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/18 14:52:05 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ void			smart_execute(t_cmd *cmd);
 void			exec_single_command(t_cmd *cmd, char **new_env, char **path);
 
 // redirect.c
-int				process_redirect(t_cmd **cmd, t_token **token);
+int				process_redirect(t_cmd **cmd, t_token **token, char *filename);
 int				redir_actions(t_cmd *cmd);
-int				valid_file(t_token *token);
+int				valid_file(char *filename, t_cmd **cmd);
 void			restaure_for_origin_fds(t_fd_backup *backup);
 void			backup_fds(t_fd_backup *backup);
 void			close_fds(t_fd_backup *backup);
