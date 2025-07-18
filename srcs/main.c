@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/17 20:52:48 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:45:12 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,14 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	{
 		input = readline("minishell> ");
 		if (!verify_input(input))
-			continue;
+				continue ;
 		add_history(input);
 		get_shell()->token = tokenization(get_shell()->token, input, NULL);
-		free(input);
+		if (!get_shell()->token)
+		{
+			cleanup_iteration();
+			continue ;
+		}
 		if (valid_metacharacteres(get_shell()->token))
 		{
 			cleanup_iteration();
@@ -72,7 +76,6 @@ t_shell	*get_shell(void)
 
 void	init_shell(t_env *envp)
 {
-	get_shell()->input = NULL;
 	get_shell()->env = envp;
 	get_shell()->cmd = NULL;
 	get_shell()->token = NULL;

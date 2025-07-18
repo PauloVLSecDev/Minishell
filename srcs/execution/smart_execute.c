@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:05:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/15 19:18:32 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:50:47 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 	path = find_path(get_shell()->env);
 	if (!path)
 	{
-		cleanup_iteration();
-		ft_printf("command not found\n");
+		ft_putstr_fd(cmd->args[0], 2);
+		ft_putstr_fd(" No such file or directory\n", 2);
 		get_shell()->exit_status = 1;
+		cleanup_iteration();
 		return ;
 	}
 	new_env = recreate_env(get_shell()->env);
@@ -65,10 +66,10 @@ static void	single_childrin_process(t_cmd *cmd, char **new_env, char **path)
 {
 	if (redir_actions(cmd))
 	{
+		perror("");
 		free_all(path);
 		free_env(get_shell()->env);
 		free_all(new_env);
-		perror("");
 		cleanup_iteration();
 		exit(2);
 	}

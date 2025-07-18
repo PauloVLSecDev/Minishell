@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/16 16:40:01 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/18 20:04:33 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	redir_actions(t_cmd *cmd)
 	if (cmd->infile)
 	{
 		fd_in = open(cmd->infile, O_RDONLY);
-		if (fd_in == -1)
+		if (fd_in < 0)
 			return (1);
 		dup2(fd_in, STDIN_FILENO);
 		close(fd_in);
@@ -30,7 +30,7 @@ int	redir_actions(t_cmd *cmd)
 	if (cmd->outfile && cmd->append_mode == 0)
 	{
 		fd_out = open(cmd->outfile, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		if (fd_out == -1)
+		if (fd_out < 0)
 			return (1);
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
@@ -43,68 +43,47 @@ int	redir_actions(t_cmd *cmd)
 	return (0);
 }
 
-int	process_redirect(t_cmd **cmd, t_token **token)
+int	process_redirect(t_cmd **cmd, t_token **token, char *filename)
 {
-	if ((*token)->type == TOKEN_REDIR_IN && (*token)->next && (*token)->next->type == TOKEN_WORD)
+	int		fd;
+
+	filename = (*token)->next->value;
+	if ((*token)->type == TOKEN_REDIR_OUT)
 	{
-		(*cmd)->infile = ft_strdup((*token)->next->value);
-		if (!(*cmd)->infile)
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd < 0)
+		{
+			free((*cmd)->outfile);
+			(*cmd)->outfile = ft_strdup(filename);
 			return (1);
+		}
+		close(fd);
+		if ((*cmd)->outfile)
+				free((*cmd)->outfile);
+		(*cmd)->outfile = ft_strdup(filename);
 	}
-	else if ((*token)->type == TOKEN_REDIR_OUT && (*token)->next
-		&& (*token)->next->type == TOKEN_WORD)
-	{
-		if (valid_file(*token))
-			return (1);
-		(*cmd)->outfile = ft_strdup((*token)->next->value);
-		if (!(*cmd)->outfile)
-			return (1);
-	}
-	else if ((*token)->type == TOKEN_APPEND
-		&& (*token)->next && (*token)->next->type == TOKEN_WORD)
+	else if ((*token)->type == TOKEN_APPEND)
 	{
 		(*cmd)->append_mode = 1;
-		(*cmd)->outfile = ft_strdup((*token)->next->value);
-		if (!(*cmd)->outfile)
+		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (fd < 0)
+		{
+			free((*cmd)->outfile);
+			(*cmd)->outfile = ft_strdup(filename);
+			return (1);
+		}
+		close(fd);
+		if ((*cmd)->outfile)
+			free((*cmd)->outfile);
+		(*cmd)->outfile = ft_strdup(filename);
+	}
+	else if ((*token)->type == TOKEN_REDIR_IN)
+	{
+		if (valid_file(filename, cmd))
 			return (1);
 	}
-		return (0);
+	return (0);
 }
-
-// int process_redirect(t_cmd **cmd, t_token **token)
-// {
-//     if ((*token)->type == TOKEN_REDIR_IN
-//         && (*token)->next
-//         && (*token)->next->type == TOKEN_WORD)
-//     {
-//         free((*cmd)->infile);
-//         (*cmd)->infile = ft_strdup((*token)->next->value);
-//         if (!(*cmd)->infile)
-//             return (1);
-//     }
-//     else if ((*token)->type == TOKEN_REDIR_OUT
-//              && (*token)->next
-//              && (*token)->next->type == TOKEN_WORD)
-//     {
-//         if (valid_file(*token))
-//             return (1);
-//         free((*cmd)->outfile);
-//         (*cmd)->outfile = ft_strdup((*token)->next->value);
-//         if (!(*cmd)->outfile)
-//             return (1);
-//     }
-//     else if ((*token)->type == TOKEN_APPEND
-//              && (*token)->next
-//              && (*token)->next->type == TOKEN_WORD)
-//     {
-//         (*cmd)->append_mode = 1;
-//         free((*cmd)->outfile);
-//         (*cmd)->outfile = ft_strdup((*token)->next->value);
-//         if (!(*cmd)->outfile)
-//             return (1);
-//     }
-//     return (0);
-// }
 
 static int	ft_append(t_cmd *cmd)
 {
@@ -120,15 +99,17 @@ static int	ft_append(t_cmd *cmd)
 	return (0);
 }
 
-int	valid_file(t_token *token)
+int	valid_file(char *filename, t_cmd **cmd)
 {
-	char	*file_name;
-
-	file_name = token->next->value;
-	if (token->type == TOKEN_REDIR_IN)
+	if (access(filename, R_OK) == -1)
 	{
-		if (access(file_name, R_OK) == -1)
-			return (1);
+		if ((*cmd)->infile)
+			free((*cmd)->infile);
+		(*cmd)->infile = ft_strdup(filename);
+		return (1);
 	}
+	if ((*cmd)->infile)
+		free((*cmd)->infile);
+	(*cmd)->infile = ft_strdup(filename);
 	return (0);
 }
