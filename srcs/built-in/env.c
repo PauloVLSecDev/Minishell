@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 18:04:16 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/04 19:00:23 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/18 18:40:23 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_env(char **args)
 {
 	char	**temp;
+	t_env	*node_env;
 	int		i;
 
 	i = 0;
@@ -24,11 +25,36 @@ int	ft_env(char **args)
 		return (127);
 	}
 	temp = recreate_env(get_shell()->env);
-	while (temp[i])
+	node_env = get_shell()->env;
+	while (node_env)
 	{
-		ft_printf("%s\n", temp[i]);
-		i++;
+		if (node_env->content)
+			ft_printf("%s=%s\n", node_env->name, node_env->content);
+		
+		node_env = node_env->next;
 	}
 	free_all(temp);
 	return (0);
 }
+
+// int ft_env(char **args)
+// {
+//     char **temp;
+//     int   i;
+
+//     if (args[1])
+//     {
+//         ft_printf("env: '%s': No such file or directory\n", args[1]);
+//         return (127);
+//     }
+//     temp = recreate_env(get_shell()->env);
+//     i = 0;
+//     while (temp[i])
+//     {
+//         if (ft_strchr(temp[i], '='))
+//             ft_printf("%s\n", temp[i]);
+//         i++;
+//     }
+//     free_all(temp);
+//     return (0);
+// }
