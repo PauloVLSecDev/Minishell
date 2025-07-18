@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:05:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/17 16:47:14 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:50:47 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ static void	single_childrin_process(t_cmd *cmd, char **new_env, char **path)
 {
 	if (redir_actions(cmd))
 	{
+		perror("");
 		free_all(path);
 		free_env(get_shell()->env);
 		free_all(new_env);
-		perror("");
 		cleanup_iteration();
 		exit(2);
 	}

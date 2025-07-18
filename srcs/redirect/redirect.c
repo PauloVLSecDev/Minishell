@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/17 18:29:49 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/18 20:04:33 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,35 @@ int	process_redirect(t_cmd **cmd, t_token **token, char *filename)
 	{
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd < 0)
+		{
+			free((*cmd)->outfile);
+			(*cmd)->outfile = ft_strdup(filename);
 			return (1);
+		}
 		close(fd);
-		free((*cmd)->outfile);
+		if ((*cmd)->outfile)
+				free((*cmd)->outfile);
 		(*cmd)->outfile = ft_strdup(filename);
 	}
 	else if ((*token)->type == TOKEN_APPEND)
 	{
+		(*cmd)->append_mode = 1;
 		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd < 0)
+		{
+			free((*cmd)->outfile);
+			(*cmd)->outfile = ft_strdup(filename);
 			return (1);
+		}
 		close(fd);
-		(*cmd)->append_mode = 1;
-		free((*cmd)->outfile);
+		if ((*cmd)->outfile)
+			free((*cmd)->outfile);
 		(*cmd)->outfile = ft_strdup(filename);
 	}
 	else if ((*token)->type == TOKEN_REDIR_IN)
 	{
 		if (valid_file(filename, cmd))
-				return (1);
+			return (1);
 	}
 	return (0);
 }
@@ -95,8 +105,11 @@ int	valid_file(char *filename, t_cmd **cmd)
 	{
 		if ((*cmd)->infile)
 			free((*cmd)->infile);
+		(*cmd)->infile = ft_strdup(filename);
 		return (1);
 	}
+	if ((*cmd)->infile)
+		free((*cmd)->infile);
 	(*cmd)->infile = ft_strdup(filename);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 17:14:59 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/14 19:25:54 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/17 18:59:54 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	_sort_env_array(char **array, size_t count)
+static void	sort_env_array(char **array, size_t count)
 {
 	size_t	i;
 	size_t	j;
@@ -43,7 +43,7 @@ void	print_export(void)
 	count = 0;
 	while (args[count])
 		count++;
-	_sort_env_array(args, count);
+	sort_env_array(args, count);
 	i = 0;
 	while (i < count)
 	{
@@ -60,7 +60,6 @@ void	update_node(t_env *node, char *value)
 		free(node->content);
 		node->content = ft_strdup(value);
 	}
-	node->exported = 1;
 }
 
 void	add_env_node(char *name, char *value)
@@ -77,7 +76,6 @@ void	add_env_node(char *name, char *value)
 		new->content = ft_strdup(value);
 	else
 		new->content = NULL;
-	new->exported = 1;
 	new->next = NULL;
 	if (!last)
 	{

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 19:57:47 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/14 14:08:25 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/17 18:48:00 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void	valid_export(char **args, int *i)
 {
-	char	*arg;
-	char	*equal;
 	char	*name;
 	char	*value;
+	char	*equal;
+	int		len;
 
-	arg = args[*i];
-	equal = ft_strchr(arg, '=');
+	equal = ft_strchr(args[*i], '=');
 	if (equal)
 	{
-		name = ft_substr(arg, 0, equal - arg);
+		len = equal - args[*i];
+		name = ft_substr(args[*i], 0, len);
 		value = ft_strdup(equal + 1);
 	}
 	else
 	{
-		name = ft_strdup(arg);
+		name = ft_strdup(args[*i]);
 		value = ft_strdup("\'\'");
 	}
 	if (error_identifier(name, value))

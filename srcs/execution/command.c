@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/17 18:25:14 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:49:44 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	process_all(t_cmd **cmd, t_token **token, int *i)
 		{
 			if (process_redirect(cmd, token, NULL))
 			{
-				get_shell()->exit_status = 1;
 				cleanup_iteration();
 				break ;
 			}

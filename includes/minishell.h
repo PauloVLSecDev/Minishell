@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/17 16:11:43 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/18 14:52:05 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-# define AVOID_TOKENS " \t\r\v\f"
+# define AVOID_TOKENS " \t\r\v\f\n"
 # define SPECIALS_CHARS "|><\"\'"
 # define QUOTE '\''
 # define DOUBLE_QUOTE '"'

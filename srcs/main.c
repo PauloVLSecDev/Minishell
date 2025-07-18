@@ -6,34 +6,31 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/17 17:29:06 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:45:12 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	verify_input(char *input)
+int verify_input(char *input)
 {
-	if (!input)
-	{
-		printf("exit\n");
-		clean_exit(0);
-		return (1);
-	}
-	if (*input == '\0')
-	{
-		free(input);
-		cleanup_iteration();
-		return (1);
-	}
-	if (!check_quotes(input))
-	{
-		ft_printf("used \"\" or '' don't %s\n", input);
-		cleanup_iteration();
-		free(input);
-		return (1);
-	}
-	return (0);
+    if (!input)
+    {
+        printf("exit\n");
+        clean_exit(0);
+    }
+    if (*input == '\0')
+    {
+        free(input);
+        return (0);
+    }
+    if (!check_quotes(input))
+    {
+        ft_printf("used \"\" or '' don't %s\n", input);
+        free(input);
+        return (0);
+    }
+    return (1);
 }
 
 int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
@@ -48,10 +45,9 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	while (1)
 	{
 		input = readline("minishell> ");
-		if (verify_input(input))
+		if (!verify_input(input))
 				continue ;
 		add_history(input);
-
 		get_shell()->token = tokenization(get_shell()->token, input, NULL);
 		if (!get_shell()->token)
 		{
@@ -84,5 +80,4 @@ void	init_shell(t_env *envp)
 	get_shell()->cmd = NULL;
 	get_shell()->token = NULL;
 	get_shell()->exit_status = 0;
-	get_shell()->input = NULL;
 }
