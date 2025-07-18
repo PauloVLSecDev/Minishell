@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 18:04:16 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/18 18:40:23 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:17:08 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,3 @@ int	ft_env(char **args)
 	free_all(temp);
 	return (0);
 }
-
-// int ft_env(char **args)
-// {
-//     char **temp;
-//     int   i;
-
-//     if (args[1])
-//     {
-//         ft_printf("env: '%s': No such file or directory\n", args[1]);
-//         return (127);
-//     }
-//     temp = recreate_env(get_shell()->env);
-//     i = 0;
-//     while (temp[i])
-//     {
-//         if (ft_strchr(temp[i], '='))
-//             ft_printf("%s\n", temp[i]);
-//         i++;
-//     }
-//     free_all(temp);
-//     return (0);
-// }
