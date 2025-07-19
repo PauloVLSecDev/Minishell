@@ -37,9 +37,8 @@ char	**recreate_env(t_env *env)
 	t_env	*curr_env;
 	char	*absolute_env_line;
 	int		i;
-	// char	*put_quotes;
 
-	
+	// char	*put_quotes;
 	i = 0;
 	absolute_env_line = NULL;
 	curr_env = env;
@@ -57,9 +56,10 @@ char	**recreate_env(t_env *env)
 		// else
 		// 	env_array[i] = ft_strdup(curr_env->name);
 		if (curr_env->content)
-    		env_array[i] = ft_join_three(curr_env->name, "=", curr_env->content);
+			env_array[i] = ft_join_three(curr_env->name, "=",
+					curr_env->content);
 		else
-    		env_array[i] = ft_strdup(curr_env->name);
+			env_array[i] = ft_strdup(curr_env->name);
 		curr_env = curr_env->next;
 		i++;
 	}

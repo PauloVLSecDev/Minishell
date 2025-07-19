@@ -65,7 +65,6 @@ typedef struct s_heredoc
 	struct s_token			*next;
 }							t_heredoc;
 
-
 typedef struct s_cmd
 {
 	char					**args;

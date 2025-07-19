@@ -57,69 +57,69 @@ t_token	*tokenization(t_token *token, char *input, t_token *current)
 	return (token);
 }
 
-static int is_space(char c)
+static int	is_space(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' ||
-			c == '\v' || c == '\f' || c == '\r');
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r');
 }
 
-int handle_quotes(char *input, int *i, t_token **token, t_token **current)
+int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
 {
-    int     start;
-    char    verify_quotes;
-    char    *value;
-    char    *joined;
+	int		start;
+	char	verify_quotes;
+	char	*value;
+	char	*joined;
 	int		quote_pos;
 
-    if (input[*i] != QUOTE && input[*i] != DOUBLE_QUOTE)
-        return (0);
-    verify_quotes = input[*i];
-    quote_pos = (*i)++;
-    start = *i;
-    while (input[*i] && input[*i] != verify_quotes)
-        (*i)++;
-    value = ft_substr(input, start, *i - start);
-    if (*current && quote_pos > 0 && !is_space(input[quote_pos - 1]))
-    {
-        joined = ft_strjoin((*current)->value, value);
-        free((*current)->value);
-        (*current)->value = joined;
-    }
-    else
-        append_token(token, current, value);
-    free(value);
-    if (input[*i] == verify_quotes)
-        (*i)++;
-    return (1);
+	if (input[*i] != QUOTE && input[*i] != DOUBLE_QUOTE)
+		return (0);
+	verify_quotes = input[*i];
+	quote_pos = (*i)++;
+	start = *i;
+	while (input[*i] && input[*i] != verify_quotes)
+		(*i)++;
+	value = ft_substr(input, start, *i - start);
+	if (*current && quote_pos > 0 && !is_space(input[quote_pos - 1]))
+	{
+		joined = ft_strjoin((*current)->value, value);
+		free((*current)->value);
+		(*current)->value = joined;
+	}
+	else
+		append_token(token, current, value);
+	free(value);
+	if (input[*i] == verify_quotes)
+		(*i)++;
+	return (1);
 }
 
 void	append_token(t_token **token, t_token **current, char *value)
 {
-    t_token *new;
+	t_token	*new;
 	int		should_concat;
-    char    *joined;
+	char	*joined;
 
 	should_concat = 0;
-    if (should_concat && *current)
-    {
-        joined = ft_strjoin((*current)->value, value);
-        free((*current)->value);
-        (*current)->value = joined;
-        return ;
-    }
-    new = malloc(sizeof(t_token));
-    if (!new)
-        return;
-    new->value = ft_strdup(value);
-    if (!new->value)
-        return;
-    new->type = find_token_type(value);
-    new->next = NULL;
-    if (*token == NULL)
-        *token = new;
-    else
-        (*current)->next = new;
-    *current = new;
+	if (should_concat && *current)
+	{
+		joined = ft_strjoin((*current)->value, value);
+		free((*current)->value);
+		(*current)->value = joined;
+		return ;
+	}
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return ;
+	new->value = ft_strdup(value);
+	if (!new->value)
+		return ;
+	new->type = find_token_type(value);
+	new->next = NULL;
+	if (*token == NULL)
+		*token = new;
+	else
+		(*current)->next = new;
+	*current = new;
 }
 
 void	ft_print_token(t_token *list)

@@ -28,27 +28,24 @@ void	process_heredoc(t_token *current, int i)
 	{
 		waitpid(pid, &status, 0);
 	}
-	
 }
 
 void	heredoc_manager(t_token *current, int fd_heredoc)
 {
 	char	*delimiter;
-	
+
 	delimiter = current->next->value;
 	// valid_quotes_heredoc(delimiter);
 	exec_heredoc(delimiter, fd_heredoc);
 	close(fd_heredoc);
-	exit (0);
-	
+	exit(0);
 }
-
 
 void	exec_heredoc(char *delimiter, int fd_heredoc)
 {
-	char *input;
-	(void)fd_heredoc;
+	char	*input;
 
+	(void)fd_heredoc;
 	while (1)
 	{
 		// signals_here()
@@ -59,13 +56,12 @@ void	exec_heredoc(char *delimiter, int fd_heredoc)
 		}
 		if (!ft_strcmp(input, delimiter))
 			break ;
-		
 	}
 }
 
 void	heredoc(t_token *token)
 {
-	t_token *current;
+	t_token	*current;
 	int		i;
 
 	i = 0;
