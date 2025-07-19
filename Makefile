@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/07/15 15:38:12 by brunogue         ###   ########.fr        #
+#    Updated: 2025/07/19 17:08:20 by pvitor-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ INCLUDES = -I$(INCLUDES_DIR)
 FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/free.c \
 		$(SRC_DIR)/parser/parser.c \
+		$(SRC_DIR)/parser/parse_utils.c \
 		$(SRC_DIR)/token/token.c \
 		$(SRC_DIR)/token/token_utils.c \
 		$(SRC_DIR)/built-in/exec_builtin.c \
