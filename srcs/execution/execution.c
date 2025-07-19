@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/18 18:56:37 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/18 21:09:58 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**recreate_env(t_env *env)
 	t_env	*curr_env;
 	char	*absolute_env_line;
 	int		i;
-	char	*put_quotes;
+	// char	*put_quotes;
 
 	
 	i = 0;
@@ -48,14 +48,18 @@ char	**recreate_env(t_env *env)
 		return (NULL);
 	while (curr_env != NULL)
 	{
+		// if (curr_env->content)
+		// {
+		// 	put_quotes = ft_join_three("\"", curr_env->content, "\"");
+		// 	env_array[i] = ft_join_three(curr_env->name, "=", put_quotes);
+		// 	free(put_quotes);
+		// }
+		// else
+		// 	env_array[i] = ft_strdup(curr_env->name);
 		if (curr_env->content)
-		{
-			put_quotes = ft_join_three("\"", curr_env->content, "\"");
-			env_array[i] = ft_join_three(curr_env->name, "=", put_quotes);
-			free(put_quotes);
-		}
+    		env_array[i] = ft_join_three(curr_env->name, "=", curr_env->content);
 		else
-			env_array[i] = ft_strdup(curr_env->name);
+    		env_array[i] = ft_strdup(curr_env->name);
 		curr_env = curr_env->next;
 		i++;
 	}
