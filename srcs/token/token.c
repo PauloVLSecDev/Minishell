@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/17 17:41:25 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/18 21:48:46 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,66 +57,29 @@ t_token	*tokenization(t_token *token, char *input, t_token *current)
 	return (token);
 }
 
-// int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
-// {
-// 	int		start;
-// 	int		verify_quotes;
-// 	char	*value;
-
-// 	value = NULL;
-// 	if (input[*i] != QUOTE && input[*i] != DOUBLE_QUOTE)
-// 		return (0);
-// 	verify_quotes = input[*i];
-// 	start = ++(*i);
-// 	while (input[*i] != verify_quotes && input[*i] != '\0')
-// 		(*i)++;
-// 	value = ft_substr(input, start, *i - start);
-// 	append_token(token, current, value);
-// 	free(value);
-// 	if (input[*i] == verify_quotes)
-// 		(*i)++;
-// 	return (1);
-// }
-
-// void	append_token(t_token **token, t_token **current, char *value)
-// {
-// 	t_token	*new;
-
-// 	new = malloc(sizeof(t_token));
-// 	if (!new)
-// 		return ;
-// 	new->value = ft_strdup(value);
-// 	if (!new->value)
-// 		return ;
-// 	new->type = find_token_type(value);
-// 	new->next = NULL;
-// 	if (*token == NULL)
-// 		*token = new;
-// 	else
-// 		(*current)->next = new;
-// 	*current = new;
-// }
-
 static int is_space(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n' ||
 			c == '\v' || c == '\f' || c == '\r');
 }
+
 int handle_quotes(char *input, int *i, t_token **token, t_token **current)
 {
     int     start;
     char    verify_quotes;
     char    *value;
     char    *joined;
+	int		quote_pos;
 
     if (input[*i] != QUOTE && input[*i] != DOUBLE_QUOTE)
         return (0);
     verify_quotes = input[*i];
-    start = ++(*i);
+    quote_pos = (*i)++;
+    start = *i;
     while (input[*i] && input[*i] != verify_quotes)
         (*i)++;
     value = ft_substr(input, start, *i - start);
-    if (*current && start > 1 && !is_space(input[start - 1]))
+    if (*current && quote_pos > 0 && !is_space(input[quote_pos - 1]))
     {
         joined = ft_strjoin((*current)->value, value);
         free((*current)->value);
