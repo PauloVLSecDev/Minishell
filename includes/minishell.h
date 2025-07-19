@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/18 14:52:05 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/19 19:24:02 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include "../libft/libft.h"
 # include "struct.h"
 # include "builtin.h"
-# include "parser.h"
-# include "token.h"
 // LIBS
 # include <fcntl.h>
 # include <readline/history.h>
@@ -120,5 +118,11 @@ int				valid_metacharacteres(t_token *token);
 void			setup_signals(void);
 void			on_sigint(int signum);
 void			on_sigquit(int signum);
+
+// HEREDOC.C
+void	process_heredoc(t_token *current, int i);
+void	heredoc_manager(t_token *current, int fd_heredoc);
+void	exec_heredoc(char *delimiter, int ft_heredoc);
+void	heredoc(t_token *token);
 
 #endif
