@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/19 18:44:22 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/19 22:25:48 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	handle_command(t_token *token)
 		return ;
 	head = curr_cmd;
 	process_all(&curr_cmd, &curr_token, &i);
+	if (curr_token->type == TOKEN_HEREDOC)
+			heredoc(token);
+	curr_cmd->infile = heredoc(token);	
 	get_shell()->cmd = head;
 }
 
