@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/18 21:48:46 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/19 21:34:31 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,17 @@ int handle_quotes(char *input, int *i, t_token **token, t_token **current)
 void	append_token(t_token **token, t_token **current, char *value)
 {
     t_token *new;
-	int		should_concat;
-    char    *joined;
+	// int		should_concat;
+    // char    *joined;
 
-	should_concat = 0;
-    if (should_concat && *current)
-    {
-        joined = ft_strjoin((*current)->value, value);
-        free((*current)->value);
-        (*current)->value = joined;
-        return ;
-    }
+	// should_concat = 0;
+    // if (should_concat && *current)
+    // {
+    //     joined = ft_strjoin((*current)->value, value);
+    //     free((*current)->value);
+    //     (*current)->value = joined;
+    //     return ;
+    // }
     new = malloc(sizeof(t_token));
     if (!new)
         return;

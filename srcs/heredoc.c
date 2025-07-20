@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/19 20:09:36 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/19 22:06:05 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,35 @@ void	process_heredoc(t_token *current, int i)
 	{
 		waitpid(pid, &status, 0);
 	}
-	
+}
+
+int	valid_quotes_heredoc(char *delimiter)
+{
+	int	i;
+
+	i = 0;
+	while (delimiter[i])
+	{
+		if (delimiter[i] == DOUBLE_QUOTE || delimiter[i] == QUOTE)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 void	heredoc_manager(t_token *current, int fd_heredoc)
 {
 	char	*delimiter;
-	
+	int		quotes;
+
 	delimiter = current->next->value;
-	// valid_quotes_heredoc(delimiter);
-	exec_heredoc(delimiter, fd_heredoc);
+	quotes = valid_quotes_heredoc(delimiter);
+	exec_heredoc(delimiter, quotes, fd_heredoc);
 	close(fd_heredoc);
 	exit (0);
-	
 }
 
-
-void	exec_heredoc(char *delimiter, int fd_heredoc)
+void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 {
 	char *input;
 	(void)fd_heredoc;
@@ -59,7 +71,8 @@ void	exec_heredoc(char *delimiter, int fd_heredoc)
 		}
 		if (!ft_strcmp(input, delimiter))
 			break ;
-		
+		if (!quotes)
+			input = expand_var(input);
 	}
 }
 
@@ -76,7 +89,7 @@ void	heredoc(t_token *token)
 		{
 			process_heredoc(current, i);
 		}
-		current = current->next;
 		i++;
+		current = current->next;
 	}
 }
