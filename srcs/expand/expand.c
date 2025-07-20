@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:00:06 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/16 14:21:03 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/20 16:37:50 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char	*append_str(char *dest, const char *src)
 	char	*temp;
 
 	temp = ft_strjoin(dest, src);
+	if (!temp)
+		return (NULL);
 	free(dest);
 	return (temp);
 }

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/18 20:04:33 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/20 16:35:38 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	redir_actions(t_cmd *cmd)
 
 int	process_redirect(t_cmd **cmd, t_token **token, char *filename)
 {
-	int	fd;
+	int		fd;
 
 	filename = (*token)->next->value;
 	if ((*token)->type == TOKEN_REDIR_OUT)

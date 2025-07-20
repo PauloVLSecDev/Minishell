@@ -6,13 +6,13 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/19 22:07:43 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/20 16:38:08 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	process_heredoc(t_token *current, int i)
+void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 {
 	char	*filename;
 	int		fd_heredoc;
@@ -21,6 +21,7 @@ void	process_heredoc(t_token *current, int i)
 
 	filename = ft_strjoin("/tmp/heredoc", ft_itoa(i));
 	fd_heredoc = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	(*cmd)->infile = ft_strdup(filename);
 	pid = fork();
 	if (pid == 0)
 		heredoc_manager(current, fd_heredoc);
@@ -28,6 +29,7 @@ void	process_heredoc(t_token *current, int i)
 	{
 		waitpid(pid, &status, 0);
 	}
+	free(filename);
 }
 
 int	valid_quotes_heredoc(char *delimiter)
@@ -47,11 +49,12 @@ int	valid_quotes_heredoc(char *delimiter)
 void	heredoc_manager(t_token *current, int fd_heredoc)
 {
 	char	*delimiter;
-	int		quotes;
+	int		quotes = 0;
 
 	delimiter = current->next->value;
-	quotes = valid_quotes_heredoc(delimiter);
+	// quotes = valid_quotes_heredoc(delimiter);
 	exec_heredoc(delimiter, quotes, fd_heredoc);
+	free(delimiter);
 	close(fd_heredoc);
 	exit (0);
 }
@@ -59,7 +62,6 @@ void	heredoc_manager(t_token *current, int fd_heredoc)
 void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 {
 	char	*input;
-
 	(void)fd_heredoc;
 	while (1)
 	{
@@ -73,23 +75,16 @@ void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 			break ;
 		if (!quotes)
 			input = expand_var(input);
+		// ft_putendl_fd(input, fd_heredoc);
+		// free(input);
 	}
 }
 
-void	heredoc(t_token *token)
+int heredoc_counter(void)
 {
-	t_token	*current;
-	int		i;
-
-	i = 0;
-	current = token;
-	while (current)
-	{
-		if (current->type == TOKEN_HEREDOC && current->next->type == TOKEN_WORD)
-		{
-			process_heredoc(current, i);
-		}
-		i++;
-		current = current->next;
-	}
+    int counter;
+	
+	counter = 0;
+    counter++;
+    return (counter);
 }

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/19 18:44:22 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/20 16:13:54 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ t_cmd	*create_cmd_node(t_token *token)
 
 void	process_all(t_cmd **cmd, t_token **token, int *i)
 {
+	int		hd_counter;
+
+	hd_counter = -1;
 	while (*token)
 	{
 		if ((*token)->type == TOKEN_WORD)
@@ -64,8 +67,8 @@ void	process_all(t_cmd **cmd, t_token **token, int *i)
 			if (*token && (*token)->next)
 				*token = (*token)->next;
 		}
-		else
-			break ;
+		else if ((*token)->type == TOKEN_HEREDOC)
+			process_heredoc(*token, ++hd_counter, cmd);
 		*token = (*token)->next;
 	}
 }
