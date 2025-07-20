@@ -22,7 +22,7 @@ void	exec_all(t_cmd *cmd)
 	path = NULL;
 	if (!cmd)
 		return ;
-	expand_all_args(cmd, get_shell()->env);
+	expand_all_args(cmd);
 	isbuiltin = is_builtin(cmd->args);
 	if (isbuiltin != -1)
 	{
@@ -69,12 +69,11 @@ void	exec_external(t_cmd *cmd, char **env, char **path)
 	free(abs_path);
 }
 
-void	expand_all_args(t_cmd *cmd, t_env *env)
+void	expand_all_args(t_cmd *cmd)
 {
 	int		i;
 	char	*expanded;
 
-	(void)env;
 	i = 0;
 	while (cmd->args[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/20 16:38:08 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/20 19:22:37 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,22 @@ void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 	int		fd_heredoc;
 	int		status;
 	pid_t	pid;
+	char *pos_fix;
 
-	filename = ft_strjoin("/tmp/heredoc", ft_itoa(i));
+	pos_fix = ft_itoa(i);
+	filename = ft_strjoin("/tmp/heredoc", pos_fix);
 	fd_heredoc = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	(*cmd)->infile = ft_strdup(filename);
+	free(filename);
+	free(pos_fix);
 	pid = fork();
 	if (pid == 0)
 		heredoc_manager(current, fd_heredoc);
 	if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
+		close(fd_heredoc);
 	}
-	free(filename);
 }
 
 int	valid_quotes_heredoc(char *delimiter)
@@ -51,18 +55,24 @@ void	heredoc_manager(t_token *current, int fd_heredoc)
 	char	*delimiter;
 	int		quotes = 0;
 
-	delimiter = current->next->value;
+	delimiter = ft_strdup(current->next->value);
+	if (!delimiter)
+	{
+		close(fd_heredoc);
+		exit(1);
+	}
 	// quotes = valid_quotes_heredoc(delimiter);
 	exec_heredoc(delimiter, quotes, fd_heredoc);
 	free(delimiter);
 	close(fd_heredoc);
+	cleanup_iteration();
+	free_env(get_shell()->env);
 	exit (0);
 }
 
 void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 {
 	char	*input;
-	(void)fd_heredoc;
 	while (1)
 	{
 		// signals_here()
@@ -75,16 +85,8 @@ void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 			break ;
 		if (!quotes)
 			input = expand_var(input);
-		// ft_putendl_fd(input, fd_heredoc);
-		// free(input);
+		ft_putendl_fd(input, fd_heredoc);
+		free(input);
 	}
 }
 
-int heredoc_counter(void)
-{
-    int counter;
-	
-	counter = 0;
-    counter++;
-    return (counter);
-}

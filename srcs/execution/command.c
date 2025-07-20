@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/20 16:13:54 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/20 19:01:08 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ t_cmd	*create_cmd_node(t_token *token)
 	if (!new_cmd)
 		return (NULL);
 	new_cmd->args = (char **)ft_calloc((count_word(token) + 1),
-			(sizeof(char *)));
+	(sizeof(char *)));
+//	new_cmd->args = (char **)malloc((count_word(token) + 1) * sizeof(char *));
 	if (!new_cmd->args)
 		return (NULL);
 	new_cmd->infile = NULL;
 	new_cmd->outfile = NULL;
 	new_cmd->next = NULL;
 	new_cmd->append_mode = 0;
+	new_cmd->args[count_word(token) + 1] = NULL;
 	return (new_cmd);
 }
 
@@ -54,7 +56,16 @@ void	process_all(t_cmd **cmd, t_token **token, int *i)
 	hd_counter = -1;
 	while (*token)
 	{
-		if ((*token)->type == TOKEN_WORD)
+		if ((*token)->type == TOKEN_HEREDOC)
+		{
+			process_heredoc(*token, ++hd_counter, cmd);
+			if ((*token)->next)
+				*token = (*token)->next;
+			if (*token)
+				*token = (*token)->next;
+			continue ;
+		}
+		else if ((*token)->type == TOKEN_WORD)
 			process_word(cmd, token, i);
 		else if ((*token)->type == TOKEN_PIPE)
 			process_pipe(cmd, token, i);
@@ -67,8 +78,6 @@ void	process_all(t_cmd **cmd, t_token **token, int *i)
 			if (*token && (*token)->next)
 				*token = (*token)->next;
 		}
-		else if ((*token)->type == TOKEN_HEREDOC)
-			process_heredoc(*token, ++hd_counter, cmd);
 		*token = (*token)->next;
 	}
 }

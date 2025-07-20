@@ -74,7 +74,7 @@ int				count_nodes(t_env *env);
 void			exec_all(t_cmd *cmd);
 void			exec_external(t_cmd *cmd, char **env, char **path);
 
-void			expand_all_args(t_cmd *cmd, t_env *env);
+void			expand_all_args(t_cmd *cmd);
 
 // expand.c
 char			*expand_var(char *arg);
