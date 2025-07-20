@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/22 17:42:21 by brunogue          #+#    #+#             */
-/*   Updated: 2025/05/22 17:43:32 by brunogue         ###   ########.fr       */
+/*   Created: 2025/07/19 21:16:38 by pvitor-l          #+#    #+#             */
+/*   Updated: 2025/07/19 21:21:45 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "minishell.h"
 
-#endif
+void	close_all(void)
+{
+	int i;
+
+	i = 3;
+	while (i <= 1024)
+	{
+		close(i);
+		i++;
+	}
+}

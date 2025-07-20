@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:46:45 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/15 19:24:17 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/19 21:31:30 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd)
 		if (redir_actions(cmd))
 			exit(get_shell()->exit_status);
 		exec_all(cmd);
+		free_env(get_shell()->env);
+		cleanup_iteration();
 		close_two(pipefd);
 		exit(get_shell()->exit_status);
 	}

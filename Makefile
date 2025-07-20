@@ -3,10 +3,8 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/07/19 17:08:20 by pvitor-l         ###   ########.fr        #
+#    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         # +#+#+#+#+#+   +#+            # Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
+#    Updated: 2025/07/19 20:59:07 by pvitor-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +46,9 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/redirect/redirect.c \
 		$(SRC_DIR)/redirect/redirect_utils.c \
 		$(SRC_DIR)/expand/expand.c \
-		$(SRC_DIR)/signals.c
-		
+		$(SRC_DIR)/signals.c \
+		$(SRC_DIR)/heredoc.c \
+		$(SRC_DIR)/heredoc_utils.c \
 
 VALGRIND = valgrind --leak-check=full \
 	--show-leak-kinds=all \
