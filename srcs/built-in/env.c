@@ -30,7 +30,7 @@
 // 	{
 // 		if (node_env->content)
 // 			ft_printf("%s=%s\n", node_env->name, node_env->content);
-		
+
 // 		node_env = node_env->next;
 // 	}
 // 	free_all(temp);
@@ -55,7 +55,6 @@ int	ft_env(char **args)
 	{
 		if (node_env->content)
 			ft_printf("%s=%s\n", node_env->name, node_env->content);
-		
 		node_env = node_env->next;
 	}
 	free_all(temp);

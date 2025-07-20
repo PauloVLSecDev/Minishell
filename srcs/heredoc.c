@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/19 22:06:05 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/19 22:07:43 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	heredoc_manager(t_token *current, int fd_heredoc)
 
 void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 {
-	char *input;
-	(void)fd_heredoc;
+	char	*input;
 
+	(void)fd_heredoc;
 	while (1)
 	{
 		// signals_here()
@@ -78,7 +78,7 @@ void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 
 void	heredoc(t_token *token)
 {
-	t_token *current;
+	t_token	*current;
 	int		i;
 
 	i = 0;

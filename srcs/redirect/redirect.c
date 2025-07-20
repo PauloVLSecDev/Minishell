@@ -45,7 +45,7 @@ int	redir_actions(t_cmd *cmd)
 
 int	process_redirect(t_cmd **cmd, t_token **token, char *filename)
 {
-	int		fd;
+	int	fd;
 
 	filename = (*token)->next->value;
 	if ((*token)->type == TOKEN_REDIR_OUT)
@@ -59,7 +59,7 @@ int	process_redirect(t_cmd **cmd, t_token **token, char *filename)
 		}
 		close(fd);
 		if ((*cmd)->outfile)
-				free((*cmd)->outfile);
+			free((*cmd)->outfile);
 		(*cmd)->outfile = ft_strdup(filename);
 	}
 	else if ((*token)->type == TOKEN_APPEND)

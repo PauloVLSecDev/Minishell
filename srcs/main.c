@@ -12,25 +12,25 @@
 
 #include "minishell.h"
 
-int verify_input(char *input)
+int	verify_input(char *input)
 {
-    if (!input)
-    {
-        printf("exit\n");
-        clean_exit(0);
-    }
-    if (*input == '\0')
-    {
-        free(input);
-        return (0);
-    }
-    if (!check_quotes(input))
-    {
-        ft_printf("used \"\" or '' don't %s\n", input);
-        free(input);
-        return (0);
-    }
-    return (1);
+	if (!input)
+	{
+		printf("exit\n");
+		clean_exit(0);
+	}
+	if (*input == '\0')
+	{
+		free(input);
+		return (0);
+	}
+	if (!check_quotes(input))
+	{
+		ft_printf("used \"\" or '' don't %s\n", input);
+		free(input);
+		return (0);
+	}
+	return (1);
 }
 
 int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
@@ -46,7 +46,7 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	{
 		input = readline("minishell> ");
 		if (!verify_input(input))
-				continue ;
+			continue ;
 		add_history(input);
 		get_shell()->token = tokenization(get_shell()->token, input, NULL);
 		if (!get_shell()->token)
