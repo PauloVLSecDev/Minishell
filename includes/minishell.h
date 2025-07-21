@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/20 21:21:04 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:19:08 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int				valid_pipe(t_token *list);
 int				valid_heredoc(t_token *list);
 int				valid_redir_out(t_token *list);
 int				valid_redir_in(t_token *list);
+int				valid_append(t_token *token);
 
 // free.c
 void			free_token_list(t_token *head);
@@ -124,6 +125,6 @@ void	process_heredoc(t_token *current, int i, t_cmd **cmd);
 void			heredoc_manager(t_token *current, int fd_heredoc);
 void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc);
 void			heredoc(t_token *token);
-int				heredoc_counter(void);
+void			close_all(void);
 
 #endif

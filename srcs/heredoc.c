@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/20 21:38:51 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/21 18:03:27 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	valid_quotes_heredoc(char *delimiter)
 	i = 0;
 	while (delimiter[i])
 	{
-		if (delimiter[i] == DOUBLE_QUOTE || delimiter[i] == QUOTE)
+		if (delimiter[i] == '\"' || delimiter[i] == '\'')
 			return (1);
 		i++;
 	}
@@ -53,20 +53,21 @@ int	valid_quotes_heredoc(char *delimiter)
 void	heredoc_manager(t_token *current, int fd_heredoc)
 {
 	char	*delimiter;
-	int		quotes = 0;
+	int		quotes;
 
+	// delimiter = current->next->value;
 	delimiter = ft_strdup(current->next->value);
+	quotes = valid_quotes_heredoc(delimiter);
 	if (!delimiter)
 	{
 		close(fd_heredoc);
 		exit(1);
 	}
-	// quotes = valid_quotes_heredoc(delimiter);
 	exec_heredoc(delimiter, quotes, fd_heredoc);
 	free(delimiter);
 	close(fd_heredoc);
-	cleanup_iteration();
 	free_env(get_shell()->env);
+	cleanup_iteration();
 	exit (0);
 }
 
@@ -78,15 +79,12 @@ void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 		// signals_here()
 		input = readline("> ");
 		if (!input)
-		{
 			break ;
-		}
 		if (!ft_strcmp(input, delimiter))
 			break ;
-		if (!quotes)
+		if (quotes == 0)
 			input = expand_var(input);
 		ft_putendl_fd(input, fd_heredoc);
 		free(input);
 	}
 }
-

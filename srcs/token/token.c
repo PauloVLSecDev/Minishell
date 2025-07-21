@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/19 22:10:19 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:21:33 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,14 @@ t_token	*tokenization(t_token *token, char *input, t_token *current)
 			continue ;
 		if (extract_redir_or_pipe(input, &i, &token, &current))
 			continue ;
-		if (handle_quotes(input, &i, &token, &current))
-			continue ;
+		if (current && current->type != TOKEN_HEREDOC)
+		{
+			if (handle_quotes(input, &i, &token, &current))
+				continue ;
+		}
 		start = i;
-		while (input[i] && !ft_strchr(AVOID_TOKENS, input[i])
-			&& !ft_strchr(SPECIALS_CHARS, input[i]))
+		while ((input[i] && !ft_strchr(AVOID_TOKENS, input[i])
+			&& !ft_strchr(SPECIALS_CHARS, input[i])) || (input[i] && current && current->type == TOKEN_HEREDOC))
 			i++;
 		if (i > start)
 		{
@@ -106,9 +109,15 @@ void	append_token(t_token **token, t_token **current, char *value)
     new->type = find_token_type(value);
     new->next = NULL;
     if (*token == NULL)
+	{
+		// new->prev = NULL;
         *token = new;
+	}
     else
+	{
+		// new->prev = *current;
         (*current)->next = new;
+	}
     *current = new;
 }
 
