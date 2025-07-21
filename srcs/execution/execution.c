@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:23:24 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/19 21:15:45 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:46:52 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	**recreate_env(t_env *env)
 	char	*absolute_env_line;
 	int		i;
 
-	// char	*put_quotes;
 	i = 0;
 	absolute_env_line = NULL;
 	curr_env = env;
@@ -47,14 +46,6 @@ char	**recreate_env(t_env *env)
 		return (NULL);
 	while (curr_env != NULL)
 	{
-		// if (curr_env->content)
-		// {
-		// 	put_quotes = ft_join_three("\"", curr_env->content, "\"");
-		// 	env_array[i] = ft_join_three(curr_env->name, "=", put_quotes);
-		// 	free(put_quotes);
-		// }
-		// else
-		// 	env_array[i] = ft_strdup(curr_env->name);
 		if (curr_env->content)
 			env_array[i] = ft_join_three(curr_env->name, "=",
 					curr_env->content);

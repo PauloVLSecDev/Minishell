@@ -18,7 +18,7 @@ void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 	int		fd_heredoc;
 	int		status;
 	pid_t	pid;
-	char *pos_fix;
+	char	*pos_fix;
 
 	pos_fix = ft_itoa(i);
 	filename = ft_strjoin("/tmp/heredoc", pos_fix);
@@ -68,12 +68,13 @@ void	heredoc_manager(t_token *current, int fd_heredoc)
 	close(fd_heredoc);
 	free_env(get_shell()->env);
 	cleanup_iteration();
-	exit (0);
+	exit(0);
 }
 
 void	exec_heredoc(char *delimiter, int fd_heredoc)
 {
 	char	*input;
+
 	while (1)
 	{
 		// signals_here()
@@ -84,8 +85,8 @@ void	exec_heredoc(char *delimiter, int fd_heredoc)
 		}
 		if (!ft_strcmp(input, delimiter))
 			break ;
-	//	if (!quotes)
-	//	input = expand_var(input);
+		//	if (!quotes)
+		//	input = expand_var(input);
 		ft_putendl_fd(input, fd_heredoc);
 		free(input);
 	}
