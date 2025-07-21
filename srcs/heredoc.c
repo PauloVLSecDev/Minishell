@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/20 21:29:17 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/20 21:42:12 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@ void	heredoc_manager(t_token *current, int fd_heredoc)
 
 	delimiter = current->next->value;
 	// valid_quotes_heredoc(delimiter);
-	exec_heredoc(delimiter, fd_heredoc);
-	close_all();
-	exit(0);
 	delimiter = ft_strdup(current->next->value);
 	if (!delimiter)
 	{
