@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/20 19:01:08 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/21 15:40:38 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ t_cmd	*create_cmd_node(t_token *token)
 	new_cmd = malloc(sizeof(t_cmd));
 	if (!new_cmd)
 		return (NULL);
-	new_cmd->args = (char **)ft_calloc((count_word(token) + 1),
+	new_cmd->args = ft_calloc((count_word(token) + 1),
 	(sizeof(char *)));
-//	new_cmd->args = (char **)malloc((count_word(token) + 1) * sizeof(char *));
+	//	new_cmd->args = (char **)malloc((count_word(token) + 1) * sizeof(char *));
 	if (!new_cmd->args)
 		return (NULL);
 	new_cmd->infile = NULL;
 	new_cmd->outfile = NULL;
 	new_cmd->next = NULL;
 	new_cmd->append_mode = 0;
-	new_cmd->args[count_word(token) + 1] = NULL;
+	// new_cmd->args[count_word(token) + 1] = NULL;
 	return (new_cmd);
 }
 

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/20 19:22:37 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/20 21:38:51 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 	int		fd_heredoc;
 	int		status;
 	pid_t	pid;
-	char *pos_fix;
+	char	*pos_fix;
 
 	pos_fix = ft_itoa(i);
 	filename = ft_strjoin("/tmp/heredoc", pos_fix);
