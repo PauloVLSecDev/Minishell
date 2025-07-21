@@ -6,13 +6,14 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:25:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/20 16:35:38 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:17:24 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	ft_append(t_cmd *cmd);
+static int	valid_fd(t_cmd **cmd, int fd, char *filename);
 
 int	redir_actions(t_cmd *cmd)
 {
@@ -45,42 +46,37 @@ int	redir_actions(t_cmd *cmd)
 
 int	process_redirect(t_cmd **cmd, t_token **token, char *filename)
 {
-	int		fd;
+	int	fd;
 
-	filename = (*token)->next->value;
 	if ((*token)->type == TOKEN_REDIR_OUT)
 	{
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd < 0)
-		{
-			free((*cmd)->outfile);
-			(*cmd)->outfile = ft_strdup(filename);
+		if (valid_fd(cmd, fd, filename) < 0)
 			return (1);
-		}
 		close(fd);
-		if ((*cmd)->outfile)
-			free((*cmd)->outfile);
-		(*cmd)->outfile = ft_strdup(filename);
+		add_in_outfile(cmd, filename);
 	}
 	else if ((*token)->type == TOKEN_APPEND)
 	{
 		(*cmd)->append_mode = 1;
 		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (fd < 0)
-		{
-			free((*cmd)->outfile);
-			(*cmd)->outfile = ft_strdup(filename);
+		if (valid_fd(cmd, fd, filename) < 0)
 			return (1);
-		}
 		close(fd);
-		if ((*cmd)->outfile)
-			free((*cmd)->outfile);
-		(*cmd)->outfile = ft_strdup(filename);
+		add_in_outfile(cmd, filename);
 	}
 	else if ((*token)->type == TOKEN_REDIR_IN)
+		return (valid_file(filename, cmd));
+	return (0);
+}
+
+int	valid_fd(t_cmd **cmd, int fd, char *filename)
+{
+	if (fd < 0)
 	{
-		if (valid_file(filename, cmd))
-			return (1);
+		free((*cmd)->outfile);
+		(*cmd)->outfile = ft_strdup(filename);
+		return (1);
 	}
 	return (0);
 }

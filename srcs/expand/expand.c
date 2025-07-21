@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:00:06 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/20 16:37:50 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:21:14 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ char	*expand_var(char *arg)
 
 char	*which_expand(char c)
 {
-	// if (c == '$')
-	// 	return (ft_itoa(getpid()));
 	if (c == '?')
 		return (ft_itoa(get_shell()->exit_status));
 	return (ft_strdup(""));

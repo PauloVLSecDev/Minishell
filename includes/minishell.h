@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 19:19:08 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:55:10 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int				verify_dollar_sign(char *arg, char **expanded);
 char			*ft_join_three(char *s1, char *s2, char *s3);
 void			init_shell(t_env *env);
 t_shell			*get_shell(void);
+void			handle_heredoc(t_token **token, int *hd_counter, t_cmd **cmd);
 
 // command.c
 void			handle_command(t_token *token);
@@ -111,6 +112,7 @@ int				valid_file(char *filename, t_cmd **cmd);
 void			restaure_for_origin_fds(t_fd_backup *backup);
 void			backup_fds(t_fd_backup *backup);
 void			close_fds(t_fd_backup *backup);
+void			add_in_outfile(t_cmd **cmd, char *filename);
 
 // valid_all.c
 int				valid_metacharacteres(t_token *token);
@@ -121,9 +123,9 @@ void			on_sigint(int signum);
 void			on_sigquit(int signum);
 
 // HEREDOC.C
-void	process_heredoc(t_token *current, int i, t_cmd **cmd);
+void			process_heredoc(t_token *current, int i, t_cmd **cmd);
 void			heredoc_manager(t_token *current, int fd_heredoc);
-void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc);
+void			exec_heredoc(char *delimiter, int quotes, int fd_heredoc);
 void			heredoc(t_token *token);
 void			close_all(void);
 

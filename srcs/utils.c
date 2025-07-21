@@ -6,11 +6,13 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:17:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/20 18:40:59 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:44:16 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	is_heredoc(t_token **curr);
 
 char	*ft_join_three(char *s1, char *s2, char *s3)
 {
@@ -29,61 +31,58 @@ char	*ft_join_three(char *s1, char *s2, char *s3)
 	return (together_all);
 }
 
-/*
 int	count_word(t_token *token)
 {
-	t_token	*temp;
 	int		count;
+	t_token	*curr;
 
-	temp = token;
 	count = 0;
-	while (temp)
+	curr = token;
+	while (curr && curr->type != TOKEN_PIPE)
 	{
-		if (temp->type == TOKEN_WORD)
+		if (curr->type == TOKEN_WORD)
 			count++;
-		else if (temp->type == TOKEN_PIPE)
-			break ;
-		else if (temp->type == TOKEN_REDIR_IN || temp->type == TOKEN_REDIR_OUT
-			|| temp->type == TOKEN_APPEND || temp->type == TOKEN_HEREDOC )
+		else if (curr->type == TOKEN_HEREDOC)
 		{
-			temp = temp->next;
-			if (temp == NULL)
-				break ;
+			if (is_heredoc(&curr))
+				continue ;
 		}
-		temp = temp->next;
+		else if (curr->type == TOKEN_REDIR_IN || curr->type == TOKEN_REDIR_OUT
+			|| curr->type == TOKEN_APPEND)
+		{
+			curr = curr->next;
+			if (curr)
+				curr = curr->next;
+			continue ;
+		}
+		curr = curr->next;
 	}
 	return (count);
 }
-*/
 
-int	count_word(t_token *token)
+int	is_heredoc(t_token **curr)
 {
-	int count = 0;
-	t_token *current = token;
-
-	while (current && current->type != TOKEN_PIPE)
+	(*curr) = (*curr)->next;
+	if ((*curr) && (*curr)->type == TOKEN_WORD)
 	{
-		if (current->type == TOKEN_WORD)
-			count++;
-		else if (current->type == TOKEN_HEREDOC)
-		{
-			current = current->next;
-			if (current && current->type == TOKEN_WORD) // This should be the delimiter
-			{
-				current = current->next;
-				continue; // Continue to the next token after the delimiter
-			}
-		}
-		else if (current->type == TOKEN_REDIR_IN ||
-		         current->type == TOKEN_REDIR_OUT ||
-		         current->type == TOKEN_APPEND)
-		{
-			current = current->next; // Skip the operator
-			if (current)
-				current = current->next; // Skip the filename
-			continue; // Continue to the next token
-		}
-		current = current->next;
+		(*curr) = (*curr)->next;
+		return (1);
 	}
-	return count;
+	return (0);
+}
+
+void	handle_heredoc(t_token **token, int *hd_counter, t_cmd **cmd)
+{
+	process_heredoc(*token, ++(*hd_counter), cmd);
+	if ((*token)->next)
+		*token = (*token)->next;
+	if (*token)
+		*token = (*token)->next;
+}
+
+void	add_in_outfile(t_cmd **cmd, char *filename)
+{
+	if ((*cmd)->outfile)
+		free((*cmd)->outfile);
+	(*cmd)->outfile = ft_strdup(filename);
 }

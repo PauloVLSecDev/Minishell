@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 19:21:33 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:53:18 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ t_token	*tokenization(t_token *token, char *input, t_token *current)
 		}
 		start = i;
 		while ((input[i] && !ft_strchr(AVOID_TOKENS, input[i])
-			&& !ft_strchr(SPECIALS_CHARS, input[i])) || (input[i] && current && current->type == TOKEN_HEREDOC))
+				&& !ft_strchr(SPECIALS_CHARS, input[i])) || (input[i] && current
+				&& current->type == TOKEN_HEREDOC))
 			i++;
 		if (i > start)
 		{
@@ -98,27 +99,27 @@ int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
 
 void	append_token(t_token **token, t_token **current, char *value)
 {
-    t_token *new;
+	t_token	*new;
 
-    new = malloc(sizeof(t_token));
-    if (!new)
-        return;
-    new->value = ft_strdup(value);
-    if (!new->value)
-        return;
-    new->type = find_token_type(value);
-    new->next = NULL;
-    if (*token == NULL)
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return ;
+	new->value = ft_strdup(value);
+	if (!new->value)
+		return ;
+	new->type = find_token_type(value);
+	new->next = NULL;
+	if (*token == NULL)
 	{
 		// new->prev = NULL;
-        *token = new;
+		*token = new;
 	}
-    else
+	else
 	{
 		// new->prev = *current;
-        (*current)->next = new;
+		(*current)->next = new;
 	}
-    *current = new;
+	*current = new;
 }
 
 void	ft_print_token(t_token *list)
