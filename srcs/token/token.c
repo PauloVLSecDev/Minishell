@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 19:21:33 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:21:34 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,9 @@ void	append_token(t_token **token, t_token **current, char *value)
     new->type = find_token_type(value);
     new->next = NULL;
     if (*token == NULL)
-	{
-		// new->prev = NULL;
         *token = new;
-	}
     else
-	{
-		// new->prev = *current;
         (*current)->next = new;
-	}
     *current = new;
 }
 

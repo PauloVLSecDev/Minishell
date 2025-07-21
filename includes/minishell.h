@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 19:19:08 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:14:44 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void			append_token(t_token **token, t_token **current, char *value);
 void			ft_print_token(t_token *list);
 int				extract_redir_or_pipe(char *input, int *i, t_token **token,
 					t_token **current);
-int				ft_avoid_tokens(char *input, int *i);
+int	ft_avoid_tokens(char *input, int *i, char *current);
 
 // parser.c
 int				check_quotes(char *input);
