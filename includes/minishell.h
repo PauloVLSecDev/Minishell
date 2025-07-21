@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/19 21:20:41 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/20 20:58:25 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int				count_nodes(t_env *env);
 void			exec_all(t_cmd *cmd);
 void			exec_external(t_cmd *cmd, char **env, char **path);
 
-void			expand_all_args(t_cmd *cmd, t_env *env);
+void			expand_all_args(t_cmd *cmd);
 
 // expand.c
 char			*expand_var(char *arg);
@@ -121,9 +121,9 @@ void			on_sigint(int signum);
 void			on_sigquit(int signum);
 
 // HEREDOC.C
-void			process_heredoc(t_token *current, int i);
+void	process_heredoc(t_token *current, int i, t_cmd **cmd);
 void			heredoc_manager(t_token *current, int fd_heredoc);
-void			exec_heredoc(char *delimiter, int ft_heredoc);
+void	exec_heredoc(char *delimiter, int fd_heredoc);
 void			heredoc(t_token *token);
 void			close_all(void);
 

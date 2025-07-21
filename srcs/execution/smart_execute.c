@@ -39,7 +39,7 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 	pid_t	pid;
 	int		status;
 
-	expand_all_args(cmd, get_shell()->env);
+	expand_all_args(cmd);
 	path = find_path(get_shell()->env);
 	if (!path)
 	{

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/18 21:48:46 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/19 22:10:19 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,31 +95,21 @@ int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
 
 void	append_token(t_token **token, t_token **current, char *value)
 {
-	t_token	*new;
-	int		should_concat;
-	char	*joined;
+    t_token *new;
 
-	should_concat = 0;
-	if (should_concat && *current)
-	{
-		joined = ft_strjoin((*current)->value, value);
-		free((*current)->value);
-		(*current)->value = joined;
-		return ;
-	}
-	new = malloc(sizeof(t_token));
-	if (!new)
-		return ;
-	new->value = ft_strdup(value);
-	if (!new->value)
-		return ;
-	new->type = find_token_type(value);
-	new->next = NULL;
-	if (*token == NULL)
-		*token = new;
-	else
-		(*current)->next = new;
-	*current = new;
+    new = malloc(sizeof(t_token));
+    if (!new)
+        return;
+    new->value = ft_strdup(value);
+    if (!new->value)
+        return;
+    new->type = find_token_type(value);
+    new->next = NULL;
+    if (*token == NULL)
+        *token = new;
+    else
+        (*current)->next = new;
+    *current = new;
 }
 
 void	ft_print_token(t_token *list)
