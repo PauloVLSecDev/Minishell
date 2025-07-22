@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 19:50:37 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/22 14:57:36 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCT_H
 
 # include "minishell.h"
+# include <stdbool.h>
 
 typedef struct s_token		t_token;
 
@@ -56,6 +57,7 @@ typedef struct s_token
 {
 	t_token_type			type;
 	char					*value;
+	bool					no_expand;
 	struct s_token			*next;
 }							t_token;
 

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 20:21:34 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:25:07 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_token	*tokenization(t_token *token, char *input, t_token *current)
 	char	*value;
 	int		i;
 	int		start;
+	char	*remove_quotes;
+	size_t	len;
 
 	i = 0;
 	while (input[i] != '\0')
@@ -53,8 +55,23 @@ t_token	*tokenization(t_token *token, char *input, t_token *current)
 		if (i > start)
 		{
 			value = ft_substr(input, start, i - start);
-			append_token(&token, &current, value);
-			free(value);
+            append_token(&token, &current, value);
+            if (current->type == TOKEN_HEREDOC)
+            {
+                len = ft_strlen(current->value);
+                if ((current->value[0] == '"' && current->value[len - 1] == '"') ||
+                    (current->value[0] == '\'' && current->value[len - 1] == '\''))
+                {  
+                    current->no_expand = true;
+                    remove_quotes = ft_substr(current->value, 1, len - 2);
+                    free(current->value);
+                    current->value = remove_quotes;
+                }
+            }
+            free(value);			
+			// value = ft_substr(input, start, i - start);
+			// append_token(&token, &current, value);
+			// free(value);
 		}
 	}
 	return (token);

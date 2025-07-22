@@ -6,20 +6,35 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 17:54:27 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 20:21:22 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:06:09 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// int	ft_avoid_tokens(char *input, int *i)
+// {
+// 	while (input[*i] && ft_strchr(AVOID_TOKENS, input[*i]))
+// 		(*i)++;
+// 	if (input[*i] == '\0')
+// 		return (1);
+// 	return (0);
+// }
+
 int	ft_avoid_tokens(char *input, int *i)
 {
-	while (input[*i] && ft_strchr(AVOID_TOKENS, input[*i]))
-		(*i)++;
-	if (input[*i] == '\0')
-		return (1);
-	return (0);
+    while (input[*i] && ft_strchr(AVOID_TOKENS, input[*i]))
+        (*i)++;
+    if (input[*i] == '\0')
+        return (1);
+    if ((input[*i] == DOUBLE_QUOTE && input[*i + 1] == DOUBLE_QUOTE) || (input[*i] == QUOTE && input[*i + 1] == QUOTE))
+    {
+        *i += 2;
+        return (1);
+    }
+    return (0);
 }
+
 
 int	extract_redir_or_pipe(char *input, int *i, t_token **token,
 		t_token **current)

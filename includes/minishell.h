@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 20:14:44 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:14:38 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <stdbool.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
 
-# define AVOID_TOKENS " \t\r\v\f\n"
+# define AVOID_TOKENS " \t\r\v\f\n\"\'"
 # define SPECIALS_CHARS "|><\"\'"
 # define QUOTE '\''
 # define DOUBLE_QUOTE '"'
@@ -41,7 +42,7 @@ void			append_token(t_token **token, t_token **current, char *value);
 void			ft_print_token(t_token *list);
 int				extract_redir_or_pipe(char *input, int *i, t_token **token,
 					t_token **current);
-int	ft_avoid_tokens(char *input, int *i, char *current);
+int	ft_avoid_tokens(char *input, int *i);
 
 // parser.c
 int				check_quotes(char *input);
