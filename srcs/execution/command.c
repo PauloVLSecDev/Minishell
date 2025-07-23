@@ -1,5 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
+/* ************************************************************************** */ /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -23,7 +22,10 @@ void	handle_command(t_token *token)
 	curr_token = token;
 	curr_cmd = create_cmd_node(curr_token);
 	if (!curr_cmd)
+	{
+		cleanup_iteration();
 		return ;
+	}
 	head = curr_cmd;
 	process_all(&curr_cmd, &curr_token, &i);
 	get_shell()->cmd = head;
