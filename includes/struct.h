@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 19:03:16 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/23 15:52:14 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_token
 	t_token_type			type;
 	char					*value;
 	struct s_token			*next;
-	// struct s_token			*prev;
 }							t_token;
 
 typedef struct s_heredoc
