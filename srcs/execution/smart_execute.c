@@ -6,12 +6,11 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:05:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/23 15:10:03 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/23 19:10:16 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 static void	single_child_process(t_cmd *cmd, char **new_env, char **path);
 
