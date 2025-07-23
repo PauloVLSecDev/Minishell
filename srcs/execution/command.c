@@ -11,6 +11,7 @@
 
 #include "minishell.h"
 
+
 void	handle_command(t_token *token)
 {
 	t_cmd	*curr_cmd;

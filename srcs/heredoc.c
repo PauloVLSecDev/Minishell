@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/23 14:58:39 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/23 15:13:56 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	exec_heredoc(char *delimiter, int fd_heredoc)
 		if (!ft_strcmp(input, delimiter))
 			break ;
 		//	if (!quotes)
-		//	input = expand_var(input);
+		input = expand_var(input);
 		ft_putendl_fd(input, fd_heredoc);
 		free(input);
 	}
