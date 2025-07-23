@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 18:03:27 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/23 14:58:39 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 	pos_fix = ft_itoa(i);
 	filename = ft_strjoin("/tmp/heredoc", pos_fix);
 	fd_heredoc = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if ((*cmd)->infile)
+		free((*cmd)->infile);
 	(*cmd)->infile = ft_strdup(filename);
 	free(filename);
 	free(pos_fix);
@@ -53,27 +55,25 @@ int	valid_quotes_heredoc(char *delimiter)
 void	heredoc_manager(t_token *current, int fd_heredoc)
 {
 	char	*delimiter;
-	int		quotes;
 
-	// delimiter = current->next->value;
 	delimiter = ft_strdup(current->next->value);
-	quotes = valid_quotes_heredoc(delimiter);
 	if (!delimiter)
 	{
 		close(fd_heredoc);
 		exit(1);
 	}
-	exec_heredoc(delimiter, quotes, fd_heredoc);
+	exec_heredoc(delimiter, fd_heredoc);
 	free(delimiter);
 	close(fd_heredoc);
 	free_env(get_shell()->env);
 	cleanup_iteration();
-	exit (0);
+	exit(0);
 }
 
-void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
+void	exec_heredoc(char *delimiter, int fd_heredoc)
 {
 	char	*input;
+
 	while (1)
 	{
 		// signals_here()
@@ -82,8 +82,8 @@ void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 			break ;
 		if (!ft_strcmp(input, delimiter))
 			break ;
-		if (quotes == 0)
-			input = expand_var(input);
+		//	if (!quotes)
+		//	input = expand_var(input);
 		ft_putendl_fd(input, fd_heredoc);
 		free(input);
 	}

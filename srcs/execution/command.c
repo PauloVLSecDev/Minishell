@@ -1,5 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
+/* ************************************************************************** */ /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -23,7 +22,10 @@ void	handle_command(t_token *token)
 	curr_token = token;
 	curr_cmd = create_cmd_node(curr_token);
 	if (!curr_cmd)
+	{
+		cleanup_iteration();
 		return ;
+	}
 	head = curr_cmd;
 	process_all(&curr_cmd, &curr_token, &i);
 	get_shell()->cmd = head;
@@ -56,36 +58,32 @@ t_cmd	*create_cmd_node(t_token *token)
 	return (new_cmd);
 }
 
-void	process_all(t_cmd **cmd, t_token **token, int *i)
+void	process_all(t_cmd **cmd, t_token **to, int *i)
 {
-	int		hd_counter;
+	int	hd_counter;
 
 	hd_counter = -1;
-	while (*token)
+	while (*to)
 	{
-		if ((*token)->type == TOKEN_HEREDOC)
+		if ((*to)->type == TOKEN_HEREDOC)
 		{
-			process_heredoc(*token, ++hd_counter, cmd);
-			if ((*token)->next)
-				*token = (*token)->next;
-			if (*token)
-				*token = (*token)->next;
+			handle_heredoc(to, &hd_counter, cmd);
 			continue ;
 		}
-		else if ((*token)->type == TOKEN_WORD)
-			process_word(cmd, token, i);
-		else if ((*token)->type == TOKEN_PIPE)
-			process_pipe(cmd, token, i);
-		else if ((*token)->type == TOKEN_REDIR_IN
-			|| (*token)->type == TOKEN_REDIR_OUT
-			|| (*token)->type == TOKEN_APPEND)
+		else if ((*to)->type == TOKEN_WORD)
+			process_word(cmd, to, i);
+		else if ((*to)->type == TOKEN_PIPE)
+			process_pipe(cmd, to, i);
+		else if ((*to)->type == TOKEN_REDIR_IN || (*to)->type == TOKEN_REDIR_OUT
+			|| (*to)->type == TOKEN_APPEND)
 		{
-			if (process_redirect(cmd, token, NULL))
+			if (process_redirect(cmd, to, (*to)->next->value))
 				break ;
-			if (*token && (*token)->next)
-				*token = (*token)->next;
+			if (*to && (*to)->next)
+				*to = (*to)->next;
 		}
-		*token = (*token)->next;
+		if (*to)
+			*to = (*to)->next;
 	}
 }
 

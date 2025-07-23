@@ -115,21 +115,21 @@ int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
 
 void	append_token(t_token **token, t_token **current, char *value)
 {
-    t_token *new;
+	t_token	*new;
 
-    new = malloc(sizeof(t_token));
-    if (!new)
-        return;
-    new->value = ft_strdup(value);
-    if (!new->value)
-        return;
-    new->type = find_token_type(value);
-    new->next = NULL;
-    if (*token == NULL)
-        *token = new;
-    else
-        (*current)->next = new;
-    *current = new;
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return ;
+	new->value = ft_strdup(value);
+	if (!new->value)
+		return ;
+	new->type = find_token_type(value);
+	new->next = NULL;
+	if (*token == NULL)
+		*token = new;
+	else
+		(*current)->next = new;
+	*current = new;
 }
 
 void	ft_print_token(t_token *list)

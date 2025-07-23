@@ -4,9 +4,9 @@
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */ 
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/20 20:45:42 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:05:18 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	verify_input(char *input)
 		printf("exit\n");
 		clean_exit(0);
 	}
-	if (*input == '\0')
+	if (!*input)
 	{
 		free(input);
 		return (0);

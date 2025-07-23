@@ -14,7 +14,7 @@
 
 void	close_all(void)
 {
-	int i;
+	int	i;
 
 	i = 3;
 	while (i <= 1024)
