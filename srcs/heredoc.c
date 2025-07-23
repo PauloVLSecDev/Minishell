@@ -23,6 +23,8 @@ void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 	pos_fix = ft_itoa(i);
 	filename = ft_strjoin("/tmp/heredoc", pos_fix);
 	fd_heredoc = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if ((*cmd)->infile)
+		free((*cmd)->infile);
 	(*cmd)->infile = ft_strdup(filename);
 	free(filename);
 	free(pos_fix);
