@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 21:16:38 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/19 21:21:45 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/23 19:59:44 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,20 @@ void	close_all(void)
 		close(i);
 		i++;
 	}
+}
+void	signals_heredoc(void)
+{
+	signal(SIGINT, handle_heredoc_sigint);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	handle_heredoc_sigint(int sig)
+{
+	(void)sig;
+
+    write(STDOUT_FILENO, "\n", 1);
+	cleanup_iteration();
+	free_env(get_shell()->env);
+	get_shell()->exit_status = 130;
+    exit(get_shell()->exit_status);
 }
