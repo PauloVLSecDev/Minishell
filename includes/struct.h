@@ -29,6 +29,7 @@ typedef struct s_shell
 	t_cmd					*cmd;
 	t_env					*env;
 	char					*input;
+	int						heredoc_counter;
 	char					**env_copy;
 	int						exit_status;
 }							t_shell;

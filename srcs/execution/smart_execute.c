@@ -6,13 +6,14 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:05:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/19 20:47:57 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:33:58 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	single_child_process(t_cmd *cmd, char **new_env, char **path);
+static int	cmd_args_is_null(t_cmd *cmd);
 
 void	smart_execute(t_cmd *cmd)
 {
@@ -21,6 +22,8 @@ void	smart_execute(t_cmd *cmd)
 
 	path = NULL;
 	new_env = NULL;
+	if (cmd_args_is_null(cmd))
+		return ;
 	if (cmd->next == NULL)
 	{
 		if (is_builtin(cmd->args) != -1)
@@ -75,11 +78,20 @@ static void	single_child_process(t_cmd *cmd, char **new_env, char **path)
 	}
 	exec_external(cmd, new_env, path);
 	free_all(new_env);
-	// free_all(path);
 	free_env(get_shell()->env);
 	cleanup_iteration();
 	if (get_shell()->exit_status == 127)
 		exit(127);
 	else
 		exit(0);
+}
+
+static int	cmd_args_is_null(t_cmd *cmd)
+{
+	if (!cmd->args[0] || !cmd)
+	{
+		cleanup_iteration();
+		return (1);
+	}
+	return (0);
 }

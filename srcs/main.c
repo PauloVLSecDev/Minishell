@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/23 17:06:34 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/24 19:07:41 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 
 	new_envp = linked_node_env(envp);
 	init_shell(new_envp);
-	setup_signals();
 	while (1)
 	{
+		setup_signals();
+		get_shell()->heredoc_counter = -1;
 		input = readline("minishell> ");
 		add_history(input);
 		if (!verify_input(input))
@@ -61,6 +62,8 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 			continue ;
 		}
 		handle_command(get_shell()->token);
+		if (get_shell()->heredoc_counter == -1)
+			set_std_cmd();
 		smart_execute(get_shell()->cmd);
 		cleanup_iteration();
 	}
@@ -80,4 +83,5 @@ void	init_shell(t_env *envp)
 	get_shell()->cmd = NULL;
 	get_shell()->token = NULL;
 	get_shell()->exit_status = 0;
+	get_shell()->heredoc_counter = -1;
 }

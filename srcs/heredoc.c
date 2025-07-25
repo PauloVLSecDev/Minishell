@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/23 20:21:11 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/24 19:09:33 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,19 @@ void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 	free(pos_fix);
 	pid = fork();
 	if (pid == 0)
+	{
+		signals_heredoc();
 		heredoc_manager(current, fd_heredoc);
+	}
 	if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
 		close(fd_heredoc);
-		if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+		if (WEXITSTATUS(status) && WTERMSIG(status) == SIGINT)
+		{
+			kill(pid, SIGKILL);
 			get_shell()->exit_status = 130;
+		}
 	}
 }
 
@@ -77,8 +83,7 @@ void	heredoc_manager(t_token *current, int fd_heredoc)
 void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 {
 	char	*input;
-	
-	signals_heredoc();
+
 	while (1)
 	{
 		input = readline("> ");

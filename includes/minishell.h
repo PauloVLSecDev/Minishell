@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/23 18:09:53 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/24 21:37:20 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int				valid_metacharacteres(t_token *token);
 // SIGNALS.C
 void			setup_signals(void);
 void			on_sigint(int signum);
-void			on_sigquit(int signum);
+void			set_std_cmd(void);
 
 // HEREDOC.C
 void			process_heredoc(t_token *current, int i, t_cmd **cmd);

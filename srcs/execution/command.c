@@ -1,4 +1,5 @@
-/* ************************************************************************** */ /*                                                                            */
+/* ************************************************************************** */
+	/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -60,14 +61,12 @@ t_cmd	*create_cmd_node(t_token *token)
 
 void	process_all(t_cmd **cmd, t_token **to, int *i)
 {
-	int	hd_counter;
-
-	hd_counter = -1;
 	while (*to)
 	{
 		if ((*to)->type == TOKEN_HEREDOC)
 		{
-			handle_heredoc(to, &hd_counter, cmd);
+			get_shell()->heredoc_counter += 1;
+			handle_heredoc(to, &(get_shell()->heredoc_counter), cmd);
 			continue ;
 		}
 		else if ((*to)->type == TOKEN_WORD)

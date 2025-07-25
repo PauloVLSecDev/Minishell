@@ -41,15 +41,11 @@ t_token	*tokenization(t_token *token, char *input, t_token *current)
 			continue ;
 		if (extract_redir_or_pipe(input, &i, &token, &current))
 			continue ;
-		if (current && current->type != TOKEN_HEREDOC)
-		{
-			if (handle_quotes(input, &i, &token, &current))
-				continue ;
-		}
+		if (handle_quotes(input, &i, &token, &current))
+			continue ;
 		start = i;
-		while ((input[i] && !ft_strchr(AVOID_TOKENS, input[i])
-				&& !ft_strchr(SPECIALS_CHARS, input[i])) || (input[i] && current
-				&& current->type == TOKEN_HEREDOC))
+		while (input[i] && !ft_strchr(AVOID_TOKENS, input[i])
+			&& !ft_strchr(SPECIALS_CHARS, input[i]))
 			i++;
 		if (i > start)
 		{
