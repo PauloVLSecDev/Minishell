@@ -50,7 +50,7 @@ int	valid_pipe(t_token *list)
 		{
 			get_shell()->exit_status = 2;
 			return (1);
-		}		
+		}
 		else if (head->type == TOKEN_PIPE && head->next != NULL)
 		{
 			if (head->next->type == TOKEN_PIPE)
@@ -74,7 +74,7 @@ int	valid_redir_in(t_token *list)
 	while (head != NULL)
 	{
 		if ((head->type == TOKEN_REDIR_IN) && (head->next == NULL))
-		{	
+		{
 			get_shell()->exit_status = 2;
 			return (1);
 		}

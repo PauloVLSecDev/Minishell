@@ -49,8 +49,8 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 	path = find_path(get_shell()->env);
 	if (!path)
 	{
-		ft_putstr_fd(cmd->args[0], 2);
 		ft_putstr_fd("No such file or directory\n", 2);
+		return ;
 	}
 	new_env = recreate_env(get_shell()->env);
 	pid = fork();
@@ -60,8 +60,8 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 	{
 		waitpid(pid, &status, 0);
 		if (WIFSIGNALED(status))
-				get_shell()->exit_status = 128 + WTERMSIG(status);
-		else 
+			get_shell()->exit_status = 128 + WTERMSIG(status);
+		else
 			get_shell()->exit_status = WEXITSTATUS(status);
 		free_all(path);
 		free_all(new_env);

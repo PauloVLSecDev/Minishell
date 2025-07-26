@@ -20,6 +20,7 @@ void	on_sigint(int signum)
 	rl_on_new_line();
 	rl_redisplay();
 }
+
 void	setup_signals(void)
 {
 	signal(SIGINT, on_sigint);
