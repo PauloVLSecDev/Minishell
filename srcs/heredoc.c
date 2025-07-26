@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+static void	hd_parent_heredoc(pid_t pid, int status, int fd_heredoc);
+
 void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 {
 	char	*filename;
@@ -20,6 +22,7 @@ void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 	pid_t	pid;
 	char	*pos_fix;
 
+	status = 0;
 	pos_fix = ft_itoa(i);
 	filename = ft_strjoin("/tmp/heredoc", pos_fix);
 	fd_heredoc = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -28,6 +31,7 @@ void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 	(*cmd)->infile = ft_strdup(filename);
 	free(filename);
 	free(pos_fix);
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -35,15 +39,20 @@ void	process_heredoc(t_token *current, int i, t_cmd **cmd)
 		heredoc_manager(current, fd_heredoc);
 	}
 	if (pid > 0)
+		hd_parent_heredoc(pid, status, fd_heredoc);
+}
+
+static void	hd_parent_heredoc(pid_t pid, int status, int fd_heredoc)
+{
+	waitpid(pid, &status, 0);
+	close(fd_heredoc);
+	setup_signals();
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 	{
-		waitpid(pid, &status, 0);
-		close(fd_heredoc);
-		if (WEXITSTATUS(status) && WTERMSIG(status) == SIGINT)
-		{
-			kill(pid, SIGKILL);
-			get_shell()->exit_status = 130;
-		}
+		get_shell()->exit_status = 130;
+		get_shell()->must_execute = 1;
 	}
+	return ;
 }
 
 int	valid_quotes_heredoc(char *delimiter)
@@ -88,7 +97,11 @@ void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 	{
 		input = readline("> ");
 		if (!input)
+		{
+			printf("warning: here-document at line 22 delimited"
+				"by end-of-file (wanted `%s')\n", delimiter);
 			break ;
+		}
 		if (!ft_strcmp(input, delimiter))
 			break ;
 		if (quotes == 0)

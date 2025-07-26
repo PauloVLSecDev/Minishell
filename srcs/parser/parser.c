@@ -47,11 +47,17 @@ int	valid_pipe(t_token *list)
 	while (head != NULL)
 	{
 		if (head->type == TOKEN_PIPE && head->next == NULL)
+		{
+			get_shell()->exit_status = 2;
 			return (1);
+		}		
 		else if (head->type == TOKEN_PIPE && head->next != NULL)
 		{
 			if (head->next->type == TOKEN_PIPE)
+			{
+				get_shell()->exit_status = 2;
 				return (1);
+			}
 		}
 		head = head->next;
 	}
@@ -68,9 +74,15 @@ int	valid_redir_in(t_token *list)
 	while (head != NULL)
 	{
 		if ((head->type == TOKEN_REDIR_IN) && (head->next == NULL))
+		{	
+			get_shell()->exit_status = 2;
 			return (1);
+		}
 		else if (head->type == TOKEN_REDIR_IN && head->next->type != TOKEN_WORD)
+		{
+			get_shell()->exit_status = 2;
 			return (1);
+		}
 		head = head->next;
 	}
 	return (0);
@@ -86,10 +98,16 @@ int	valid_redir_out(t_token *list)
 	while (head != NULL)
 	{
 		if (head->type == TOKEN_REDIR_OUT && head->next == NULL)
+		{
+			get_shell()->exit_status = 2;
 			return (1);
+		}
 		else if (head->type == TOKEN_REDIR_OUT
 			&& head->next->type != TOKEN_WORD)
+		{
+			get_shell()->exit_status = 2;
 			return (1);
+		}
 		head = head->next;
 	}
 	return (0);
@@ -105,9 +123,15 @@ int	valid_heredoc(t_token *list)
 	while (head != NULL)
 	{
 		if (head->type == TOKEN_HEREDOC && head->next == NULL)
+		{
+			get_shell()->exit_status = 2;
 			return (1);
+		}
 		else if (head->type == TOKEN_HEREDOC && head->next->type != TOKEN_WORD)
+		{
+			get_shell()->exit_status = 2;
 			return (1);
+		}
 		head = head->next;
 	}
 	return (0);

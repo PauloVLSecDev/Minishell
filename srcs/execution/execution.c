@@ -35,11 +35,9 @@ char	**recreate_env(t_env *env)
 {
 	char	**env_array;
 	t_env	*curr_env;
-	char	*absolute_env_line;
 	int		i;
 
 	i = 0;
-	absolute_env_line = NULL;
 	curr_env = env;
 	env_array = malloc((count_nodes(env) + 1) * sizeof(char *));
 	if (!env_array)
@@ -80,6 +78,7 @@ char	*join_path_with_cmd(char **path, t_cmd *cmd)
 		free(path_with_cmd);
 		i++;
 	}
+	get_shell()->exit_status = 127;
 	free_all(path);
 	return (NULL);
 }
@@ -115,6 +114,9 @@ char	**find_path(t_env *env)
 		return (NULL);
 	path = ft_split(current_node->content, ':');
 	if ((!path) || (!*path))
+	{
+		get_shell()->exit_status = 127;
 		return (NULL);
+	}
 	return (path);
 }

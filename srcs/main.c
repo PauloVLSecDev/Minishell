@@ -43,8 +43,6 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	init_shell(new_envp);
 	while (1)
 	{
-		setup_signals();
-		get_shell()->heredoc_counter = -1;
 		input = readline("minishell> ");
 		add_history(input);
 		if (!verify_input(input))
@@ -58,7 +56,6 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 		if (valid_metacharacteres(get_shell()->token))
 		{
 			cleanup_iteration();
-			get_shell()->exit_status = 2;
 			continue ;
 		}
 		handle_command(get_shell()->token);
@@ -83,5 +80,6 @@ void	init_shell(t_env *envp)
 	get_shell()->cmd = NULL;
 	get_shell()->token = NULL;
 	get_shell()->exit_status = 0;
+	get_shell()->must_execute = 0;
 	get_shell()->heredoc_counter = -1;
 }

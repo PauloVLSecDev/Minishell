@@ -24,7 +24,7 @@ void	smart_execute(t_cmd *cmd)
 	new_env = NULL;
 	if (cmd_args_is_null(cmd))
 		return ;
-	if (cmd->next == NULL)
+	if (cmd->next == NULL && get_shell()->must_execute != 1)
 	{
 		if (is_builtin(cmd->args) != -1)
 			exec_builtin(is_builtin(cmd->args), cmd);
@@ -34,7 +34,10 @@ void	smart_execute(t_cmd *cmd)
 	else if (cmd->next != NULL)
 		execute_pipeline(cmd);
 	else
+	{
+		get_shell()->must_execute = 0;
 		return ;
+	}
 }
 
 void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
@@ -47,10 +50,7 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 	if (!path)
 	{
 		ft_putstr_fd(cmd->args[0], 2);
-		ft_putstr_fd(" No such file or directory\n", 2);
-		get_shell()->exit_status = 1;
-		cleanup_iteration();
-		return ;
+		ft_putstr_fd("No such file or directory\n", 2);
 	}
 	new_env = recreate_env(get_shell()->env);
 	pid = fork();
@@ -59,7 +59,10 @@ void	exec_single_command(t_cmd *cmd, char **new_env, char **path)
 	else if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
-		get_shell()->exit_status = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+				get_shell()->exit_status = 128 + WTERMSIG(status);
+		else 
+			get_shell()->exit_status = WEXITSTATUS(status);
 		free_all(path);
 		free_all(new_env);
 	}
