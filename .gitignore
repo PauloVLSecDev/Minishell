@@ -1,0 +1,9 @@
+*.o
+*.a
+a.out
+*.swp
+.vscode/
+minishell
+*.json
+includesn
+.nfs*
