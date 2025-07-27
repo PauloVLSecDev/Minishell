@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:00:06 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 20:21:14 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/24 20:02:07 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,85 @@ int	verify_dollar_sign(char *arg, char **expanded)
 	return (i);
 }
 
-char	*expand_var(char *arg)
+int ternary(int condition, int true_val, int false_val)
 {
-	char	*expanded;
-	int		i;
-	char	buffer[2];
-	int		curr_i;
-
-	expanded = ft_strdup("");
-	i = 0;
-	while (arg[i])
-	{
-		curr_i = verify_dollar_sign(&arg[i], &expanded);
-		if (curr_i > 0)
-			i += curr_i;
-		else
-		{
-			buffer[0] = arg[i];
-			buffer[1] = '\0';
-			expanded = append_str(expanded, buffer);
-			i++;
-		}
-	}
-	return (expanded);
+    if (condition)
+        return true_val;
+    return false_val;
 }
+
+char *expand_var(char *arg)
+{
+    char   *expanded;
+    int     in_quotes;
+    int     i;
+    int     consumed;
+    char    buffer[2];
+
+	i = 0;
+	in_quotes = 0;
+    expanded = ft_strdup("");
+    if (!expanded)
+        return NULL;
+    while (arg[i])
+    {
+        if (arg[i] == QUOTE && in_quotes != 2)
+        {
+            in_quotes = ternary(in_quotes == 1, 0, 1);
+            i++;
+        }
+        else if (arg[i] == DOUBLE_QUOTE && in_quotes != 1)
+        {
+            in_quotes = ternary(in_quotes == 2, 0, 2);
+            i++;
+        }
+        else if (arg[i] == '$' && in_quotes != 1)
+        {
+            consumed = verify_dollar_sign(&arg[i], &expanded);
+            if (consumed > 0)
+                i += consumed;
+            else
+            {
+                buffer[0] = arg[i++];
+                buffer[1] = '\0';
+                expanded = append_str(expanded, buffer);
+            }
+        }
+        else
+        {
+            buffer[0] = arg[i++];
+            buffer[1] = '\0';
+            expanded = append_str(expanded, buffer);
+        }
+    }
+    return expanded;
+}
+
+
+// char	*expand_var(char *arg)
+// {
+// 	char	*expanded;
+// 	int		i;
+// 	char	buffer[2];
+// 	int		curr_i;
+
+// 	expanded = ft_strdup("");
+// 	i = 0;
+// 	while (arg[i])
+// 	{
+// 		curr_i = verify_dollar_sign(&arg[i], &expanded);
+// 		if (curr_i > 0)
+// 			i += curr_i;
+// 		else
+// 		{
+// 			buffer[0] = arg[i];
+// 			buffer[1] = '\0';
+// 			expanded = append_str(expanded, buffer);
+// 			i++;
+// 		}
+// 	}
+// 	return (expanded);
+// }
 
 char	*which_expand(char c)
 {

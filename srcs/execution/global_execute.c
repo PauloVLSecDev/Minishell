@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/19 21:34:23 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/24 19:43:55 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,60 @@ void	exec_external(t_cmd *cmd, char **env, char **path)
 	free(abs_path);
 }
 
-void	expand_all_args(t_cmd *cmd)
+static char *strip_quotes(char *s)
 {
-	int		i;
-	char	*expanded;
+    int   len;
+    char *out;
 
-	i = 0;
-	while (cmd->args[i])
-	{
-		expanded = expand_var(cmd->args[i]);
-		free(cmd->args[i]);
-		cmd->args[i] = expanded;
-		i++;
-	}
+    if (!s)
+        return NULL;
+    len = ft_strlen(s);
+    if (len >= 2 && ((s[0] == '\'' && s[len-1] == '\'') ||
+                     (s[0] == '"'  && s[len-1] == '"')))
+    {
+        out = malloc(len - 1);
+        if (!out)
+            return NULL;
+        ft_memmove(out, s + 1, len - 2);
+        return out;
+    }
+    return ft_strdup(s);
 }
+
+void expand_all_args(t_cmd *cmd)
+{
+    int   i;
+    char *tmp;
+    char *noquotes;
+
+    while (cmd)
+    {
+        i = 0;
+        while (cmd->args && cmd->args[i])
+        {
+            tmp = expand_var(cmd->args[i]);
+            free(cmd->args[i]);
+            noquotes = strip_quotes(tmp);
+            free(tmp);
+            cmd->args[i] = noquotes;
+            i++;
+        }
+        cmd = cmd->next;
+    }
+}
+
+
+// void	expand_all_args(t_cmd *cmd)
+// {
+// 	int		i;
+// 	char	*expanded;
+
+// 	i = 0;
+// 	while (cmd->args[i])
+// 	{
+// 		expanded = expand_var(cmd->args[i]);
+// 		free(cmd->args[i]);
+// 		cmd->args[i] = expanded;
+// 		i++;
+// 	}
+// }

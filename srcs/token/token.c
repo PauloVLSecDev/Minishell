@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/21 20:53:18 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/24 19:17:45 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,74 +28,153 @@ t_token_type	find_token_type(char *str)
 		return (TOKEN_WORD);
 }
 
-t_token	*tokenization(t_token *token, char *input, t_token *current)
+static int is_space(char c)
+{
+	return (c == ' '  || c == '\t' || c == '\n' ||
+			c == '\v' || c == '\f' || c == '\r');
+}
+
+int handle_quotes(char *input, int *i, t_token **token, t_token **current)
+{
+    int		quote_pos;
+    char	delim;
+    char	*value;
+    int		end_pos;
+    char	*joined;
+
+	quote_pos = *i;
+    delim = input[*i];
+    (*i)++;
+    while (input[*i] && input[*i] != delim)
+        (*i)++;
+    end_pos = *i;
+    if (input[*i] == delim)
+        (*i)++;
+    value = ft_substr(input, quote_pos, end_pos - quote_pos + 1);
+    if (*current
+        && quote_pos > 0
+        && !is_space(input[quote_pos - 1]))
+    {
+        joined = ft_strjoin((*current)->value, value);
+        free((*current)->value);
+        (*current)->value = joined;
+    }
+    else
+        append_token(token, current, value);
+    free(value);
+    return (1);
+}
+
+t_token *tokenization(t_token *token, char *input, t_token *current)
 {
 	char	*value;
-	int		i;
-	int		start;
+    int		start;
+    int		i;
 
-	i = 0;
-	while (input[i] != '\0')
-	{
-		if (ft_avoid_tokens(input, &i))
-			continue ;
-		if (extract_redir_or_pipe(input, &i, &token, &current))
-			continue ;
-		if (current && current->type != TOKEN_HEREDOC)
-		{
-			if (handle_quotes(input, &i, &token, &current))
-				continue ;
-		}
-		start = i;
-		while ((input[i] && !ft_strchr(AVOID_TOKENS, input[i])
-				&& !ft_strchr(SPECIALS_CHARS, input[i])) || (input[i] && current
-				&& current->type == TOKEN_HEREDOC))
-			i++;
-		if (i > start)
-		{
-			value = ft_substr(input, start, i - start);
-			append_token(&token, &current, value);
-			free(value);
-		}
-	}
-	return (token);
+    i = 0;
+    // get_shell()->has_quotes_or_not = 0;
+    while (input[i])
+    {
+        if (ft_avoid_tokens(input, &i))
+            continue;
+        if (extract_redir_or_pipe(input, &i, &token, &current))
+            continue;
+        if (input[i] == '\'' || input[i] == '\"')
+        {
+            // get_shell()->has_quotes_or_not = 1;
+            handle_quotes(input, &i, &token, &current);
+            continue;
+        }
+        start = i;
+        while (input[i]
+               && !ft_strchr(AVOID_TOKENS,   input[i])
+               && !ft_strchr(SPECIALS_CHARS, input[i]))
+            i++;
+        if (i > start)
+        {
+            value = ft_substr(input, start, i - start);
+            append_token(&token, &current, value);
+            free(value);
+        }
+    }
+    return (token);
 }
 
-static int	is_space(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r');
-}
 
-int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
-{
-	int		start;
-	char	verify_quotes;
-	char	*value;
-	char	*joined;
-	int		quote_pos;
 
-	if (input[*i] != QUOTE && input[*i] != DOUBLE_QUOTE)
-		return (0);
-	verify_quotes = input[*i];
-	quote_pos = (*i)++;
-	start = *i;
-	while (input[*i] && input[*i] != verify_quotes)
-		(*i)++;
-	value = ft_substr(input, start, *i - start);
-	if (*current && quote_pos > 0 && !is_space(input[quote_pos - 1]))
-	{
-		joined = ft_strjoin((*current)->value, value);
-		free((*current)->value);
-		(*current)->value = joined;
-	}
-	else
-		append_token(token, current, value);
-	free(value);
-	if (input[*i] == verify_quotes)
-		(*i)++;
-	return (1);
-}
+
+
+
+
+// t_token	*tokenization(t_token *token, char *input, t_token *current)
+// {
+// 	char	*value;
+// 	int		i;
+// 	int		start;
+
+// 	i = 0;
+// 	while (input[i] != '\0')
+// 	{
+// 		if (ft_avoid_tokens(input, &i))
+// 			continue ;
+// 		if (extract_redir_or_pipe(input, &i, &token, &current))
+// 			continue ;
+// 		if (current && current->type != TOKEN_HEREDOC)
+// 		{
+// 			if (handle_quotes(input, &i, &token, &current))
+// 				continue ;
+// 		}
+// 		start = i;
+// 		while ((input[i] && !ft_strchr(AVOID_TOKENS, input[i])
+// 				&& !ft_strchr(SPECIALS_CHARS, input[i])) || (input[i] && current
+// 				&& current->type == TOKEN_HEREDOC))
+// 			i++;
+// 		if (i > start)
+// 		{
+// 			value = ft_substr(input, start, i - start);
+// 			append_token(&token, &current, value);
+// 			free(value);
+// 		}
+// 	}
+// 	return (token);
+// }
+
+// static int	is_space(char c)
+// {
+// 	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+// 		|| c == '\r');
+// }
+
+
+// int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
+// {
+// 	int		start;
+// 	char	verify_quotes;
+// 	char	*value;
+// 	char	*joined;
+// 	int		quote_pos;
+
+// 	if (input[*i] != QUOTE && input[*i] != DOUBLE_QUOTE)
+// 		return (0);
+// 	verify_quotes = input[*i];
+// 	quote_pos = (*i)++;
+// 	start = *i;
+// 	while (input[*i] && input[*i] != verify_quotes)
+// 		(*i)++;
+// 	value = ft_substr(input, start, *i - start);
+// 	if (*current && quote_pos > 0 && !is_space(input[quote_pos - 1]))
+// 	{
+// 		joined = ft_strjoin((*current)->value, value);
+// 		free((*current)->value);
+// 		(*current)->value = joined;
+// 	}
+// 	else
+// 		append_token(token, current, value);
+// 	free(value);
+// 	if (input[*i] == verify_quotes)
+// 		(*i)++;
+// 	return (1);
+// }
 
 void	append_token(t_token **token, t_token **current, char *value)
 {
@@ -110,15 +189,9 @@ void	append_token(t_token **token, t_token **current, char *value)
 	new->type = find_token_type(value);
 	new->next = NULL;
 	if (*token == NULL)
-	{
-		// new->prev = NULL;
 		*token = new;
-	}
 	else
-	{
-		// new->prev = *current;
 		(*current)->next = new;
-	}
 	*current = new;
 }
 
