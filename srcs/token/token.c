@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 19:26:32 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 19:43:43 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,7 @@ t_token_type	find_token_type(char *str)
 static int is_space(char c)
 {
 	return (c == ' '  || c == '\t' || c == '\n' ||
-			c == '\v' || c == '\f' || cvoid	ft_print_token(t_token *list)
-{
-	while (list != NULL)
-	{
-		ft_printf("token: %s         | type of token %d\n", list->value,
-			list->type);
-		list = list->next;
-	}
-	return ;
-}
- == '\r');
+			c == '\v' || c == '\f' || c == '\r');
 }
 
 int handle_quotes(char *input, int *i, t_token **token, t_token **current)

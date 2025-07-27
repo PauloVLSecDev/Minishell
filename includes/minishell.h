@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 18:28:37 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 20:50:13 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			exec_external(t_cmd *cmd, char **env, char **path);
 void			expand_all_args(t_cmd *cmd);
 
 // expand.c
-char			*expand_var(char *arg);
+char			*expand_var(char *arg, char *expanded);
 char			*expand_env(char *arg, int *i, t_env *env);
 char			*which_expand(char c);
 char			*append_str(char *dest, const char *src);

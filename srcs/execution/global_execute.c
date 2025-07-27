@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/27 18:39:37 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 20:48:35 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,18 @@ static char *strip_quotes(char *s)
 
 void expand_all_args(t_cmd *cmd)
 {
-    int   i;
-    char *tmp;
-    char *noquotes;
+    int		i;
+    char	*tmp;
+    char	*noquotes;
+	char	*expanded;
 
+	expanded  = ft_strdup("");
     while (cmd)
     {
         i = 0;
         while (cmd->args && cmd->args[i])
         {
-            tmp = expand_var(cmd->args[i]);
+            tmp = expand_var(cmd->args[i], expanded);
             free(cmd->args[i]);
             noquotes = strip_quotes(tmp);
             free(tmp);
@@ -119,19 +121,3 @@ void expand_all_args(t_cmd *cmd)
         cmd = cmd->next;
     }
 }
-
-
-// void	expand_all_args(t_cmd *cmd)
-// {
-// 	int		i;
-// 	char	*expanded;
-
-// 	i = 0;
-// 	while (cmd->args[i])
-// 	{
-// 		expanded = expand_var(cmd->args[i]);
-// 		free(cmd->args[i]);
-// 		cmd->args[i] = expanded;
-// 		i++;
-// 	}
-// }

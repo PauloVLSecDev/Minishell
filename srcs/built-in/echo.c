@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:48:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 18:28:04 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 20:47:51 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_echo(char **args)
 	char	*expanded;
 
 	i = 1;
+	expanded  = ft_strdup("");
 	n_flag = 0;
 	if (args[1] && !ft_strcmp(args[1], "-n"))
 	{
@@ -27,7 +28,7 @@ int	ft_echo(char **args)
 	}
 	while (args[i])
 	{
-		expanded = expand_var(args[i]);
+		expanded = expand_var(args[i], expanded);
 		ft_putstr_fd(expanded, 1);
 		if (args[i + 1])
 			ft_putstr_fd(" ", 1);

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 18:28:20 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 20:20:47 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,14 @@ typedef enum e_token_type
 	TOKEN_APPEND,
 	TOKEN_HEREDOC,
 	TOKEN_EOF,
-}							t_token_type;
+}	t_token_type;
+
+typedef enum e_quotemode
+{
+    QUOTE_NONE   = 0,
+    QUOTE_SINGLE = 1,
+    QUOTE_DOUBLE = 2
+}   t_qmode;
 
 typedef struct s_token
 {
