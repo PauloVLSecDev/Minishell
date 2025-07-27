@@ -5,7 +5,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/21 20:53:43 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:03:46 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,12 @@ t_cmd	*create_cmd_node(t_token *token)
 
 void	process_all(t_cmd **cmd, t_token **to, int *i)
 {
-	int	hd_counter;
-
-	hd_counter = -1;
 	while (*to)
 	{
 		if ((*to)->type == TOKEN_HEREDOC)
 		{
-			handle_heredoc(to, &hd_counter, cmd);
+			get_shell()->heredoc_counter += 1;
+			handle_heredoc(to, &(get_shell()->heredoc_counter), cmd);
 			continue ;
 		}
 		else if ((*to)->type == TOKEN_WORD)

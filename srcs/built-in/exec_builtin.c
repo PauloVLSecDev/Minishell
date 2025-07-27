@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/15 19:22:52 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/27 18:36:52 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,33 @@ int	fds_error(t_fd_backup *backup, t_cmd *cmd)
 		get_shell()->exit_status = 1;
 		return (-1);
 	}
+	restore_and_close(backup);
 	return (0);
 }
 
-int	exec_builtin(int code, t_cmd *cmd)
+int	exec_builtin(int code, t_cmd *cmd, t_env *env)
 {
-	t_fd_backup	backup;
+	t_shell	*shell;
 
-	if (fds_error(&backup, cmd))
+	shell = get_shell();
+	if (fds_error(shell->backup_fds, cmd))
 		return (-1);
 	if (code == ECHO)
-		get_shell()->exit_status = ft_echo(cmd->args);
+		shell->exit_status = ft_echo(cmd->args);
 	else if (code == PWD)
-		get_shell()->exit_status = ft_pwd();
+		shell->exit_status = ft_pwd();
 	else if (code == CD)
-		get_shell()->exit_status = ft_cd(cmd->args);
+		shell->exit_status = ft_cd(cmd->args);
 	else if (code == ENV)
-		get_shell()->exit_status = ft_env(cmd->args);
+		shell->exit_status = ft_env(cmd->args);
 	else if (code == EXPORT)
-		get_shell()->exit_status = ft_export(cmd->args);
+		shell->exit_status = ft_export(cmd->args);
 	else if (code == UNSET)
-		get_shell()->exit_status = ft_unset(&(get_shell()->env), cmd->args);
+		shell->exit_status = ft_unset(&env, cmd->args);
 	else if (code == EXIT)
-	{
-		restore_and_close(&backup);
-		get_shell()->exit_status = ft_exit(cmd->args);
-		return (get_shell()->exit_status);
-	}
-	restore_and_close(&backup);
-	return (get_shell()->exit_status);
+		shell->exit_status = ft_exit(cmd->args);
+	restore_and_close(shell->backup_fds);
+	return (shell->exit_status);
 }
 
 void	restore_and_close(t_fd_backup *backup)

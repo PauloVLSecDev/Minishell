@@ -6,13 +6,15 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/27 15:45:07 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 18:39:37 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_all(t_cmd *cmd)
+static int	valid_builtin(int isbuiltin, t_cmd *cmd, t_env *envp);
+
+void	exec_all(t_cmd *cmd, t_env *envp)
 {
 	char	**new_env;
 	char	**path;
@@ -24,19 +26,13 @@ void	exec_all(t_cmd *cmd)
 		return ;
 	expand_all_args(cmd);
 	isbuiltin = is_builtin(cmd->args);
-	if (isbuiltin != -1)
-	{
-		get_shell()->exit_status = exec_builtin(isbuiltin, cmd);
-		cleanup_iteration();
+	if (valid_builtin(isbuiltin, cmd, envp))
 		return ;
-	}
-	else
-	{
-		new_env = recreate_env(get_shell()->env);
-		path = find_path(get_shell()->env);
-		exec_external(cmd, new_env, path);
-		free_all(new_env);
-	}
+	new_env = recreate_env(envp);
+	path = find_path(envp);
+	exec_external(cmd, new_env, path);
+	free_all(new_env);
+	free_all(path);
 }
 
 void	exec_external(t_cmd *cmd, char **env, char **path)
@@ -49,7 +45,7 @@ void	exec_external(t_cmd *cmd, char **env, char **path)
 	if (!abs_path)
 	{
 		ft_putstr_fd(cmd->args[0], 2);
-		ft_putstr_fd(" command not found\n", 2);
+		ft_putstr_fd("command not found\n", 2);
 		get_shell()->exit_status = 127;
 		cleanup_iteration();
 		return ;
@@ -57,12 +53,29 @@ void	exec_external(t_cmd *cmd, char **env, char **path)
 	if (execve(abs_path, cmd->args, env) == -1)
 	{
 		ft_putstr_fd(cmd->args[0], 2);
-		ft_putstr_fd(" command not found\n", 2);
+		ft_putstr_fd("command not found\n", 2);
 		free(abs_path);
 		cleanup_iteration();
+		free_env(get_shell()->env);
+		free_all(env);
 		exit(get_shell()->exit_status = 127);
 	}
 	free(abs_path);
+}
+
+static int	valid_builtin(int isbuiltin, t_cmd *cmd, t_env *envp)
+{
+	int	exit_code;
+
+	exit_code = 0;
+	if (isbuiltin != -1)
+	{
+		exit_code = exec_builtin(isbuiltin, cmd, envp);
+		get_shell()->exit_status = exit_code;
+		cleanup_iteration();
+		return (1);
+	}
+	return (0);
 }
 
 static char *strip_quotes(char *s)

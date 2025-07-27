@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:17:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/21 20:44:16 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/27 18:29:02 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	is_heredoc(t_token **curr)
 
 void	handle_heredoc(t_token **token, int *hd_counter, t_cmd **cmd)
 {
-	process_heredoc(*token, ++(*hd_counter), cmd);
+	process_heredoc(*token, *hd_counter, cmd);
 	if ((*token)->next)
 		*token = (*token)->next;
 	if (*token)

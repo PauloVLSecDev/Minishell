@@ -6,13 +6,14 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/23 15:52:14 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/27 18:28:20 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# include "builtin.h"
 # include "minishell.h"
 
 typedef struct s_token		t_token;
@@ -28,7 +29,10 @@ typedef struct s_shell
 	t_token					*token;
 	t_cmd					*cmd;
 	t_env					*env;
+	t_fd_backup				*backup_fds;
 	char					*input;
+	int						must_execute;
+	int						heredoc_counter;
 	char					**env_copy;
 	int						exit_status;
 }							t_shell;
