@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/24 19:43:50 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 15:44:57 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <stdbool.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -41,7 +42,7 @@ void			append_token(t_token **token, t_token **current, char *value);
 void			ft_print_token(t_token *list);
 int				extract_redir_or_pipe(char *input, int *i, t_token **token,
 					t_token **current);
-int				ft_avoid_tokens(char *input, int *i);
+int	ft_avoid_tokens(char *input, int *i);
 
 // parser.c
 int				check_quotes(char *input);
@@ -125,7 +126,7 @@ void			on_sigquit(int signum);
 // HEREDOC.C
 void			process_heredoc(t_token *current, int i, t_cmd **cmd);
 void			heredoc_manager(t_token *current, int fd_heredoc);
-void			exec_heredoc(char *delimiter, int quotes, int fd_heredoc);
+void	exec_heredoc(char *delimiter, int fd_heredoc);
 void			heredoc(t_token *token);
 void			close_all(void);
 
