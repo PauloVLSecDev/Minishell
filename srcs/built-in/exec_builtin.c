@@ -50,10 +50,10 @@ int	fds_error(t_fd_backup *backup, t_cmd *cmd)
 
 int	exec_builtin(int code, t_cmd *cmd, t_env *env)
 {
-	t_shell *shell;
+	t_shell	*shell;
 
 	shell = get_shell();
- 	if (fds_error(shell->backup_fds, cmd))
+	if (fds_error(shell->backup_fds, cmd))
 		return (-1);
 	if (code == ECHO)
 		shell->exit_status = ft_echo(cmd->args);

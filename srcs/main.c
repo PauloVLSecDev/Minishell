@@ -6,11 +6,13 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/26 21:33:36 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:55:17 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	double_valid_token_and_mcharacteres(t_token *token);
 
 int	verify_input(char *input)
 {
@@ -53,16 +55,21 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 			continue ;
 		tmp_node = tokenization(get_shell()->token, input, aux_node);
 		get_shell()->token = tmp_node;
-		if (!get_shell()->token || valid_metacharacteres(get_shell()->token))
-		{
-			cleanup_iteration();
+		if (double_valid_token_and_mcharacteres(get_shell()->token))
 			continue ;
-		}
 		handle_command(get_shell()->token);
-		if (get_shell()->heredoc_counter == -1)
-			set_std_cmd();
 		smart_execute(get_shell()->cmd);
 		cleanup_iteration();
+	}
+	return (0);
+}
+
+static int	double_valid_token_and_mcharacteres(t_token *token)
+{
+	if (!token || valid_metacharacteres(token))
+	{
+		cleanup_iteration();
+		return (1);
 	}
 	return (0);
 }
@@ -76,7 +83,7 @@ t_shell	*get_shell(void)
 
 void	init_shell(t_env *envp)
 {
-	t_fd_backup backup;
+	t_fd_backup	backup;
 
 	get_shell()->env = envp;
 	get_shell()->cmd = NULL;

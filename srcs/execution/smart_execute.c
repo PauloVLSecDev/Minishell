@@ -22,6 +22,8 @@ void	smart_execute(t_cmd *cmd)
 
 	path = NULL;
 	new_env = NULL;
+	if (get_shell()->heredoc_counter == -1)
+		set_std_cmd();
 	if (cmd_args_is_null(cmd))
 		return ;
 	if (cmd->next == NULL && get_shell()->must_execute != 1)

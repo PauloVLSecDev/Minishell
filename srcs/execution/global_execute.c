@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_execute.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/26 20:21:24 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:41:53 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	exec_external(t_cmd *cmd, char **env, char **path)
 	if (!abs_path)
 	{
 		ft_putstr_fd(cmd->args[0], 2);
-		ft_putstr_fd(" command not found\n", 2);
+		ft_putstr_fd("command not found\n", 2);
 		get_shell()->exit_status = 127;
 		cleanup_iteration();
 		return ;
@@ -53,9 +53,11 @@ void	exec_external(t_cmd *cmd, char **env, char **path)
 	if (execve(abs_path, cmd->args, env) == -1)
 	{
 		ft_putstr_fd(cmd->args[0], 2);
-		ft_putstr_fd(" command not found\n", 2);
+		ft_putstr_fd("command not found\n", 2);
 		free(abs_path);
 		cleanup_iteration();
+		free_env(get_shell()->env);
+		free_all(env);
 		exit(get_shell()->exit_status = 127);
 	}
 	free(abs_path);
