@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:42:15 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/01 14:52:51 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:27:03 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_exit(char **args)
 	ac = count_arg(args);
 	if (ac > 2)
 	{
-		ft_putstr_fd("exit: Too many arguments\n", 2);
+		ft_putstr_fd("exit: too many arguments\n", 2);
 		return (1);
 	}
 	if (args[1] && !is_numeric(args[1]))

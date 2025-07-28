@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 12:45:10 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/15 19:33:13 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:25:36 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_cd(char **args)
 	}
 	else if (args[2])
 	{
-		ft_putendl_fd("cd: Too many arguments.", 2);
+		ft_putendl_fd("cd: too many arguments.", 2);
 		return (1);
 	}
 	else if (chdir(args[1]) != 0)

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 21:23:52 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:32:16 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void			init_shell(t_env *env);
 t_shell			*get_shell(void);
 void			handle_heredoc(t_token **token, int *hd_counter, t_cmd **cmd);
 int				is_space(char c);
-
+int				count_cmd(t_cmd *cmd);
+void			perror_and_exit(void);
 // command.c
 void			handle_command(t_token *token);
 void			process_all(t_cmd **cmd, t_token **token, int *i);
@@ -100,7 +101,7 @@ t_cmd			*create_cmd_node(t_token *token);
 
 // pipe.c
 void			execute_pipeline(t_cmd *cmd);
-void			create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd);
+pid_t			create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd);
 
 // single_command.c
 void			smart_execute(t_cmd *cmd);
