@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 20:50:13 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:08:32 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void			add_in_outfile(t_cmd **cmd, char *filename);
 int				valid_metacharacteres(t_token *token);
 
 // SIGNALS.C
-void			setup_signals(void);
+void			signals_ctrl_c(void);
 void			on_sigint(int signum);
 void			set_std_cmd(void);
 

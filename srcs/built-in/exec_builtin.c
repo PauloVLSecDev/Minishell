@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:36:05 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 18:36:52 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:00:14 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	fds_error(t_fd_backup *backup, t_cmd *cmd)
 		get_shell()->exit_status = 1;
 		return (-1);
 	}
-	restore_and_close(backup);
+	if (!is_builtin(cmd->args))
+		restore_and_close(backup);
 	return (0);
 }
 

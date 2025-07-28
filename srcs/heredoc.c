@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 20:47:58 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:10:12 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	hd_parent_heredoc(pid_t pid, int status, int fd_heredoc)
 {
 	waitpid(pid, &status, 0);
 	close(fd_heredoc);
-	setup_signals();
+	signals_ctrl_c();
 	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 	{
 		get_shell()->exit_status = 130;
@@ -94,14 +94,15 @@ void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 	char	*input;
 	char	*expanded;
 
-	expanded  = NULL;
+	expanded = NULL;
 	while (1)
 	{
 		input = readline("> ");
 		if (!input)
 		{
 			printf("warning: here-document at line 22 delimited"
-				"by end-of-file (wanted `%s')\n", delimiter);
+					"by end-of-file (wanted `%s')\n",
+					delimiter);
 			break ;
 		}
 		if (!ft_strcmp(input, delimiter))

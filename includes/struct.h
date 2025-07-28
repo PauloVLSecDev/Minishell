@@ -54,14 +54,14 @@ typedef enum e_token_type
 	TOKEN_APPEND,
 	TOKEN_HEREDOC,
 	TOKEN_EOF,
-}	t_token_type;
+}							t_token_type;
 
 typedef enum e_quotemode
 {
-    QUOTE_NONE   = 0,
-    QUOTE_SINGLE = 1,
-    QUOTE_DOUBLE = 2
-}   t_qmode;
+	QUOTE_NONE = 0,
+	QUOTE_SINGLE = 1,
+	QUOTE_DOUBLE = 2
+}							t_qmode;
 
 typedef struct s_token
 {

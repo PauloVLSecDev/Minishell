@@ -78,46 +78,46 @@ static int	valid_builtin(int isbuiltin, t_cmd *cmd, t_env *envp)
 	return (0);
 }
 
-static char *strip_quotes(char *s)
+static char	*strip_quotes(char *s)
 {
-    int   len;
-    char *out;
+	int		len;
+	char	*out;
 
-    if (!s)
-        return NULL;
-    len = ft_strlen(s);
-    if (len >= 2 && ((s[0] == '\'' && s[len-1] == '\'') ||
-                     (s[0] == '"'  && s[len-1] == '"')))
-    {
-        out = malloc(len - 1);
-        if (!out)
-            return NULL;
-        ft_memmove(out, s + 1, len - 2);
-        return out;
-    }
-    return ft_strdup(s);
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	if (len >= 2 && ((s[0] == '\'' && s[len - 1] == '\'') || (s[0] == '"'
+				&& s[len - 1] == '"')))
+	{
+		out = malloc(len - 1);
+		if (!out)
+			return (NULL);
+		ft_memmove(out, s + 1, len - 2);
+		return (out);
+	}
+	return (ft_strdup(s));
 }
 
-void expand_all_args(t_cmd *cmd)
+void	expand_all_args(t_cmd *cmd)
 {
-    int		i;
-    char	*tmp;
-    char	*noquotes;
+	int		i;
+	char	*tmp;
+	char	*noquotes;
 	char	*expanded;
 
-	expanded  = ft_strdup("");
-    while (cmd)
-    {
-        i = 0;
-        while (cmd->args && cmd->args[i])
-        {
-            tmp = expand_var(cmd->args[i], expanded);
-            free(cmd->args[i]);
-            noquotes = strip_quotes(tmp);
-            free(tmp);
-            cmd->args[i] = noquotes;
-            i++;
-        }
-        cmd = cmd->next;
-    }
+	expanded = ft_strdup("");
+	while (cmd)
+	{
+		i = 0;
+		while (cmd->args && cmd->args[i])
+		{
+			tmp = expand_var(cmd->args[i], expanded);
+			free(cmd->args[i]);
+			noquotes = strip_quotes(tmp);
+			free(tmp);
+			cmd->args[i] = noquotes;
+			i++;
+		}
+		cmd = cmd->next;
+	}
 }
