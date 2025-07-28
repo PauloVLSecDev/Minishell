@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 17:54:27 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 21:43:08 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:04:07 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,12 @@ static void	extract_redir_target(char *input, int *i, t_token **token,
 	}
 }
 
-int	extract_redir_or_pipe(char *input, int *i, t_token **token,
-		t_token **current)
+int	redir_or_pipe(char *inp, int *i, t_token **tok, t_token **cur)
 {
-	if (input[*i] == '|' || input[*i] == '<' || input[*i] == '>')
+	if (inp[*i] == '|' || inp[*i] == '<' || inp[*i] == '>')
 	{
-		extract_redir_value(input, i, token, current);
-		extract_redir_target(input, i, token, current);
+		extract_redir_value(inp, i, tok, cur);
+		extract_redir_target(inp, i, tok, cur);
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/28 18:59:46 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:04:27 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_token_type	find_token_type(char *str)
 		return (TOKEN_WORD);
 }
 
-int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
+int	handle_quotes(char *inp, int *i, t_token **tok, t_token **cur)
 {
 	int		quote_pos;
 	char	delim;
@@ -37,22 +37,22 @@ int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
 	char	*joined;
 
 	quote_pos = *i;
-	delim = input[*i];
+	delim = inp[*i];
 	(*i)++;
-	while (input[*i] && input[*i] != delim)
+	while (inp[*i] && inp[*i] != delim)
 		(*i)++;
 	end_pos = *i;
-	if (input[*i] == delim)
+	if (inp[*i] == delim)
 		(*i)++;
-	value = ft_substr(input, quote_pos, end_pos - quote_pos + 1);
-	if (*current && quote_pos > 0 && !is_space(input[quote_pos - 1]))
+	value = ft_substr(inp, quote_pos, end_pos - quote_pos + 1);
+	if (*cur && quote_pos > 0 && !is_space(inp[quote_pos - 1]))
 	{
-		joined = ft_strjoin((*current)->value, value);
-		free((*current)->value);
-		(*current)->value = joined;
+		joined = ft_strjoin((*cur)->value, value);
+		free((*cur)->value);
+		(*cur)->value = joined;
 	}
 	else
-		append_token(token, current, value);
+		append_token(tok, cur, value);
 	free(value);
 	return (1);
 }
@@ -92,7 +92,7 @@ t_token	*tokenization(t_token *token, char *input, t_token *current)
 	{
 		if (ft_avoid_tokens(input, &i))
 			continue ;
-		if (extract_redir_or_pipe(input, &i, &token, &current))
+		if (redir_or_pipe(input, &i, &token, &current))
 			continue ;
 		if (input[i] != TOKEN_HEREDOC && (input[i] == QUOTE
 				|| input[i] == DOUBLE_QUOTE))

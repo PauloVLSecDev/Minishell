@@ -6,7 +6,7 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/07/28 18:43:43 by pvitor-l         ###   ########.fr        #
+#    Updated: 2025/07/28 19:41:47 by brunogue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/redirect/redirect_utils.c \
 		$(SRC_DIR)/expand/expand.c \
 		$(SRC_DIR)/expand/expand_utils.c \
+		$(SRC_DIR)/expand/expand_ternary.c \
 		$(SRC_DIR)/signals.c \
 		$(SRC_DIR)/heredoc.c \
 		$(SRC_DIR)/heredoc_utils.c \

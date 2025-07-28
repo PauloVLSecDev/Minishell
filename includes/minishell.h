@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/28 18:44:05 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:03:04 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@
 # define QUOTE '\''
 # define DOUBLE_QUOTE '"'
 
-// token.c
+//┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╝✹╚━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑//
+
+// ▊▊▊▊ token.c ▊▊▊▊
 t_token_type	find_token_type(char *str);
 t_token			*tokenization(t_token *token, char *input, t_token *current);
-int				handle_quotes(char *input, int *i, t_token **token,
-					t_token **current);
+int				handle_quotes(char *inp, int *i, t_token **tok, t_token **cur);
 void			append_token(t_token **token, t_token **current, char *value);
 void			ft_print_token(t_token *list);
-int				extract_redir_or_pipe(char *input, int *i, t_token **token,
-					t_token **current);
+int				redir_or_pipe(char *inp, int *i, t_token **tok, t_token **cur);
 int				ft_avoid_tokens(char *input, int *i);
 
-// parser.c
+// ▊▊▊▊ parser.c ▊▊▊▊
 int				check_quotes(char *input);
 int				valid_pipe(t_token *list);
 int				valid_heredoc(t_token *list);
@@ -52,11 +52,11 @@ int				valid_redir_out(t_token *list);
 int				valid_redir_in(t_token *list);
 int				valid_append(t_token *token);
 
-// free.c
+// ▊▊▊▊ free.c ▊▊▊▊
 void			free_token_list(t_token *head);
 void			cleanup_iteration(void);
 
-// environment.c
+// ▊▊▊▊ environment.c ▊▊▊▊
 t_env			*linked_node_env(char **env);
 t_env			*create_node_env(char *name, char *content);
 void			free_env(t_env *env);
@@ -66,27 +66,32 @@ void			insert_node(char *env_name, t_env *curr_node, char *content);
 void			free_token_list(t_token *head);
 void			free_cmd(t_cmd *cmd);
 
-// execution.c
+// ▊▊▊▊ execution.c ▊▊▊▊
 char			**find_path(t_env *env);
 char			*join_path_with_cmd(char **path, t_cmd *cmd);
 char			**recreate_env(t_env *env);
 int				count_nodes(t_env *env);
 
-// global_exection.c
+// ▊▊▊▊ global_exection.c ▊▊▊▊
 void			exec_all(t_cmd *cmd, t_env *envp);
 void			exec_external(t_cmd *cmd, char **env, char **path);
 
 void			expand_all_args(t_cmd *cmd);
 
-// expand.c
+// ▊▊▊▊ expand.c ▊▊▊▊
+int				verify_dollar_sign(char *arg, char **expanded);
 char			*expand_var(char *arg, char *expanded);
-char			*expand_env(char *arg, int *i, t_env *env);
+
+// ▊▊▊▊ expand_utils.c ▊▊▊▊
 char			*which_expand(char c);
 char			*append_str(char *dest, const char *src);
-int				verify_dollar_sign(char *arg, char **expanded);
-int				ternary(int condition, int true_val, int false_val);
+char			*expand_env(char *arg, int *i, t_env *env);
 
-// utils.c
+// ▊▊▊▊ expand_ternary.c ▊▊▊▊
+int				ternary(int condition, int true_val, int false_val);
+t_qmode			toggle_quote(char c, t_qmode in_quotes);
+
+// ▊▊▊▊ utils.c ▊▊▊▊
 char			*ft_join_three(char *s1, char *s2, char *s3);
 void			init_shell(t_env *env);
 t_shell			*get_shell(void);
@@ -94,22 +99,22 @@ void			handle_heredoc(t_token **token, int *hd_counter, t_cmd **cmd);
 int				is_space(char c);
 int				count_cmd(t_cmd *cmd);
 void			perror_and_exit(void);
-// command.c
+// ▊▊▊▊ command.c ▊▊▊▊
 void			handle_command(t_token *token);
-void			process_all(t_cmd **cmd, t_token **token, int *i);
-void			process_pipe(t_cmd **cmd, t_token **token, int *i);
-void			process_word(t_cmd **cmd, t_token **token, int *i);
 t_cmd			*create_cmd_node(t_token *token);
+void			process_all(t_cmd **cmd, t_token **to, int *i);
+void			process_word(t_cmd **curr_cmd, t_token **token, int *i);
+void			process_pipe(t_cmd **cmd, t_token **token, int *i);
 
-// pipe.c
+// ▊▊▊▊ pipe.c ▊▊▊▊
 void			execute_pipeline(t_cmd *cmd);
 pid_t			create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd);
 
-// single_command.c
+// ▊▊▊▊ single_command.c ▊▊▊▊
 void			smart_execute(t_cmd *cmd);
 void			exec_single_command(t_cmd *cmd, char **new_env, char **path);
 
-// redirect.c
+// ▊▊▊▊ redirect.c ▊▊▊▊
 int				process_redirect(t_cmd **cmd, t_token **token, char *filename);
 int				redir_actions(t_cmd *cmd);
 int				valid_file(char *filename, t_cmd **cmd);
@@ -118,15 +123,15 @@ void			backup_fds(t_fd_backup *backup);
 void			close_fds(t_fd_backup *backup);
 void			add_in_outfile(t_cmd **cmd, char *filename);
 
-// valid_all.c
+// ▊▊▊▊ valid_all.c ▊▊▊▊
 int				valid_metacharacteres(t_token *token);
 
-// SIGNALS.C
+// ▊▊▊▊ signals.c ▊▊▊▊
 void			signals_ctrl_c(void);
 void			on_sigint(int signum);
 void			set_std_cmd(void);
 
-// HEREDOC.C
+// ▊▊▊▊ heredoc.c ▊▊▊▊ 
 void			process_heredoc(t_token *current, int i, t_cmd **cmd);
 void			heredoc_manager(t_token *current, int fd_heredoc);
 void			exec_heredoc(char *delimiter, int quotes, int fd_heredoc);
@@ -134,5 +139,7 @@ void			heredoc(t_token *token);
 void			close_all(void);
 void			handle_heredoc_sigint(int sig);
 void			signals_heredoc(void);
+
+//┕━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╗✹╔━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┙//
 
 #endif

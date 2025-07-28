@@ -6,18 +6,11 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 16:49:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/28 16:50:20 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:41:58 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ternary(int condition, int true_val, int false_val)
-{
-	if (condition)
-		return (true_val);
-	return (false_val);
-}
 
 char	*which_expand(char c)
 {
