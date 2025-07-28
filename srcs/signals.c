@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:17:14 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 18:29:18 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:07:40 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	on_sigint(int signum)
 	rl_redisplay();
 }
 
-void	setup_signals(void)
+void	signals_ctrl_c(void)
 {
 	signal(SIGINT, on_sigint);
 	signal(SIGQUIT, SIG_IGN);

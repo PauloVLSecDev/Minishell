@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:17:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/27 18:29:02 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:23:36 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,10 @@ void	add_in_outfile(t_cmd **cmd, char *filename)
 	if ((*cmd)->outfile)
 		free((*cmd)->outfile);
 	(*cmd)->outfile = ft_strdup(filename);
+}
+
+int	is_space(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r');
 }

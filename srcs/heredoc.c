@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 21:01:42 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:19:31 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	hd_parent_heredoc(pid_t pid, int status, int fd_heredoc)
 {
 	waitpid(pid, &status, 0);
 	close(fd_heredoc);
-	setup_signals();
 	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 	{
 		get_shell()->exit_status = 130;

@@ -19,7 +19,7 @@ int	ft_echo(char **args)
 	char	*expanded;
 
 	i = 1;
-	expanded  = ft_strdup("");
+	expanded = ft_strdup("");
 	n_flag = 0;
 	if (args[1] && !ft_strcmp(args[1], "-n"))
 	{
