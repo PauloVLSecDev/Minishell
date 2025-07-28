@@ -6,13 +6,14 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:52:12 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/22 14:57:36 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:42:41 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# include "builtin.h"
 # include "minishell.h"
 # include <stdbool.h>
 
@@ -29,7 +30,10 @@ typedef struct s_shell
 	t_token					*token;
 	t_cmd					*cmd;
 	t_env					*env;
+	t_fd_backup				*backup_fds;
 	char					*input;
+	int						must_execute;
+	int						heredoc_counter;
 	char					**env_copy;
 	int						exit_status;
 }							t_shell;
@@ -52,6 +56,13 @@ typedef enum e_token_type
 	TOKEN_HEREDOC,
 	TOKEN_EOF,
 }							t_token_type;
+
+typedef enum e_quotemode
+{
+	QUOTE_NONE = 0,
+	QUOTE_SINGLE = 1,
+	QUOTE_DOUBLE = 2
+}							t_qmode;
 
 typedef struct s_token
 {

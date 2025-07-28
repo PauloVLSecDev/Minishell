@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:17:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/21 20:44:16 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:23:36 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	is_heredoc(t_token **curr)
 
 void	handle_heredoc(t_token **token, int *hd_counter, t_cmd **cmd)
 {
-	process_heredoc(*token, ++(*hd_counter), cmd);
+	process_heredoc(*token, *hd_counter, cmd);
 	if ((*token)->next)
 		*token = (*token)->next;
 	if (*token)
@@ -85,4 +85,10 @@ void	add_in_outfile(t_cmd **cmd, char *filename)
 	if ((*cmd)->outfile)
 		free((*cmd)->outfile);
 	(*cmd)->outfile = ft_strdup(filename);
+}
+
+int	is_space(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r');
 }

@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:01:04 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/15 18:56:59 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 18:37:21 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # endif
 
 # include "minishell.h"
+# include "struct.h"
 
 enum	e_builtin
 {
@@ -33,7 +34,7 @@ enum	e_builtin
 
 // EXEC_BUILTIN
 int		is_builtin(char **args);
-int		exec_builtin(int codem, t_cmd *cmd);
+int		exec_builtin(int codem, t_cmd *cmd, t_env *env);
 int		count_word(t_token *token);
 void	token_to_cmd(void);
 void	restore_and_close(t_fd_backup *backup);

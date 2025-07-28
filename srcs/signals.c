@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:17:14 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/17 20:43:12 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:07:40 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,26 @@ void	on_sigint(int signum)
 	rl_redisplay();
 }
 
-void	on_sigquit(int signum)
-{
-	(void)signum;
-}
-
-void	setup_signals(void)
+void	signals_ctrl_c(void)
 {
 	signal(SIGINT, on_sigint);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+void	std_cmd_c(int sig)
+{
+	if (sig == SIGINT)
+		write(1, "\n", 1);
+}
+
+void	std_cmd_back_slash(int sig)
+{
+	if (sig == SIGQUIT)
+		write(1, "Quit (core dumped)\n", 20);
+}
+
+void	set_std_cmd(void)
+{
+	signal(SIGINT, std_cmd_c);
+	signal(SIGQUIT, std_cmd_back_slash);
 }
