@@ -6,14 +6,13 @@
 #    By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 20:04:53 by pvitor-l          #+#    #+#              #
-#    Updated: 2025/07/28 16:49:53 by brunogue         ###   ########.fr        #
+#    Updated: 2025/07/28 18:43:43 by pvitor-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME = minishell 
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g3
-
 SRC_DIR = srcs
 OBJ_DIR = obj
 INCLUDES_DIR = includes
@@ -42,6 +41,7 @@ FILES = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/execution/global_execute.c \
 		$(SRC_DIR)/execution/command.c \
 		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/utils2.c \
 		$(SRC_DIR)/execution/pipe.c \
 		$(SRC_DIR)/execution/smart_execute.c \
 		$(SRC_DIR)/redirect/valid_all.c \

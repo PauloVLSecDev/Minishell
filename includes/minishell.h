@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:55:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/28 16:51:40 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:44:05 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <stdbool.h>
 # include <signal.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
@@ -42,7 +42,7 @@ void			append_token(t_token **token, t_token **current, char *value);
 void			ft_print_token(t_token *list);
 int				extract_redir_or_pipe(char *input, int *i, t_token **token,
 					t_token **current);
-int	ft_avoid_tokens(char *input, int *i);
+int				ft_avoid_tokens(char *input, int *i);
 
 // parser.c
 int				check_quotes(char *input);
@@ -84,7 +84,7 @@ char			*expand_env(char *arg, int *i, t_env *env);
 char			*which_expand(char c);
 char			*append_str(char *dest, const char *src);
 int				verify_dollar_sign(char *arg, char **expanded);
-int	ternary(int condition, int true_val, int false_val);
+int				ternary(int condition, int true_val, int false_val);
 
 // utils.c
 char			*ft_join_three(char *s1, char *s2, char *s3);
@@ -92,7 +92,8 @@ void			init_shell(t_env *env);
 t_shell			*get_shell(void);
 void			handle_heredoc(t_token **token, int *hd_counter, t_cmd **cmd);
 int				is_space(char c);
-
+int				count_cmd(t_cmd *cmd);
+void			perror_and_exit(void);
 // command.c
 void			handle_command(t_token *token);
 void			process_all(t_cmd **cmd, t_token **token, int *i);
@@ -102,7 +103,7 @@ t_cmd			*create_cmd_node(t_token *token);
 
 // pipe.c
 void			execute_pipeline(t_cmd *cmd);
-void			create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd);
+pid_t			create_child_process(int *pipefd, t_cmd *cmd, int *prev_fd);
 
 // single_command.c
 void			smart_execute(t_cmd *cmd);

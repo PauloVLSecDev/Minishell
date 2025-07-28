@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 18:05:18 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/27 21:44:46 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:50:49 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 			continue ;
 		tmp_node = tokenization(get_shell()->token, input, aux_node);
 		get_shell()->token = tmp_node;
-		ft_print_token(get_shell()->token);
 		if (double_valid_token_and_mcharacteres(get_shell()->token))
 			continue ;
 		handle_command(get_shell()->token);

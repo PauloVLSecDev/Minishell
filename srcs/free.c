@@ -66,6 +66,7 @@ void	clean_exit(int code)
 		free_cmd(get_shell()->cmd);
 	if (get_shell()->token)
 		free_token_list(get_shell()->token);
+	restore_and_close(get_shell()->backup_fds);
 	exit(code);
 }
 

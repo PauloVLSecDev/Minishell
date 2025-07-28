@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/28 16:47:53 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:59:46 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
 	return (1);
 }
 
-static void	token_of_tokenization(char *input, int *i, t_token **token, t_token **current)
+static void	token_of_tokenization(char *input, int *i, t_token **token,
+		t_token **current)
 {
 	char	*value;
 	int		start;
@@ -123,15 +124,4 @@ void	append_token(t_token **token, t_token **current, char *value)
 	else
 		(*current)->next = new;
 	*current = new;
-}
-
-void	ft_print_token(t_token *list)
-{
-	while (list != NULL)
-	{
-		ft_printf("token: %s         | type of token %d\n", list->value,
-			list->type);
-		list = list->next;
-	}
-	return ;
 }

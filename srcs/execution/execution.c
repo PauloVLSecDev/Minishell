@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 static char	*access_valid(t_cmd *cmd, char **path);
 
 int	count_nodes(t_env *env)
