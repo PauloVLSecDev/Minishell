@@ -35,128 +35,127 @@
 # include <unistd.h>
 
 /* --- Macros --- */
-# define AVOID_TOKENS    " \t\r\v\f\n"
-# define SPECIALS_CHARS  "|><\"\'"
-# define QUOTE           '\''
-# define DOUBLE_QUOTE    '"'
+# define AVOID_TOKENS " \t\r\v\f\n"
+# define SPECIALS_CHARS "|><\"\'"
+# define QUOTE '\''
+# define DOUBLE_QUOTE '"'
 
 /* ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
  * ┃                         Tokenization                         ┃
  * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
  */
-t_token_type    find_token_type(char *str);
-t_token         *tokenization(t_token *token, char *input, t_token *current);
-int             handle_quotes(char *inp, int *i, t_token **tok, t_token **cur);
-int             redir_or_pipe(char *inp, int *i, t_token **tok, t_token **cur);
-int             ft_avoid_tokens(char *input, int *i);
-void            append_token(t_token **token, t_token **current, char *value);
-void            ft_print_token(t_token *list);
+t_token_type	find_token_type(char *str);
+t_token			*tokenization(t_token *token, char *input, t_token *current);
+int				handle_quotes(char *inp, int *i, t_token **tok, t_token **cur);
+int				redir_or_pipe(char *inp, int *i, t_token **tok, t_token **cur);
+int				ft_avoid_tokens(char *input, int *i);
+void			append_token(t_token **token, t_token **current, char *value);
+void			ft_print_token(t_token *list);
 
 /* ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
  * ┃                           Parsing                            ┃
  * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
  */
-int             check_quotes(char *input);
-int             valid_pipe(t_token *list);
-int             valid_heredoc(t_token *list);
-int             valid_redir_out(t_token *list);
-int             valid_redir_in(t_token *list);
-int             valid_append(t_token *token);
-int             valid_metacharacteres(t_token *token);
+int				check_quotes(char *input);
+int				valid_pipe(t_token *list);
+int				valid_heredoc(t_token *list);
+int				valid_redir_out(t_token *list);
+int				valid_redir_in(t_token *list);
+int				valid_append(t_token *token);
+int				valid_metacharacteres(t_token *token);
 
 /* ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
  * ┃                       Environment                            ┃
  * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
  */
-t_env           *linked_node_env(char **env);
-t_env           *create_node_env(char *name, char *content);
-void            insert_node(char *env_name, t_env *curr_node, char *content);
-char            *get_env_name(char *env);
-char            *get_env_value(t_env *env, char *name);
-void            free_env(t_env *env);
-char            **recreate_env(t_env *env);
-int             count_nodes(t_env *env);
+t_env			*linked_node_env(char **env);
+t_env			*create_node_env(char *name, char *content);
+void			insert_node(char *env_name, t_env *curr_node, char *content);
+char			*get_env_name(char *env);
+char			*get_env_value(t_env *env, char *name);
+void			free_env(t_env *env);
+char			**recreate_env(t_env *env);
+int				count_nodes(t_env *env);
 
 /* ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
  * ┃                       Execution & Utils                      ┃
  * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
  */
-char            **find_path(t_env *env);
-char            *join_path_with_cmd(char **path, t_cmd *cmd);
-void            exec_all(t_cmd *cmd, t_env *envp);
-void            exec_external(t_cmd *cmd, char **new_env, char **path);
-void            expand_all_args(t_cmd *cmd);
+char			**find_path(t_env *env);
+char			*join_path_with_cmd(char **path, t_cmd *cmd);
+void			exec_all(t_cmd *cmd, t_env *envp);
+void			exec_external(t_cmd *cmd, char **new_env, char **path);
+void			expand_all_args(t_cmd *cmd);
 
 /* ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
  * ┃                       Expansion & Utils                      ┃
  * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
  */
-int             verify_dollar_sign(char *arg, char **expanded);
-char            *expand_var(char *arg, char *expanded);
-char            *which_expand(char c);
-char            *expand_env(char *arg, int *i, t_env *env);
-char            *append_str(char *dest, const char *src);
-int             ternary(int condition, int true_val, int false_val);
-t_qmode         toggle_quote(char c, t_qmode in_quotes);
+int				verify_dollar_sign(char *arg, char **expanded);
+char			*expand_var(char *arg, char *expanded);
+char			*which_expand(char c);
+char			*expand_env(char *arg, int *i, t_env *env);
+char			*append_str(char *dest, const char *src);
+int				ternary(int condition, int true_val, int false_val);
+t_qmode			toggle_quote(char c, t_qmode in_quotes);
 
 /* ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
  * ┃                     Command & Execution                      ┃
  * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
  */
-void            init_shell(t_env *env);
-t_shell         *get_shell(void);
-void            handle_command(t_token *token);
-t_cmd           *create_cmd_node(t_token *token);
-void            process_all(t_cmd **cmd, t_token **token, int *i);
-void            process_word(t_cmd **current, t_token **token, int *i);
-void            process_pipe(t_cmd **cmd, t_token **token, int *i);
+void			init_shell(t_env *env);
+t_shell			*get_shell(void);
+void			handle_command(t_token *token);
+t_cmd			*create_cmd_node(t_token *token);
+void			process_all(t_cmd **cmd, t_token **token, int *i);
+void			process_word(t_cmd **current, t_token **token, int *i);
+void			process_pipe(t_cmd **cmd, t_token **token, int *i);
 
 /* Pipeline */
-void            execute_pipeline(t_cmd *cmd);
-pid_t           create_child_process(int pipefd[2], t_cmd *cmd, int *prev_fd);
+void			execute_pipeline(t_cmd *cmd);
+pid_t			create_child_process(int pipefd[2], t_cmd *cmd, int *prev_fd);
 
 /* Single Command */
-void            smart_execute(t_cmd *cmd);
-void            exec_single_command(t_cmd *cmd, char **new_env, char **path);
+void			smart_execute(t_cmd *cmd);
+void			exec_single_command(t_cmd *cmd, char **new_env, char **path);
 
 /* Redirects */
-int             process_redirect(t_cmd **cmd, t_token **token, char *filename);
-int             redir_actions(t_cmd *cmd);
-int             valid_file(char *filename, t_cmd **cmd);
-void            backup_fds(t_fd_backup *backup);
-void            close_fds(t_fd_backup *backup);
-void            restaure_for_origin_fds(t_fd_backup *backup);
-void            add_in_outfile(t_cmd **cmd, char *filename);
+int				process_redirect(t_cmd **cmd, t_token **token, char *filename);
+int				redir_actions(t_cmd *cmd);
+int				valid_file(char *filename, t_cmd **cmd);
+void			backup_fds(t_fd_backup *backup);
+void			close_fds(t_fd_backup *backup);
+void			restaure_for_origin_fds(t_fd_backup *backup);
+void			add_in_outfile(t_cmd **cmd, char *filename);
 
 /* Here-Document */
-void            process_heredoc(t_token *current, int i, t_cmd **cmd);
-void            heredoc_manager(t_token *current, int fd_heredoc);
-void            exec_heredoc(char *delimiter, int quotes, int fd_heredoc);
-void            heredoc(t_token *token);
-void            close_all(void);
-void            handle_heredoc_sigint(int sig);
+void			process_heredoc(t_token *current, int i, t_cmd **cmd);
+void			heredoc_manager(t_token *current, int fd_heredoc);
+void			exec_heredoc(char *delimiter, int quotes, int fd_heredoc);
+void			heredoc(t_token *token);
+void			close_all(void);
+void			handle_heredoc_sigint(int sig);
 void			handle_heredoc(t_token **token, int *hd_counter, t_cmd **cmd);
-void            signals_heredoc(void);
+void			signals_heredoc(void);
 
 /* Cleanup */
-void            free_token_list(t_token *head);
-void            free_cmd(t_cmd *cmd);
-void            cleanup_iteration(void);
-void            clean_exit(int code);
+void			free_token_list(t_token *head);
+void			free_cmd(t_cmd *cmd);
+void			cleanup_iteration(void);
+void			clean_exit(int code);
 
 /* Signals */
-void            signals_ctrl_c(void);
-void            on_sigint(int signum);
-void            set_std_cmd(void);
+void			signals_ctrl_c(void);
+void			on_sigint(int signum);
+void			set_std_cmd(void);
 
 /* Utils */
-char            *ft_join_three(char *s1, char *s2, char *s3);
-int             is_space(char c);
-void            restore_and_close(t_fd_backup *backup);
+char			*ft_join_three(char *s1, char *s2, char *s3);
+int				is_space(char c);
+void			restore_and_close(t_fd_backup *backup);
 
 /* Utils2 */
 int				count_cmd(t_cmd *cmd);
 void			perror_and_exit(void);
-
 
 #endif /* MINISHELL_H */
