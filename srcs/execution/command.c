@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 void	handle_command(t_token *token)
 {
 	t_cmd	*curr_cmd;
@@ -51,10 +50,11 @@ t_cmd	*create_cmd_node(t_token *token)
 	new_cmd->outfile = NULL;
 	new_cmd->next = NULL;
 	new_cmd->append_mode = 0;
-	new_cmd->args = (char **)ft_calloc((word_count + 1), sizeof(char *));
+	new_cmd->args = ft_calloc((word_count + 1), sizeof(char *));
 	if (!new_cmd->args)
 	{
 		free(new_cmd);
+		cleanup_iteration();
 		return (NULL);
 	}
 	return (new_cmd);

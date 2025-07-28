@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:28:11 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 21:43:32 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:47:53 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,34 @@ int	handle_quotes(char *input, int *i, t_token **token, t_token **current)
 	return (1);
 }
 
-t_token	*tokenization(t_token *token, char *input, t_token *current)
+static void	token_of_tokenization(char *input, int *i, t_token **token, t_token **current)
 {
 	char	*value;
-	int		i;
 	int		start;
 	char	*joined;
+
+	start = *i;
+	while (input[*i] && !ft_strchr(AVOID_TOKENS, input[*i])
+		&& !ft_strchr(SPECIALS_CHARS, input[*i]) && !(is_space(input[*i])))
+		(*i)++;
+	if (*i > start)
+	{
+		value = ft_substr(input, start, *i - start);
+		if (start == 0 || is_space(input[start - 1]) || *current == NULL)
+			append_token(token, current, value);
+		else
+		{
+			joined = ft_strjoin((*current)->value, value);
+			free((*current)->value);
+			(*current)->value = joined;
+		}
+		free(value);
+	}
+}
+
+t_token	*tokenization(t_token *token, char *input, t_token *current)
+{
+	int	i;
 
 	i = 0;
 	while (input[i])
@@ -77,25 +99,7 @@ t_token	*tokenization(t_token *token, char *input, t_token *current)
 			handle_quotes(input, &i, &token, &current);
 			continue ;
 		}
-		start = i;
-		while (input[i] && !ft_strchr(AVOID_TOKENS, input[i])
-			&& !ft_strchr(SPECIALS_CHARS, input[i]) && !(is_space(input[i])))
-			i++;
-		if (i > start)
-		{
-			value = ft_substr(input, start, i - start);
-			if (start == 0 || is_space(input[start - 1]) || current == NULL)
-			{
-				append_token(&token, &current, value);
-			}
-			else
-			{
-				joined = ft_strjoin(current->value, value);
-				free(current->value);
-				current->value = joined;
-			}
-			free(value);
-		}
+		token_of_tokenization(input, &i, &token, &current);
 		if (input[i] && is_space(input[i]))
 			i++;
 	}

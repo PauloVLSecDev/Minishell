@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 21:45:31 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:52:03 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,7 @@ void	heredoc_manager(t_token *current, int fd_heredoc)
 void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 {
 	char	*input;
-	char	*expanded;
 
-	expanded  = ft_strdup("");
 	while (1)
 	{
 		input = readline("> ");
@@ -106,7 +104,7 @@ void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 		if (!ft_strcmp(input, delimiter))
 			break ;
 		if (quotes == 0)
-			input = expand_var(input, expanded);
+			input = expand_var(input, NULL);
 		ft_putendl_fd(input, fd_heredoc);
 		free(input);
 	}
