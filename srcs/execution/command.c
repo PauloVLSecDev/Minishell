@@ -1,12 +1,12 @@
 /* ************************************************************************** */
-	/*                                                                            */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:10 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/27 17:03:46 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/27 22:12:45 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	process_all(t_cmd **cmd, t_token **to, int *i)
 			|| (*to)->type == TOKEN_APPEND)
 		{
 			if (process_redirect(cmd, to, (*to)->next->value))
-				break ;
+				get_shell()->exit_status = 1;
 			if (*to && (*to)->next)
 				*to = (*to)->next;
 		}

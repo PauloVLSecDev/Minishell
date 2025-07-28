@@ -93,14 +93,15 @@ void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 	char	*input;
 	char	*expanded;
 
-	expanded  = ft_strdup("");
+	expanded = ft_strdup("");
 	while (1)
 	{
 		input = readline("> ");
 		if (!input)
 		{
 			ft_printf("warning: here-document at line 22 delimited"
-				"by end-of-file (wanted `%s')\n", delimiter);
+						"by end-of-file (wanted `%s')\n",
+						delimiter);
 			break ;
 		}
 		if (!ft_strcmp(input, delimiter))

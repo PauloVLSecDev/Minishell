@@ -50,7 +50,7 @@ int	main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[],
 	while (1)
 	{
 		signals_ctrl_c();
-			input = readline("minishell> ");
+		input = readline("minishell> ");
 		add_history(input);
 		if (!verify_input(input))
 			continue ;
