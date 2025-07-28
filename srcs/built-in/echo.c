@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:48:17 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/27 20:47:51 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:53:48 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_echo(char **args)
 	char	*expanded;
 
 	i = 1;
-	expanded = ft_strdup("");
+	expanded = NULL;
 	n_flag = 0;
 	if (args[1] && !ft_strcmp(args[1], "-n"))
 	{
