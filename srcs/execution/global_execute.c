@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:03:07 by pvitor-l          #+#    #+#             */
-/*   Updated: 2025/07/27 20:48:35 by brunogue         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:00:33 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static int	valid_builtin(int isbuiltin, t_cmd *cmd, t_env *envp)
 
 static char *strip_quotes(char *s)
 {
-    int   len;
-    char *out;
+    int		len;
+    char	*out;
 
     if (!s)
         return NULL;
