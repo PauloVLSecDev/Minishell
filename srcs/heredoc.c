@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:08:53 by brunogue          #+#    #+#             */
-/*   Updated: 2025/07/28 18:54:17 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:47:22 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ void	exec_heredoc(char *delimiter, int quotes, int fd_heredoc)
 		if (!input)
 		{
 			ft_printf("warning: here-document at line 22 delimited"
-						"by end-of-file (wanted `%s')\n",
-						delimiter);
+				"by end-of-file (wanted `%s')\n", delimiter);
 			break ;
 		}
 		if (!ft_strcmp(input, delimiter))
